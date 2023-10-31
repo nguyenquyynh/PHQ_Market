@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="25dp"
+    tools:context=".Activity_Login">
+    <LinearLayout
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginTop="70dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log"
+            android:textStyle="bold"
+            android:textSize="40dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In"
+            android:textStyle="bold"
+            android:textSize="40dp"
+            android:textColor="@color/navigation_selected"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login to app"
+        android:layout_below="@id/text1"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:textSize="24dp"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text3"
+        android:layout_width="match_parent"
+        android:layout_marginTop="46dp"
+        android:layout_below="@id/text2"
+        android:layout_height="60dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Email"
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="20dp"
+            android:background="@drawable/radius"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/text3">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Password"
+                android:drawableLeft="@drawable/pass"
+                android:drawablePadding="20dp"
+                android:background="@drawable/radius"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/showpass"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="20dp"/>
+    </RelativeLayout>
+    <CheckBox
+        android:id="@+id/chkRemember"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Remember Account"
+        android:textColor="@color/text_color"
+        android:layout_below="@id/layout1"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/chkRemember"
+        android:backgroundTint="@color/button_login"
+        android:text="Login"
+        android:textSize="20dp"
+        app:cornerRadius="10dp" />
+
+    <LinearLayout
+        android:id="@+id/text5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Haven't an account ?"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/text_color"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@color/navigation_selected"
+            />
+    </LinearLayout>
+</RelativeLayout>
