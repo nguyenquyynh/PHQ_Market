@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/nen_search"
+    android:layout_marginRight="15dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
+        <ImageView
+            android:id="@+id/Img_imgcatalog"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/ic_launcher_background"/>
+        <TextView
+            android:id="@+id/Txt_namecatalog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Catalog +"
+            android:layout_marginTop="6dp"
+            android:layout_below="@+id/Img_imgcatalog"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"/>
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Txt_namecatalog"
+            android:gravity="left"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp">
+            <TextView
+                android:id="@+id/Txt_countcatalog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:textColor="#9E9E9E"
+                android:textSize="17dp"/>
+            <TextView
+                android:id="@+id/items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" items"
+                android:textColor="#AFAEAE"
+                android:layout_toRightOf="@+id/Txt_priceproduct"
+                android:textSize="15dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
