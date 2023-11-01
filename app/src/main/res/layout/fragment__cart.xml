@@ -38,9 +38,9 @@
             android:layout_alignParentEnd="true"/>
         <ImageView
             android:id="@+id/icNotification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/showpass"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/notification"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
@@ -58,8 +58,7 @@
         android:id="@+id/rlt3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/rlt2"
-        android:layout_marginBottom="40dp">
+        android:layout_above="@id/rlt2">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -89,7 +88,9 @@
         android:id="@+id/rlt2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btnCheckOut">
+        android:layout_above="@id/btnCheckOut"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
