@@ -8,10 +8,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.phq_market.R;
+import com.example.phq_market.fragment.Fragment_Account;
 import com.example.phq_market.fragment.Fragment_Cart;
 import com.example.phq_market.fragment.Fragment_Discovery;
 import com.example.phq_market.fragment.Fragment_Home;
@@ -23,6 +27,7 @@ public class Activity_Main extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FrameLayout frameLayout;
     TextView Title_fragment;
+    RelativeLayout layout1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class Activity_Main extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.Bottom_navigation);
         frameLayout = findViewById(R.id.Frame_layout);
         Title_fragment = findViewById(R.id.Title_fragment);
+        layout1 = findViewById(R.id.layout1);
 
         changeFragment(new Fragment_Home());
         Title_fragment.setText("Home");
@@ -43,6 +49,7 @@ public class Activity_Main extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 if (item.getItemId() == R.id.Home) {
                     changeFragment(new Fragment_Home());
                     Title_fragment.setText("Home");
@@ -61,10 +68,12 @@ public class Activity_Main extends AppCompatActivity {
 //                    fragmentTransaction.replace(R.id.Frame_layout, new Fragment_Home()).commit();
                     Title_fragment.setText("Like");
                 }
+
+                layout1.setVisibility(View.VISIBLE);
+
                 if (item.getItemId() == R.id.Account) {
-//                    FragmentManager fragmentManager = getSupportFragmentManager();
-//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.Frame_layout, new Fragment_Home()).commit();
+                    layout1.setVisibility(View.GONE);
+                    changeFragment(new Fragment_Account());
                     Title_fragment.setText("Account");
                 }
                 return true;
