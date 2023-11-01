@@ -2,6 +2,7 @@ package com.example.phq_market.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -31,6 +32,9 @@ public class Activity_Main extends AppCompatActivity {
         frameLayout = findViewById(R.id.Frame_layout);
         Title_fragment = findViewById(R.id.Title_fragment);
 
+        changeFragment(new Fragment_Home());
+        Title_fragment.setText("Home");
+
     }
 
     @Override
@@ -40,21 +44,15 @@ public class Activity_Main extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.Home) {
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.Frame_layout, new Fragment_Home()).commit();
+                    changeFragment(new Fragment_Home());
                     Title_fragment.setText("Home");
                 }
                 if (item.getItemId() == R.id.Cart) {
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.Frame_layout, new Fragment_Cart()).commit();
+                    changeFragment(new Fragment_Cart());
                     Title_fragment.setText("Cart");
                 }
                 if (item.getItemId() == R.id.Discovery) {
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.Frame_layout, new Fragment_Discovery()).commit();
+                    changeFragment(new Fragment_Discovery());
                     Title_fragment.setText("Discovery");
                 }
                 if (item.getItemId() == R.id.Like) {
@@ -72,5 +70,11 @@ public class Activity_Main extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void changeFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.Frame_layout, fragment).commit();
     }
 }

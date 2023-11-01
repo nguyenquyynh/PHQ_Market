@@ -150,6 +150,7 @@
         android:layout_below="@id/layout2"/>
 
     <Button
+        android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_below="@id/chkRemember"
@@ -173,9 +174,10 @@
             android:textColor="@color/text_color"
             />
         <TextView
+            android:id="@+id/tvLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logn in"
+            android:text="Lo in"
             android:textStyle="bold"
             android:textSize="16dp"
             android:textColor="@color/navigation_selected"

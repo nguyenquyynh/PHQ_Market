@@ -22,6 +22,9 @@
             android:name=".activity.Activity_Login"
             android:exported="false" />
         <activity
+            android:name=".activity.Activity_ItemDetail"
+            android:exported="false" />
+        <activity
             android:name=".activity.Activity_Main"
             android:exported="true">
             <intent-filter>

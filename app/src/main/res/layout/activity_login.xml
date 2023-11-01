@@ -93,6 +93,7 @@
         android:layout_below="@id/layout1"/>
 
     <Button
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_below="@id/chkRemember"
@@ -117,6 +118,7 @@
             android:textColor="@color/text_color"
             />
         <TextView
+            android:id="@+id/tvSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up"

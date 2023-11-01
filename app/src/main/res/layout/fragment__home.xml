@@ -104,5 +104,10 @@
             tools:listitem="@layout/layout_item_popularproduct"
             android:layout_below="@+id/Popular_item"/>
     </RelativeLayout>
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="click thử đi item đó "/>
 
 </RelativeLayout>
