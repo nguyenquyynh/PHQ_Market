@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="27mm"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="20dp"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/Img_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/heart" />
+        <ImageView
+            android:id="@+id/Img_imageproduct"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/Img_like"/>
+        <TextView
+            android:id="@+id/Txt_nameproduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product +"
+            android:layout_below="@+id/Img_imageproduct"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Txt_nameproduct"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/Txt_priceproduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="000.000"
+                android:textSize="16dp"
+
+                android:textColor="@color/navigation_selected"
+                />
+            <TextView
+                android:id="@+id/vnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" VNĐ"
+                android:layout_toRightOf="@+id/Txt_priceproduct"
+                android:textSize="16dp"
+                android:textColor="@color/navigation_selected"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout1"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/start"/>
+            <TextView
+                android:id="@+id/Txt_evaluate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5"
+                android:layout_toRightOf="@+id/start"
+                android:textSize="16dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

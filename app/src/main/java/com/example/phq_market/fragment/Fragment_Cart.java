@@ -1,19 +1,24 @@
-package com.example.phq_market;
+package com.example.phq_market.fragment;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-public class Fragment_ItemDetail extends Fragment {
-
+import com.example.phq_market.R;
 
 
-    public Fragment_ItemDetail() {
+public class Fragment_Cart extends Fragment {
+
+
+    public Fragment_Cart() {
         // Required empty public constructor
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,6 @@ public class Fragment_ItemDetail extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_detail, container, false);
+        return inflater.inflate(R.layout.fragment__cart, container, false);
     }
 }

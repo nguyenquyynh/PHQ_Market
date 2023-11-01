@@ -1,14 +1,16 @@
-package com.example.phq_market;
+package com.example.phq_market.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Activity_Wellcome extends AppCompatActivity {
+import com.example.phq_market.R;
+
+public class Activity_Signup extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wellcome);
+        setContentView(R.layout.activity_signup);
     }
 }

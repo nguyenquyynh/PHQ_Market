@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.Fragment_Discovery">
+    <LinearLayout
+        android:id="@+id/Menu_search"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:weightSum="100">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="83"
+            android:background="@drawable/nen_search"
+            android:hint="Search"
+            android:drawableLeft="@drawable/search"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="20dp"
+            android:drawablePadding="20dp"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="16"
+            android:layout_height="match_parent"
+            android:src="@drawable/filt"
+            android:background="@drawable/nen_filt"/>
+    </LinearLayout>
+   <ScrollView
+       android:layout_below="@+id/Menu_search"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="10dp"
+           android:orientation="vertical">
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/Recycler_view_catalog"
+               android:layout_width="match_parent"
+
+               android:layout_height="wrap_content"
+               android:layout_marginBottom="15dp"
+               tools:listitem="@layout/layout_item_catalog"
+               android:layout_marginTop="20dp"/>
+           <RelativeLayout
+               android:id="@+id/New"
+               android:layout_below="@+id/Recycler_view_catalog"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:id="@+id/Popular_item"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="New Arrivals"
+                   android:textStyle="bold"
+                   android:textSize="20dp"
+                   android:layout_alignParentTop="true"
+                   android:layout_alignParentLeft="true"/>
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="See all"
+                   android:textColor="@color/navigation_selected"
+                   android:textSize="15dp"
+                   android:layout_marginTop="4dp"
+                   android:layout_alignParentTop="true"
+                   android:layout_alignParentRight="true"/>
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/Recycler_viewnew"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="20dp"
+                   tools:listitem="@layout/layout_item_newproduct"
+                   android:layout_below="@+id/Popular_item"/>
+               <HorizontalScrollView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/Recycler_viewnew">
+                   <LinearLayout
+                       android:id="@+id/linear_layout"
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:layout_marginTop="15dp"
+                       android:orientation="horizontal">
+
+                       <ImageView
+                           android:layout_width="370dp"
+                           android:scaleType="centerCrop"
+                           android:layout_height="200dp"
+                           android:src="@drawable/ic_launcher_background"/>
+
+                       <ImageView
+                           android:layout_width="370dp"
+                           android:scaleType="centerCrop"
+                           android:layout_height="200dp"
+                           android:src="@drawable/ic_launcher_foreground"/>
+
+                       <ImageView
+                           android:layout_width="370dp"
+                           android:scaleType="centerCrop"
+                           android:layout_height="200dp"
+                           android:src="@drawable/ic_launcher_background"/>
+                       <ImageView
+                           android:layout_width="370dp"
+                           android:scaleType="centerCrop"
+                           android:layout_height="200dp"
+                           android:src="@drawable/ic_launcher_foreground"/>
+                   </LinearLayout>
+
+               </HorizontalScrollView>
+           </RelativeLayout>
+
+           <RelativeLayout
+               android:layout_below="@+id/New"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:id="@+id/Bestsale_item"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Best saler"
+                   android:textStyle="bold"
+                   android:textSize="20dp"
+                   android:layout_alignParentTop="true"
+                   android:layout_alignParentLeft="true"/>
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="See all"
+                   android:textColor="@color/navigation_selected"
+                   android:textSize="15dp"
+                   android:layout_marginTop="4dp"
+                   android:layout_alignParentTop="true"
+                   android:layout_alignParentRight="true"/>
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/Recycler_viewbest"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="20dp"
+                   tools:listitem="@layout/layout_item_newproduct"
+                   android:layout_below="@+id/Bestsale_item"/>
+               <HorizontalScrollView
+                   android:id="@+id/Banner"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@+id/Recycler_viewbest">
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:layout_marginTop="15dp"
+                       android:orientation="horizontal">
+
+                       <ImageView
+                           android:layout_width="370dp"
+                           android:scaleType="centerCrop"
+                           android:layout_height="200dp"
+                           android:src="@drawable/ic_launcher_background"/>
+
+                       <ImageView
+                           android:layout_width="370dp"
+                           android:scaleType="centerCrop"
+                           android:layout_height="200dp"
+                           android:src="@drawable/ic_launcher_foreground"/>
+
+                       <ImageView
+                           android:layout_width="370dp"
+                           android:scaleType="centerCrop"
+                           android:layout_height="200dp"
+                           android:src="@drawable/ic_launcher_background"/>
+                       <ImageView
+                           android:layout_width="370dp"
+                           android:scaleType="centerCrop"
+                           android:layout_height="200dp"
+                           android:src="@drawable/ic_launcher_foreground"/>
+                   </LinearLayout>
+
+               </HorizontalScrollView>
+           </RelativeLayout>
+       </LinearLayout>
+   </ScrollView>
+
+</RelativeLayout>
