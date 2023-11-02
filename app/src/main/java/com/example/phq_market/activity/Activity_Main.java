@@ -54,10 +54,12 @@ public class Activity_Main extends AppCompatActivity {
                     changeFragment(new Fragment_Home());
                     Title_fragment.setText("Home");
                 }
+
                 if (item.getItemId() == R.id.Cart) {
                     changeFragment(new Fragment_Cart());
                     Title_fragment.setText("Cart");
                 }
+
                 if (item.getItemId() == R.id.Discovery) {
                     changeFragment(new Fragment_Discovery());
                     Title_fragment.setText("Discovery");

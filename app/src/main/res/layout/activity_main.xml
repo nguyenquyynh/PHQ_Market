@@ -61,7 +61,8 @@
         android:id="@+id/Bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:menu="@menu/menu"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/nen_bottomnavigation"
-        android:layout_alignParentBottom="true"/>
+        app:labelVisibilityMode="selected"
+        app:menu="@menu/menu" />
 </RelativeLayout>
