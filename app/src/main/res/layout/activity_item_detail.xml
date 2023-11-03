@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.Activity_ItemDetail"
-    android:background="#313B5D">
+    android:background="@color/background">
 
     <RelativeLayout
         android:id="@+id/rlt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="80dp"
-        android:padding="25dp"
-        android:background="@drawable/background_card_item_detail">
+        android:padding="25dp">
 
         <RelativeLayout
             android:id="@+id/rlt1"
@@ -168,7 +167,7 @@ When performance is what you’re looking for, look no further than the all-new 
 
     <TextView
         android:id="@+id/tvAddcart"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -177,5 +176,6 @@ When performance is what you’re looking for, look no further than the all-new 
         android:layout_marginTop="-80dp"
         android:gravity="center"
         android:textSize="19dp"
-        android:text="900.000 VND - Add to cart"/>
+        android:text="900.000 VND - Add to cart"
+        android:background="@drawable/background_card_item_detail"/>
 </RelativeLayout>
