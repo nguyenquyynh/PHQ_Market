@@ -25,10 +25,11 @@
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_weight="16"
             android:layout_height="match_parent"
-            android:src="@drawable/filt"
-            android:background="@drawable/nen_filt"/>
+            android:layout_weight="16"
+            android:background="@drawable/nen_filt"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/filt" />
     </LinearLayout>
    <ScrollView
        android:layout_below="@+id/Menu_search"
