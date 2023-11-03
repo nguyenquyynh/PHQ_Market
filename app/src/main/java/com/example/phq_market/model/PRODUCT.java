@@ -11,6 +11,7 @@ public class PRODUCT {
     public PRODUCT() {
     }
 
+
     public PRODUCT(Integer ID, String NAME, String DESCRIBE, Integer QUANTITY, Float PRICE, Integer IDCATALOG) {
         this.ID = ID;
         this.NAME = NAME;

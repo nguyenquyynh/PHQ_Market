@@ -4,34 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.Fragment_Discovery">
-    <LinearLayout
-        android:id="@+id/Menu_search"
-        android:layout_margin="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:weightSum="100">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="83"
-            android:background="@drawable/nen_search"
-            android:hint="Search"
-            android:drawableLeft="@drawable/search"
-            android:layout_marginRight="10dp"
-            android:paddingLeft="20dp"
-            android:drawablePadding="20dp"/>
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_weight="16"
-            android:layout_height="match_parent"
-            android:src="@drawable/filt"
-            android:background="@drawable/nen_filt"/>
-    </LinearLayout>
-   <ScrollView
-       android:layout_below="@+id/Menu_search"
+<ScrollView
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
        <LinearLayout
@@ -148,42 +122,7 @@
                    android:layout_marginTop="20dp"
                    tools:listitem="@layout/layout_item_newproduct"
                    android:layout_below="@+id/Bestsale_item"/>
-               <HorizontalScrollView
-                   android:id="@+id/Banner"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_below="@+id/Recycler_viewbest">
-                   <LinearLayout
-                       android:layout_width="wrap_content"
-                       android:layout_height="match_parent"
-                       android:layout_marginTop="15dp"
-                       android:orientation="horizontal">
 
-                       <ImageView
-                           android:layout_width="370dp"
-                           android:scaleType="centerCrop"
-                           android:layout_height="200dp"
-                           android:src="@drawable/ic_launcher_background"/>
-
-                       <ImageView
-                           android:layout_width="370dp"
-                           android:scaleType="centerCrop"
-                           android:layout_height="200dp"
-                           android:src="@drawable/ic_launcher_foreground"/>
-
-                       <ImageView
-                           android:layout_width="370dp"
-                           android:scaleType="centerCrop"
-                           android:layout_height="200dp"
-                           android:src="@drawable/ic_launcher_background"/>
-                       <ImageView
-                           android:layout_width="370dp"
-                           android:scaleType="centerCrop"
-                           android:layout_height="200dp"
-                           android:src="@drawable/ic_launcher_foreground"/>
-                   </LinearLayout>
-
-               </HorizontalScrollView>
            </RelativeLayout>
        </LinearLayout>
    </ScrollView>

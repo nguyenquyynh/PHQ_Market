@@ -31,6 +31,7 @@
             android:layout_weight="72"
             android:paddingTop="15dp"
             android:paddingLeft="10dp"
+            android:background="@drawable/nen_search"
             android:paddingRight="10dp"
             android:layout_height="match_parent">
             <TextView
@@ -87,14 +88,7 @@
                     android:textSize="18dp"
                     android:textColor="@color/navigation_selected"/>
             </LinearLayout>
-            <Button
-                android:id="@+id/Btn_buynow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Buy Now"
-                android:backgroundTint="@color/navigation_selected"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+
         </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
