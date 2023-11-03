@@ -10,12 +10,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/nen_search"
         android:weightSum="100">
         <RelativeLayout
             android:id="@+id/anh"
             android:layout_width="0dp"
             android:layout_weight="28"
             android:background="@drawable/nen_product"
+
             android:layout_height="130dp">
             <ImageView
                 android:id="@+id/Img_imageproduct"
@@ -31,7 +33,6 @@
             android:layout_weight="72"
             android:paddingTop="15dp"
             android:paddingLeft="10dp"
-            android:background="@drawable/nen_search"
             android:paddingRight="10dp"
             android:layout_height="match_parent">
             <TextView

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="28dp"
-    tools:context=".activity_Order"
+    tools:context=".adapter.Activity_Order"
     android:orientation="vertical"
     android:background="@color/background">
 

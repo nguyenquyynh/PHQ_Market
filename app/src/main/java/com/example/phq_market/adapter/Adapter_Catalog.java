@@ -14,19 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
-import com.example.phq_market.model.CATALOG;
+import com.example.phq_market.model.CATALOGSHOW;
 
 import java.util.ArrayList;
 
 public class Adapter_Catalog extends RecyclerView.Adapter<Adapter_Catalog.ViewHolder> {
 
-    public final ArrayList<CATALOG> list_catalog;
+    public final ArrayList<CATALOGSHOW> list_catalog;
     public final Context context;
 
-    public Adapter_Catalog(ArrayList<CATALOG> list_catalog, Context context) {
+    public Adapter_Catalog(ArrayList<CATALOGSHOW> list_catalog, Context context) {
         this.list_catalog = list_catalog;
         this.context = context;
     }
+
 
     @NonNull
     @Override
@@ -38,14 +39,13 @@ public class Adapter_Catalog extends RecyclerView.Adapter<Adapter_Catalog.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull Adapter_Catalog.ViewHolder holder, int position) {
-        CATALOG catalog = list_catalog.get(position);
+        CATALOGSHOW catalog = list_catalog.get(position);
         try {
             Glide.with(context)
                     .load(catalog.getIMG())
                     .into(holder.Img_imgcatalog);
             holder.Txt_namecatalog.setText(catalog.getNAME());
-//            Thêm phương thức đếm số lượng product thuộc catalag
-//            holder.Txt_countcatalog.setText();
+            holder.Txt_countcatalog.setText(String.valueOf(catalog.getQUANTITY()));
         } catch (Exception e) {
             Log.d(">>>>>>>>>>>>>>", e.getMessage());
         }
