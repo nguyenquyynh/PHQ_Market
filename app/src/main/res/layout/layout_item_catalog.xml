@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="110dp"
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
     android:paddingBottom="5dp"
-    android:backgroundTint="@drawable/nen_search"
+    android:background="@drawable/nen_search"
     android:layout_marginRight="15dp">
 
     <RelativeLayout
@@ -24,6 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Catalog +"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginTop="6dp"
             android:layout_below="@+id/Img_imgcatalog"
             android:textSize="18dp"
