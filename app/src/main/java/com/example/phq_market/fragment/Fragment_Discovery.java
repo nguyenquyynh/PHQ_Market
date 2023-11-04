@@ -114,50 +114,50 @@ public class Fragment_Discovery extends Fragment {
         adapter_catalog = new Adapter_Catalog(list_catalog,getContext());
         Recycler_view_catalog.setAdapter(adapter_catalog);
 //        ===============================================New Product===================================================
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                handler.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        progressDialog = new ProgressDialog(getContext());
-//                        progressDialog.setMessage("Dữ liệu đang chạy");
-//                        progressDialog.setCancelable(false);
-//                        progressDialog.show();
-//                    }
-//                });
-//                Retrofit retrofit = new Retrofit.Builder()
-//                        .baseUrl("https://phqmarket.000webhostapp.com/product/")
-//                        .addConverterFactory(GsonConverterFactory.create())
-//                        .build();
-//                api api_product = retrofit.create(api.class);
-//                Call<ArrayList<NEWPRODUCT>> call = api_product.get_Listproduct();
-//                call.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
-//                    @Override
-//                    public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
-//                        if (response.isSuccessful() && response.body() != null) {
-//                            ArrayList<NEWPRODUCT> list = response.body();
-//                            list_product.clear();
-//                            list_product.addAll(list);
-//                            adapter_newProduct.notifyDataSetChanged();
-//                            Toast.makeText(getContext(), "THnafh công"+list.size(), Toast.LENGTH_SHORT).show();
-//                            progressDialog.dismiss();
-//                        }
-//                    }
-//                    @Override
-//                    public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
-//                        Toast.makeText(getContext(), "Lỗi !!", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//
-//            }
-//        }).start();
-//
-//        layoutManager = new LinearLayoutManager(getContext());
-//        Recycler_viewnew.setLayoutManager(layoutManager);
-//        adapter_newProduct = new Adapter_NewProduct(list_product,getContext());
-//        Recycler_viewnew.setAdapter(adapter_newProduct);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog = new ProgressDialog(getContext());
+                        progressDialog.setMessage("Dữ liệu đang chạy");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+                    }
+                });
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://phqmarket.000webhostapp.com/product/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                api api_product = retrofit.create(api.class);
+                Call<ArrayList<NEWPRODUCT>> call = api_product.get_Listproduct();
+                call.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            ArrayList<NEWPRODUCT> list = response.body();
+                            list_product.clear();
+                            list_product.addAll(list);
+                            adapter_newProduct.notifyDataSetChanged();
+                            Toast.makeText(getContext(), "THnafh công"+list.size(), Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
+                        Toast.makeText(getContext(), "Lỗi !!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
+        }).start();
+
+        layoutManager = new LinearLayoutManager(getContext());
+        Recycler_viewnew.setLayoutManager(layoutManager);
+        adapter_newProduct = new Adapter_NewProduct(list_product,getContext());
+        Recycler_viewnew.setAdapter(adapter_newProduct);
     }
 
 }

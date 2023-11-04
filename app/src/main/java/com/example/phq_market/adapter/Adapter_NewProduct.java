@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.model.NEWPRODUCT;
 
@@ -48,7 +49,9 @@ public class Adapter_NewProduct extends RecyclerView.Adapter<Adapter_NewProduct.
     public void onBindViewHolder(@NonNull Adapter_NewProduct.ViewHolder holder, int position) {
         NEWPRODUCT product = list_product.get(position);
         try {
-            //Load Image
+            Glide.with(context)
+                    .load(product.getIMG())
+                    .into(holder.Img_imageproduct);
             holder.Txt_nameproduct.setText(product.getNAME());
             holder.Txt_evaluate.setText(String.valueOf(product.getEVALUATE()));
             holder.Txt_priceproduct.setText(String.valueOf(product.getPRICE()));
