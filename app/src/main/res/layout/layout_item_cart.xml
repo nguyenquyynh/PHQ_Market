@@ -17,20 +17,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/imgAnh"
+        android:layout_toLeftOf="@+id/btndelete"
         android:text="Logo"
         android:textSize="14dp"
-        android:textColor="@color/text_color"/>
+        android:textColor="@color/text_color"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+<LinearLayout
+    android:id="@+id/lnprice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/imgAnh"
+    android:layout_below="@id/tvName"
+    android:orientation="horizontal"
+    android:layout_marginTop="6dp">
     <TextView
         android:id="@+id/tvCost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imgAnh"
-        android:layout_below="@id/tvName"
-        android:layout_marginTop="6dp"
-        android:text="945.000VND"
+        android:text="945.000"
         android:textSize="14dp"
         android:textStyle="bold"
         android:textColor="@color/navigation_selected"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VND"
+        android:textColor="@color/navigation_selected"
+        android:layout_marginLeft="10dp"/>
+</LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -38,7 +54,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="23dp"
         android:layout_toRightOf="@id/imgAnh"
-        android:layout_below="@id/tvCost"
+        android:layout_below="@id/lnprice"
         android:gravity="center">
 
         <ImageView
@@ -48,6 +64,7 @@
             android:src="@drawable/btn_plus" />
 
         <TextView
+            android:id="@+id/tvquantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="01"

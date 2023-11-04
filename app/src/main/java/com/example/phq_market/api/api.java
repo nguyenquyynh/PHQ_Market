@@ -1,5 +1,6 @@
 package com.example.phq_market.api;
 
+import com.example.phq_market.model.CART;
 import com.example.phq_market.model.CATALOG;
 import com.example.phq_market.model.CATALOGSHOW;
 import com.example.phq_market.model.NEWPRODUCT;
@@ -16,4 +17,7 @@ public interface api {
     Call<ArrayList<CATALOGSHOW>> get_Listcatalog();
     @GET("getlistproduct.php")
     Call<ArrayList<NEWPRODUCT>> get_Listproduct();
+
+    @GET("getlistcart.php")
+    Call<ArrayList<CART>> get_Listcart();
 }
