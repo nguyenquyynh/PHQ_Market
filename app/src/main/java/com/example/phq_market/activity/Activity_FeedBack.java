@@ -1,4 +1,4 @@
-package com.example.phq_market.adapter;
+package com.example.phq_market.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

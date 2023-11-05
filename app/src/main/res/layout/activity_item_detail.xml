@@ -17,6 +17,7 @@
             android:id="@+id/rlt1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/icBack"
                 android:layout_width="24dp"
@@ -41,16 +42,27 @@
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rlt2"
             android:layout_below="@id/rlt1"
             android:layout_width="match_parent"
-            android:layout_height="320dp">
-            <ImageView
-                android:layout_width="wrap_content"
+            android:layout_height="325dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="320dp" />
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/shoes"/>
-        </RelativeLayout>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:id="@+id/indicator_layout">
+            </LinearLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/rlt4"

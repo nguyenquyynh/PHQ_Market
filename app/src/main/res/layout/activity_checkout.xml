@@ -7,7 +7,7 @@
     android:padding="28dp"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".adapter.Activity_Checkout">
+    tools:context=".activity.Activity_Checkout">
 
     <RelativeLayout
         android:layout_width="match_parent"
