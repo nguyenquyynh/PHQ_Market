@@ -34,7 +34,9 @@
             android:text="Product +"
             android:layout_below="@+id/Img_imageproduct"
             android:gravity="center"
-            android:textSize="22dp"
+            android:textSize="20dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_marginTop="20dp"
             android:textStyle="bold"/>
         <LinearLayout

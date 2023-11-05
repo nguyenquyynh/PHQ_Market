@@ -12,17 +12,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
+import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.PRODUCT;
 
 import java.util.ArrayList;
 
 public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_PopularProduct.ViewHolder> {
 
-    public final ArrayList<PRODUCT> list_product;
+    public final ArrayList<NEWPRODUCT> list_product;
     public final Context context;
 
-    public Adapter_PopularProduct(ArrayList<PRODUCT> list_product, Context context) {
+    public Adapter_PopularProduct(ArrayList<NEWPRODUCT> list_product, Context context) {
         this.list_product = list_product;
         this.context = context;
     }
@@ -37,12 +39,14 @@ public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_Popular
 
     @Override
     public void onBindViewHolder(@NonNull Adapter_PopularProduct.ViewHolder holder, int position) {
-        PRODUCT product = list_product.get(position);
+        NEWPRODUCT product = list_product.get(position);
         try {
-            //Load image of froduct
+            Glide.with(context)
+                    .load(product.getIMG())
+                    .into(holder.Img_imageproduct);
             holder.Txt_nameproduct.setText(product.getNAME());
             holder.Txt_priceproduct.setText(String.valueOf(product.getPRICE()));
-            holder.Txt_evaluate.setText(String.valueOf(4.5));
+            holder.Txt_evaluate.setText(String.valueOf(product.getEVALUATE()));
         } catch (Exception e) {
             Log.d(">>>>>>>>>>>>", e.getMessage());
         }

@@ -39,7 +39,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
         CART cart = list_CART.get(position);
         try {
             Glide.with(context)
-                    .load(cart.getImage())
+                    .load(cart.getIMG())
                     .into(holder.imgAnh);
             holder.tvName.setText(cart.getNAME());
             holder.tvquantity.setText(String.valueOf(cart.getQUANTITY()));

@@ -20,4 +20,7 @@ public interface api {
 
     @GET("getlistcart.php")
     Call<ArrayList<CART>> get_Listcart();
+
+    @GET("getlistpopularproduct.php")
+    Call<ArrayList<NEWPRODUCT>> get_listpopularproduct();
 }

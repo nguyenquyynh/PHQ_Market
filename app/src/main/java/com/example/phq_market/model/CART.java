@@ -5,22 +5,22 @@ public class CART {
     private String NAME;
     private Float PRICE;
     private  Integer QUANTITY;
-    private String Image;
+    private String IMG;
 
-    public CART(Integer ID, String NAME, Float PRICE, Integer QUANTITY, String image) {
+    public CART(Integer ID, String NAME, Float PRICE, Integer QUANTITY, String IMG) {
         this.ID = ID;
         this.NAME = NAME;
         this.PRICE = PRICE;
         this.QUANTITY = QUANTITY;
-        this.Image = image;
+        this.IMG = IMG;
     }
 
-    public String getImage() {
-        return Image;
+    public String getIMG() {
+        return IMG;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public void setIMG(String IMG) {
+        IMG = IMG;
     }
 
     public Integer getID() {

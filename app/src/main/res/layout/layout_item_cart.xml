@@ -1,87 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp">
+    app:cardBackgroundColor="@color/background">
 
-    <ImageView
-        android:id="@+id/imgAnh"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/logo"
-        android:layout_marginRight="20dp"/>
-
-    <TextView
-        android:id="@+id/tvName"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imgAnh"
-        android:layout_toLeftOf="@+id/btndelete"
-        android:text="Logo"
-        android:textSize="14dp"
-        android:textColor="@color/text_color"
-        android:maxLines="1"
-        android:ellipsize="end" />
-
-<LinearLayout
-    android:id="@+id/lnprice"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_toRightOf="@id/imgAnh"
-    android:layout_below="@id/tvName"
-    android:orientation="horizontal"
-    android:layout_marginTop="6dp">
-    <TextView
-        android:id="@+id/tvCost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="945.000"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        android:textColor="@color/navigation_selected"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VND"
-        android:textColor="@color/navigation_selected"
-        android:layout_marginLeft="10dp"/>
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="23dp"
-        android:layout_toRightOf="@id/imgAnh"
-        android:layout_below="@id/lnprice"
-        android:gravity="center">
-
+        android:layout_marginTop="25dp">
         <ImageView
-            android:id="@+id/btnPlus"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/btn_plus" />
+            android:id="@+id/imgAnh"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            android:layout_marginRight="20dp"/>
 
         <TextView
-            android:id="@+id/tvquantity"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="01"
-            android:textSize="18dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
-        <ImageView
-            android:id="@+id/btnMinus"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/btn_minus"/>
-    </LinearLayout>
+            android:layout_toRightOf="@id/imgAnh"
+            android:layout_toLeftOf="@+id/btndelete"
+            android:text="Logo"
+            android:textSize="14dp"
+            android:textColor="@color/text_color"
+            android:maxLines="1"
+            android:ellipsize="end" />
 
-    <ImageView
-        android:id="@+id/btndelete"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/delete"
-        android:layout_alignParentEnd="true"/>
-</RelativeLayout>
+        <LinearLayout
+            android:id="@+id/lnprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imgAnh"
+            android:layout_below="@id/tvName"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+            <TextView
+                android:id="@+id/tvCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="945.000"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/navigation_selected"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VND"
+                android:textColor="@color/navigation_selected"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="23dp"
+            android:layout_toRightOf="@id/imgAnh"
+            android:layout_below="@id/lnprice"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/btnPlus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/btn_plus" />
+
+            <TextView
+                android:id="@+id/tvquantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01"
+                android:textSize="18dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+            <ImageView
+                android:id="@+id/btnMinus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/btn_minus"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btndelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/delete"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>
