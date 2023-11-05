@@ -7,7 +7,7 @@
     android:padding="28dp"
     android:orientation="vertical"
     android:background="@color/background"
-    tools:context=".adapter.Activity_FeedBack"
+    tools:context=".activity.Activity_FeedBack"
     tools:ignore="ExtraText">
 
     <RelativeLayout

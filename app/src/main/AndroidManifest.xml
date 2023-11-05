@@ -16,10 +16,10 @@
         android:theme="@style/Theme.PHQ_Market"
         tools:targetApi="31">
         <activity
-            android:name=".adapter.Activity_Checkout"
+            android:name=".activity.Activity_Checkout"
             android:exported="false" />
         <activity
-            android:name=".adapter.Activity_FeedBack"
+            android:name=".activity.Activity_FeedBack"
             android:exported="false" />
         <activity
             android:name=".activity.Activity_EditAccount"

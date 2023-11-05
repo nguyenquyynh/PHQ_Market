@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size
+        android:width="60dp"
+        android:height="5dp"
+        />
+
+    <solid android:color="@color/navigation_selected" /> <!-- Màu chấm tròn khi được chọn -->
+    <corners android:radius="3dp"/>
+</shape>
