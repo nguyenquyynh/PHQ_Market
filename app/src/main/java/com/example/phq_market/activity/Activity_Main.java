@@ -19,6 +19,7 @@ import com.example.phq_market.fragment.Fragment_Account;
 import com.example.phq_market.fragment.Fragment_Cart;
 import com.example.phq_market.fragment.Fragment_Discovery;
 import com.example.phq_market.fragment.Fragment_Home;
+import com.example.phq_market.fragment.Fragment_Like;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -65,9 +66,7 @@ public class Activity_Main extends AppCompatActivity {
                     Title_fragment.setText("Discovery");
                 }
                 if (item.getItemId() == R.id.Like) {
-//                    FragmentManager fragmentManager = getSupportFragmentManager();
-//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.Frame_layout, new Fragment_Home()).commit();
+                    changeFragment(new Fragment_Like());
                     Title_fragment.setText("Like");
                 }
 

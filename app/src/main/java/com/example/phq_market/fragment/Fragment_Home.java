@@ -104,11 +104,13 @@ public class Fragment_Home extends Fragment {
                             adapterPopularProduct.notifyDataSetChanged();
                             Toast.makeText(getContext(), "THnafh công"+list.size(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
+                        }else {
+                            Toast.makeText(getContext(), "Lỗi 1", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
                     public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Lỗi !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Lỗi !!"+ t.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
