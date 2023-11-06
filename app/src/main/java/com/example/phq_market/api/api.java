@@ -14,20 +14,18 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface api {
-
+    @GET("register.php")
+    Call<String> register(@Query("NAME") String name , @Query("PASS") String pass, @Query("PHONE") int phone,@Query("EMAIL") String email);
     @GET("getlistcatalog.php")
     Call<ArrayList<CATALOGSHOW>> get_Listcatalog();
     @GET("getlistproduct.php")
     Call<ArrayList<NEWPRODUCT>> get_Listproduct();
-
     @GET("getlistcart.php")
     Call<ArrayList<CART>> get_Listcart();
     @GET("getlistpopularproduct.php")
     Call<ArrayList<NEWPRODUCT>> get_listpopularproduct();
-
     @GET("deleteItemInCart.php")
     Call<String> delete_ItemInCart(@Query("IDCART") Integer idcart);
-
     @GET("updateItemInCart.php")
     Call<String> update_ItemInCart(@Query("IDCART") Integer idcart, @Query("QUANTITY") Integer QUANTITY);
 }
