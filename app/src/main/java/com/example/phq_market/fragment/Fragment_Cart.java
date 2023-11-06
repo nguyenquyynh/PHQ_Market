@@ -36,7 +36,7 @@ public class Fragment_Cart extends Fragment {
     private Adapter_Cart adapterCart;
     private LinearLayoutManager linearLayoutManager;
     private ProgressDialog progressDialog_cart;
-    private Handler handler_catalog = new Handler();
+    private Handler handler_cart = new Handler();
 
     public Fragment_Cart() {
         // Required empty public constructor
@@ -66,7 +66,7 @@ public class Fragment_Cart extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                handler_catalog.post(new Runnable() {
+                handler_cart.post(new Runnable() {
                     @Override
                     public void run() {
                         progressDialog_cart = new ProgressDialog(getContext());
@@ -79,8 +79,8 @@ public class Fragment_Cart extends Fragment {
                         .baseUrl("https://phqmarket.000webhostapp.com/cart/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
-                api api_catalog = retrofit_catalog.create(api.class);
-                Call<ArrayList<CART>> call = api_catalog.get_Listcart();
+                api api_cart = retrofit_catalog.create(api.class);
+                Call<ArrayList<CART>> call = api_cart.get_Listcart();
                 call.enqueue(new Callback<ArrayList<CART>>() {
                     @Override
                     public void onResponse(Call<ArrayList<CART>> call, Response<ArrayList<CART>> response) {

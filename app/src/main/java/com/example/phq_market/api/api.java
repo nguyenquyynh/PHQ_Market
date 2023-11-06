@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface api {
 
@@ -20,7 +22,12 @@ public interface api {
 
     @GET("getlistcart.php")
     Call<ArrayList<CART>> get_Listcart();
-
     @GET("getlistpopularproduct.php")
     Call<ArrayList<NEWPRODUCT>> get_listpopularproduct();
+
+    @GET("deleteItemInCart.php")
+    Call<String> delete_ItemInCart(@Query("IDCART") Integer idcart);
+
+    @GET("updateItemInCart.php")
+    Call<String> update_ItemInCart(@Query("IDCART") Integer idcart, @Query("QUANTITY") Integer QUANTITY);
 }
