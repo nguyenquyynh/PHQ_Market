@@ -61,12 +61,11 @@
             android:layout_toRightOf="@id/imgAnh"
             android:layout_below="@id/lnprice"
             android:gravity="center">
-
             <ImageView
-                android:id="@+id/btnPlus"
+                android:id="@+id/btnMinus"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/btn_plus" />
+                android:src="@drawable/btn_minus"/>
 
             <TextView
                 android:id="@+id/tvquantity"
@@ -76,11 +75,12 @@
                 android:textSize="18dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"/>
+
             <ImageView
-                android:id="@+id/btnMinus"
+                android:id="@+id/btnPlus"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/btn_minus"/>
+                android:src="@drawable/btn_plus" />
         </LinearLayout>
 
         <ImageView
