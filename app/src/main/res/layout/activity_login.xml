@@ -47,6 +47,7 @@
         android:layout_below="@id/text2"
         android:layout_height="60dp">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_Email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Email"
@@ -68,6 +69,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_Password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Password"
