@@ -14,6 +14,8 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface api {
+    @GET("login.php")
+    Call<String> login(@Query("NAME") String name , @Query("PASS") String pass);
     @GET("register.php")
     Call<String> register(@Query("NAME") String name , @Query("PASS") String pass, @Query("PHONE") int phone,@Query("EMAIL") String email);
     @GET("getlistcatalog.php")
@@ -28,4 +30,5 @@ public interface api {
     Call<String> delete_ItemInCart(@Query("IDCART") Integer idcart);
     @GET("updateItemInCart.php")
     Call<String> update_ItemInCart(@Query("IDCART") Integer idcart, @Query("QUANTITY") Integer QUANTITY);
+
 }
