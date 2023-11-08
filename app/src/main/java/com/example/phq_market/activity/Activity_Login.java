@@ -116,7 +116,7 @@ public class Activity_Login extends AppCompatActivity {
                             editor.putString("Email",response.body().getEMAIL());
                             editor.putString("Pass",response.body().getPASS());
                             editor.apply();
-                            finish();
+                            startActivity(new Intent(Activity_Login.this, Activity_Main.class));
                             progressDialog.dismiss();
                         }else {
                             Toast.makeText(Activity_Login.this, "Email or pass is uncorrect"+response.body(), Toast.LENGTH_SHORT).show();
