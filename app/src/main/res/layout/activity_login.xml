@@ -86,7 +86,7 @@
             android:layout_marginRight="20dp"/>
     </RelativeLayout>
     <CheckBox
-        android:id="@+id/chkRemember"
+        android:id="@+id/chk_Remember"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_below="@id/chkRemember"
+        android:layout_below="@id/chk_Remember"
         android:backgroundTint="@color/button_login"
         android:text="Login"
         android:textSize="20dp"

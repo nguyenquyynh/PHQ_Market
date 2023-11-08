@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.phq_market.R;
 import com.example.phq_market.api.api;
+import com.example.phq_market.model.IDCUSTOMER;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -29,15 +31,17 @@ public class Activity_Signup extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private Handler handler = new Handler();
+    private TextInputEditText edtemail;
+    TextInputEditText edtPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
         TextInputEditText edtUsername = findViewById(R.id.edtUsername);
-        TextInputEditText edtemail = findViewById(R.id.edtemail);
+        edtemail = findViewById(R.id.edtemail);
         TextInputEditText edtPhone = findViewById(R.id.edtPhone);
-        TextInputEditText edtPassword = findViewById(R.id.edtPassword);
+        edtPassword = findViewById(R.id.edtPassword);
         TextInputEditText edtConfirmPassword = findViewById(R.id.edtConfirmPassword);
         ImageView imgShowPass = findViewById(R.id.imgShowPass);
         ImageView imgShowConfirmPass = findViewById(R.id.imgShowConfirmPass);
@@ -137,6 +141,14 @@ public class Activity_Signup extends AppCompatActivity {
                         if(response.isSuccessful() && response.body() != null){
                             Toast.makeText(Activity_Signup.this, "Sign Up Success", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
+
+                            SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putBoolean("remember",false);
+                            editor.putString("Email",edtemail.getText().toString());
+                            editor.putString("Pass",edtPassword.getText().toString());
+                            editor.apply();
+
                             startActivity(new Intent(Activity_Signup.this, Activity_Main.class));
                         }else {
                             Toast.makeText(Activity_Signup.this, "Eror", Toast.LENGTH_SHORT).show();

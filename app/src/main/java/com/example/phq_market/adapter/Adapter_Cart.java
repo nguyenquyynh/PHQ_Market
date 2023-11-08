@@ -1,7 +1,10 @@
 package com.example.phq_market.adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +36,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
     private ArrayList<CART> list_CART;
     private ProgressDialog progressDialog_cart;
     private Handler handler_cart = new Handler();
+    private SharedPreferences sharedPreferences;
 
     public Adapter_Cart(Context context, ArrayList<CART> list_CART) {
         this.context = context;
@@ -186,7 +190,11 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_cart = retrofit_catalog.create(api.class);
-                Call<ArrayList<CART>> call = api_cart.get_Listcart();
+
+                sharedPreferences = context.getSharedPreferences("account",MODE_PRIVATE);
+                String email = sharedPreferences.getString("Email",null);
+                String pass = sharedPreferences.getString("Pass",null);
+                Call<ArrayList<CART>> call = api_cart.get_Listcart(email,pass);
                 call.enqueue(new Callback<ArrayList<CART>>() {
                     @Override
                     public void onResponse(Call<ArrayList<CART>> call, Response<ArrayList<CART>> response) {

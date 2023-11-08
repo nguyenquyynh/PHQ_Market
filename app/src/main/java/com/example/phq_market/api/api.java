@@ -3,6 +3,7 @@ package com.example.phq_market.api;
 import com.example.phq_market.model.CART;
 import com.example.phq_market.model.CATALOG;
 import com.example.phq_market.model.CATALOGSHOW;
+import com.example.phq_market.model.IDCUSTOMER;
 import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.PRODUCT;
 
@@ -15,7 +16,7 @@ import retrofit2.http.Query;
 
 public interface api {
     @GET("login.php")
-    Call<String> login(@Query("NAME") String name , @Query("PASS") String pass);
+    Call<IDCUSTOMER> login(@Query("NAME") String name , @Query("PASS") String pass);
     @GET("register.php")
     Call<String> register(@Query("NAME") String name , @Query("PASS") String pass, @Query("PHONE") int phone,@Query("EMAIL") String email);
     @GET("getlistcatalog.php")
@@ -23,7 +24,7 @@ public interface api {
     @GET("getlistproduct.php")
     Call<ArrayList<NEWPRODUCT>> get_Listproduct();
     @GET("getlistcart.php")
-    Call<ArrayList<CART>> get_Listcart();
+    Call<ArrayList<CART>> get_Listcart(@Query("EMAIL") String name , @Query("PASS") String pass);
     @GET("getlistpopularproduct.php")
     Call<ArrayList<NEWPRODUCT>> get_listpopularproduct();
     @GET("deleteItemInCart.php")
