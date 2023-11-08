@@ -189,6 +189,7 @@ When performance is what you’re looking for, look no further than the all-new 
         </ScrollView>
     </RelativeLayout>
     <LinearLayout
+        android:id="@+id/Txt_addcart"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"

@@ -1,7 +1,11 @@
 package com.example.phq_market.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,15 +43,14 @@ public class Activity_ItemDetail extends AppCompatActivity {
     private Adapter_Image_Slide_ItemDetail adapter_img;
     private ViewPager2 viewPager;
     LinearLayout indicatorLayout;
-    int ID;
+    int ID, IDCUSTOMER;
     //Feedback
     LinearLayoutManager layoutManager_feedback;
     Adapter_Feedback adapter_feedback;
     RecyclerView Recycler_feedback;
     TextView Txt_evaluateproduct, Txt_descriptionproduct, Txt_more;
     TextView Txt_priceproduct, Txt_priceaddtocart;
-    TextView Txt_addcart;
-    ProgressDialog progressDialog;
+    LinearLayout Txt_addcart;
     TextView Txt_nameproduct;
     private ArrayList<ONLYIMAGE> imageList;
     private  ArrayList<FEEDBACKSHOW> list_feedback;
@@ -55,13 +58,13 @@ public class Activity_ItemDetail extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
-
         viewPager = findViewById(R.id.view_pager);
         Txt_evaluateproduct = findViewById(R.id.Txt_evaluateproduct);
         Txt_priceproduct = findViewById(R.id.Txt_priceproduct);
         Txt_priceaddtocart = findViewById(R.id.Txt_priceaddtocart);
         Txt_nameproduct = findViewById(R.id.Txt_nameproduct);
         Txt_more = findViewById(R.id.Txt_more);
+        Txt_addcart = findViewById(R.id.Txt_addcart);
         Txt_descriptionproduct = findViewById(R.id.Txt_descriptionproduct);
         Recycler_feedback = findViewById(R.id.Recycler_feedback);
         indicatorLayout = findViewById(R.id.indicator_layout);
@@ -136,13 +139,14 @@ public class Activity_ItemDetail extends AppCompatActivity {
 
             }
         });
+
         //Lấy list feaadback
         Retrofit retrofit_feedback = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.000webhostapp.com/feedback/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_feedback = retrofit_feedback.create(api.class);
-        Call<ArrayList<FEEDBACKSHOW>> call_feedback = api_feedback.get_feedbackproduct(25);
+        Call<ArrayList<FEEDBACKSHOW>> call_feedback = api_feedback.get_feedbackproduct(ID);
         call_feedback.enqueue(new Callback<ArrayList<FEEDBACKSHOW>>() {
             @Override
             public void onResponse(Call<ArrayList<FEEDBACKSHOW>> call, Response<ArrayList<FEEDBACKSHOW>> response) {
@@ -162,6 +166,52 @@ public class Activity_ItemDetail extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<FEEDBACKSHOW>> call, Throwable t) {
                 Log.d(">>>>>>>>" , "false");
+            }
+        });
+
+        Txt_addcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
+                if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
+                    Retrofit retrofit_addcart = new Retrofit.Builder()
+                            .baseUrl("https://phqmarket.000webhostapp.com/cart/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    api api_cart = retrofit_addcart.create(api.class);
+                    Call<String> call_cart = api_cart.add_ItemInCart(ID,sharedPreferences.getString("Email", null),sharedPreferences.getString("Pass", null));
+                    call_cart.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Toast.makeText(Activity_ItemDetail.this, "Add is Successful, please check your cart !!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(Activity_ItemDetail.this, "Add is Faile !!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Activity_ItemDetail.this);
+                    builder.setTitle("Warning");
+                    builder.setIcon(R.drawable.baseline_error_outline_24);
+                    builder.setMessage("You are not logged in, Login now ?");
+                    builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            startActivity(new Intent(Activity_ItemDetail.this, Activity_Login.class));
+                        }
+                    });
+                    builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
 
