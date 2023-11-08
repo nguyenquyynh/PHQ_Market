@@ -28,7 +28,7 @@
             android:name=".activity.Activity_Wellcome"
             android:exported="false" />
         <activity
-            android:name=".activity.Activity_Main"
+            android:name=".activity.Activity_Signup"
             android:exported="false" />
         <activity
             android:name=".activity.Activity_Login"
@@ -37,7 +37,7 @@
             android:name=".activity.Activity_ItemDetail"
             android:exported="false" />
         <activity
-            android:name=".activity.Activity_Signup"
+            android:name=".activity.Activity_Main"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
