@@ -1,6 +1,9 @@
 package com.example.phq_market.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -37,7 +40,7 @@ public class Fragment_Cart extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private ProgressDialog progressDialog_cart;
     private Handler handler_cart = new Handler();
-
+    private SharedPreferences sharedPreferences;
     public Fragment_Cart() {
         // Required empty public constructor
     }
@@ -47,6 +50,7 @@ public class Fragment_Cart extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
 
     }
 
@@ -80,7 +84,10 @@ public class Fragment_Cart extends Fragment {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_cart = retrofit_catalog.create(api.class);
-                Call<ArrayList<CART>> call = api_cart.get_Listcart();
+
+                String email = sharedPreferences.getString("Email",null);
+                String pass = sharedPreferences.getString("Pass",null);
+                Call<ArrayList<CART>> call = api_cart.get_Listcart(email,pass);
                 call.enqueue(new Callback<ArrayList<CART>>() {
                     @Override
                     public void onResponse(Call<ArrayList<CART>> call, Response<ArrayList<CART>> response) {
@@ -89,17 +96,17 @@ public class Fragment_Cart extends Fragment {
                            list_CART.clear();
                            list_CART.addAll(list);
                            adapterCart.notifyDataSetChanged();
-                           Toast.makeText(getContext(), "Thành công "+list.size(), Toast.LENGTH_SHORT).show();
                            progressDialog_cart.dismiss();
                        }else {
-                           Toast.makeText(getContext(), "lỗi ", Toast.LENGTH_SHORT).show();
-
+                           Toast.makeText(getContext(), "Hãy đăng nhập", Toast.LENGTH_SHORT).show();
+                           progressDialog_cart.dismiss();
                        }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<CART>> call, Throwable t) {
-                        Toast.makeText(getContext(), "lỗi ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+                        progressDialog_cart.dismiss();
                     }
                 });
 
