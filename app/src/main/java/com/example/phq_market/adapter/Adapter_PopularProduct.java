@@ -45,16 +45,24 @@ public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_Popular
                     .into(holder.Img_imageproduct);
             holder.Txt_nameproduct.setText(product.getNAME());
             holder.Txt_priceproduct.setText(String.valueOf(product.getPRICE()));
-            holder.Txt_evaluate.setText(String.valueOf(product.getEVALUATE()));
+            holder.Txt_evaluate.setText(String.format("%.3s",product.getEVALUATE()));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickProduct.clickproduct(product.getID());
+                }
+            });
+            holder.Img_like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         } catch (Exception e) {
             Log.d(">>>>>>>>>>>>", e.getMessage());
         }
-        holder.Img_like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Truyền đi ID của product
-            }
-        });
+
+
     }
 
     @Override
@@ -73,5 +81,12 @@ public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_Popular
             Txt_priceproduct = itemView.findViewById(R.id.Txt_priceproduct);
             Txt_evaluate = itemView.findViewById(R.id.Txt_evaluate);
         }
+    }
+    public interface OnClickProduct {
+        public void clickproduct(int ID);
+    }
+    public Adapter_PopularProduct.OnClickProduct onClickProduct;
+    public void setOnClickProduct(Adapter_PopularProduct.OnClickProduct onClickProduct) {
+        this.onClickProduct = onClickProduct;
     }
 }

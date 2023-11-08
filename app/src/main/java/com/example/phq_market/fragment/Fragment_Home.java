@@ -57,19 +57,8 @@ public class Fragment_Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__home, container, false);
-
         rcv_Home = view.findViewById(R.id.rcv_Home);
-
         listProduct = new ArrayList<>();
-
-
-        Button btn = view.findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), Activity_ItemDetail.class));
-            }
-        });
         return view;
     }
 
@@ -122,5 +111,14 @@ public class Fragment_Home extends Fragment {
         rcv_Home.setLayoutManager(LayoutManager);
         adapterPopularProduct = new Adapter_PopularProduct(listProduct,getContext());
         rcv_Home.setAdapter(adapterPopularProduct);
+
+        adapterPopularProduct.setOnClickProduct(new Adapter_PopularProduct.OnClickProduct() {
+            @Override
+            public void clickproduct(int ID) {
+                Intent intent = new Intent(getContext(), Activity_ItemDetail.class);
+                intent.putExtra("IDPRODUCT", ID);
+                startActivity(intent);
+            }
+        });
     }
 }

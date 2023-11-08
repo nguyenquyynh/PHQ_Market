@@ -55,6 +55,7 @@
                <HorizontalScrollView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
+                   android:layout_margin="10dp"
                    android:layout_below="@+id/Recycler_viewnew">
                    <LinearLayout
                        android:id="@+id/linear_layout"
