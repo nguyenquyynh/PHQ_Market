@@ -111,7 +111,6 @@ public class Fragment_Home extends Fragment {
                     @Override
                     public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
                         Toast.makeText(getContext(), "Lỗi !!"+ t.toString(), Toast.LENGTH_SHORT).show();
-
                     }
                 });
 

@@ -51,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Email"
+            android:inputType="text"
             android:drawableLeft="@drawable/email"
             android:drawablePadding="20dp"
             android:background="@drawable/radius"/>
@@ -73,14 +74,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:drawableLeft="@drawable/pass"
                 android:drawablePadding="20dp"
                 android:background="@drawable/radius"/>
         </com.google.android.material.textfield.TextInputLayout>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/open_eye"
+            android:id="@+id/img_showpas"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:src="@drawable/close_eye"
             android:layout_alignParentRight="true"
             android:layout_marginTop="25dp"
             android:layout_marginRight="20dp"/>
