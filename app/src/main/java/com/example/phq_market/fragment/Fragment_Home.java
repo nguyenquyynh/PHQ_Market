@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,10 +103,9 @@ public class Fragment_Home extends Fragment {
                             listProduct.clear();
                             listProduct.addAll(list);
                             adapterPopularProduct.notifyDataSetChanged();
-                            Toast.makeText(getContext(), "THnafh công"+list.size(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }else {
-                            Toast.makeText(getContext(), "Lỗi 1", Toast.LENGTH_SHORT).show();
+                            Log.d(">>>>>>>>>>>>>>>>>>>", "Lỗi");
                         }
                     }
                     @Override

@@ -1,6 +1,8 @@
 package com.example.phq_market.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.MainThread;
@@ -10,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.phq_market.R;
+import com.example.phq_market.activity.Activity_ItemDetail;
 import com.example.phq_market.adapter.Adapter_Catalog;
 import com.example.phq_market.adapter.Adapter_NewProduct;
 import com.example.phq_market.adapter.Adapter_PopularProduct;
@@ -96,13 +100,12 @@ public class Fragment_Discovery extends Fragment {
                             list_catalog.clear();
                             list_catalog.addAll(list);
                             adapter_catalog.notifyDataSetChanged();
-                            Toast.makeText(getContext(), "Thành công "+list.size(), Toast.LENGTH_SHORT).show();
                             progressDialog_catalog.dismiss();
                         }
                     }
                     @Override
                     public void onFailure(Call<ArrayList<CATALOGSHOW>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Thất bại !!", Toast.LENGTH_SHORT).show();
+                        Log.d(">>>>>>>>>>>>>>>>>>>", t.getMessage());
                     }
                 });
 
@@ -140,14 +143,12 @@ public class Fragment_Discovery extends Fragment {
                             list_product.clear();
                             list_product.addAll(list);
                             adapter_newProduct.notifyDataSetChanged();
-                            Toast.makeText(getContext(), "THnafh công"+list.size(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
                     }
                     @Override
                     public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Lỗi !!", Toast.LENGTH_SHORT).show();
-
+                        Log.d(">>>>>>>>>>>>>>>>>>>>>>>", t.getMessage());
                     }
                 });
 
@@ -158,6 +159,14 @@ public class Fragment_Discovery extends Fragment {
         Recycler_viewnew.setLayoutManager(layoutManager);
         adapter_newProduct = new Adapter_NewProduct(list_product,getContext());
         Recycler_viewnew.setAdapter(adapter_newProduct);
+        adapter_newProduct.setOnClickProduct(new Adapter_NewProduct.OnClickProduct() {
+            @Override
+            public void clickproduct(int ID) {
+                Intent intent = new Intent(getContext(), Activity_ItemDetail.class);
+                intent.putExtra("IDPRODUCT", ID);
+                startActivity(intent);
+            }
+        });
     }
 
 }
