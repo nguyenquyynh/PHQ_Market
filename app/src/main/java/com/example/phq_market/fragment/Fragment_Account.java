@@ -5,9 +5,6 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,19 +13,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_EditAccount;
 import com.example.phq_market.activity.Activity_Login;
 import com.example.phq_market.activity.Activity_Signup;
 
-
 public class Fragment_Account extends Fragment {
-
-
-
     public Fragment_Account() {
-        // Required empty public constructor
     }
+
     private TextView tv_Email;
     private TextView tv_Phone;
     private TextView tv_Address;
