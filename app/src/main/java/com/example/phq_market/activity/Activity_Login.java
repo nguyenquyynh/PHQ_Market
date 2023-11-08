@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +46,8 @@ public class Activity_Login extends AppCompatActivity {
         TextInputEditText edt_Email = findViewById(R.id.edt_Email);
         TextInputEditText edt_Password = findViewById(R.id.edt_Password);
         chk_Remember = findViewById(R.id.chk_Remember);
+        ImageView img_showpas = findViewById(R.id.img_showpas);
+
 
         sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -56,6 +61,21 @@ public class Activity_Login extends AppCompatActivity {
             edt_Email.setText(sharedPreferences.getString("Email",null));
             edt_Password.setText(sharedPreferences.getString("Pass",null));
         }
+
+        img_showpas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(edt_Password.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD){
+                    img_showpas.setImageResource(R.drawable.open_eye);
+                    edt_Password.setInputType(InputType.TYPE_CLASS_TEXT);
+                    edt_Password.setTransformationMethod(null);
+                }else {
+                    img_showpas.setImageResource(R.drawable.close_eye);
+                    edt_Password.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD );
+                    edt_Password.setTransformationMethod(new PasswordTransformationMethod());
+                }
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
