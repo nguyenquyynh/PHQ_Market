@@ -54,6 +54,7 @@
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="320dp" />
+
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -70,11 +71,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/rlt2">
             <TextView
-                android:id="@+id/tvNameItem"
+                android:id="@+id/Txt_nameproduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nike Air Max Plus II"
                 android:textSize="18dp"
+                android:textStyle="bold"
                 android:textColor="@color/text_color"
                 android:layout_marginBottom="17dp"/>
             <ImageView
@@ -83,26 +85,37 @@
                 android:layout_height="22dp"
                 android:src="@drawable/star"
                 android:layout_marginRight="10dp"
-                android:layout_below="@id/tvNameItem"/>
+                android:layout_below="@id/Txt_nameproduct"/>
             <TextView
-                android:id="@+id/tvCountLike"
+                android:id="@+id/Txt_evaluateproduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4.5000"
                 android:textSize="17dp"
                 android:textColor="@color/black"
-                android:layout_below="@id/tvNameItem"
+                android:layout_below="@id/Txt_nameproduct"
                 android:layout_toRightOf="@id/imgStar"/>
 
             <TextView
-                android:id="@+id/tvPrice"
+                android:id="@+id/Txt_priceproduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="900.000 VND"
+                android:text="900.000"
                 android:textSize="22dp"
                 android:textStyle="bold"
                 android:textColor="@color/navigation_selected"
-                android:layout_below="@id/tvNameItem"
+                android:layout_below="@id/Txt_nameproduct"
+                android:layout_toLeftOf="@id/VND"
+                android:layout_marginBottom="-5dp"/>
+            <TextView
+                android:id="@+id/VND"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" VND"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:textColor="@color/navigation_selected"
+                android:layout_below="@id/Txt_nameproduct"
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="-5dp"/>
         </RelativeLayout>
@@ -128,7 +141,7 @@
                     android:layout_height="3dp"
                     android:src="@drawable/underline"/>
                 <TextView
-                    android:id="@+id/tvDescription"
+                    android:id="@+id/Txt_descriptionproduct"
                     android:layout_marginTop="20dp"
                     android:layout_below="@id/tvdcr"
                     android:layout_width="match_parent"
@@ -140,10 +153,10 @@ When performance is what you’re looking for, look no further than the all-new 
                     android:maxLines="2"
                     android:ellipsize="end"/>
                 <TextView
-                    android:id="@+id/editDsr"
+                    android:id="@+id/Txt_more"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_below="@+id/tvDescription"
+                    android:layout_below="@+id/Txt_descriptionproduct"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="More"
@@ -157,7 +170,7 @@ When performance is what you’re looking for, look no further than the all-new 
                     android:text="COMMENT"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    android:layout_below="@+id/editDsr"/>
+                    android:layout_below="@+id/Txt_more"/>
                 <ImageView
                     android:layout_below="@id/tvdcr2"
                     android:layout_width="45dp"
@@ -165,7 +178,7 @@ When performance is what you’re looking for, look no further than the all-new 
                     android:src="@drawable/underline" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcvComment"
+                    android:id="@+id/Recycler_feedback"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -175,19 +188,25 @@ When performance is what you’re looking for, look no further than the all-new 
 
         </ScrollView>
     </RelativeLayout>
-
-
-    <TextView
-        android:id="@+id/tvAddcart"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/rlt"
-        android:textColor="@color/white"
-        android:layout_marginTop="-80dp"
-        android:gravity="center"
-        android:textSize="19dp"
-        android:text="900.000 VND - Add to cart"
-        android:background="@drawable/background_card_item_detail"/>
+        android:orientation="horizontal"
+        android:background="@drawable/background_card_item_detail"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/Txt_priceaddtocart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="900.000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text=" VND - Add to cart"/>
+    </LinearLayout>
 </RelativeLayout>

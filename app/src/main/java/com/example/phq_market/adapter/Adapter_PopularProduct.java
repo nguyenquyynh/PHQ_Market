@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.model.NEWPRODUCT;
-import com.example.phq_market.model.PRODUCT;
 
 import java.util.ArrayList;
 

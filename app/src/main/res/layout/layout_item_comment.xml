@@ -3,29 +3,54 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="15dp"
-    android:layout_marginTop="10dp">
+    app:cardCornerRadius="6dp"
+    android:layout_marginTop="7dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="10dp"
         android:background="@color/input_text">
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/Txt_nameuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/navigation_selected"
+            android:layout_alignParentLeft="true"
             android:textStyle="bold"
-            android:textSize="14dp"
+            android:layout_marginLeft="6dp"
+            android:textSize="15dp"
             android:text="user 1"/>
         <TextView
-            android:id="@+id/tvComment"
+            android:id="@+id/line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvName"
+            android:layout_below="@+id/Txt_nameuser"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="5dp"
             android:textSize="11dp"
-            android:text="This shoes is very bền"/>
+            android:text=" - "/>
+        <TextView
+            android:id="@+id/Txt_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Txt_nameuser"
+            android:layout_toRightOf="@id/line"
+            android:layout_marginTop="5dp"
+            android:textSize="11dp"
+            android:text="this is conhtent off your FEEDBACKSHOW"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/Txt_evaluate"
+            android:src="@drawable/start"/>
+        <TextView
+            android:id="@+id/Txt_evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_alignParentRight="true"
+            android:text="4.5"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
