@@ -1,10 +1,10 @@
 package com.example.phq_market.model;
 
-public class IDCUSTOMER {
+public class CUSTOMER {
     private String EMAIL;
     private String PASS;
 
-    public IDCUSTOMER(String EMAIL, String PASS) {
+    public CUSTOMER(String EMAIL, String PASS) {
         this.EMAIL = EMAIL;
         this.PASS = PASS;
     }

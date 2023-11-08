@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.phq_market.R;
 import com.example.phq_market.api.api;
-import com.example.phq_market.model.IDCUSTOMER;
+import com.example.phq_market.model.CUSTOMER;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -100,10 +100,10 @@ public class Activity_Login extends AppCompatActivity {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api apiAccount = retrofit.create(api.class);
-                Call<IDCUSTOMER> call = apiAccount.login(username,password);
-                call.enqueue(new Callback<IDCUSTOMER>() {
+                Call<CUSTOMER> call = apiAccount.login(username,password);
+                call.enqueue(new Callback<CUSTOMER>() {
                     @Override
-                    public void onResponse(Call<IDCUSTOMER> call, Response<IDCUSTOMER> response) {
+                    public void onResponse(Call<CUSTOMER> call, Response<CUSTOMER> response) {
                         if(response.isSuccessful() && response.body() != null){
                             Toast.makeText(Activity_Login.this, "Login Success", Toast.LENGTH_SHORT).show();
 
@@ -124,7 +124,7 @@ public class Activity_Login extends AppCompatActivity {
                         }
                     }
                     @Override
-                    public void onFailure(Call<IDCUSTOMER> call, Throwable t) {
+                    public void onFailure(Call<CUSTOMER> call, Throwable t) {
                         Toast.makeText(Activity_Login.this, "Error", Toast.LENGTH_SHORT).show();
                         Log.d("->>>>>>>>>>>>>>>>>>>",t.toString());
                         progressDialog.dismiss();

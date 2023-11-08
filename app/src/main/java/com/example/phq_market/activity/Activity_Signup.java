@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.example.phq_market.R;
 import com.example.phq_market.api.api;
-import com.example.phq_market.model.IDCUSTOMER;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
