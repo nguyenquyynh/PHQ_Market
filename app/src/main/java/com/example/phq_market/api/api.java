@@ -44,4 +44,6 @@ public interface api {
     Call<String> delete_ItemInCart(@Query("IDCART") Integer idcart);
     @GET("updateItemInCart.php")
     Call<String> update_ItemInCart(@Query("IDCART") Integer idcart, @Query("QUANTITY") Integer QUANTITY);
+    @GET("getlistbanner.php")
+    Call<ArrayList<ONLYIMAGE>> get_listbanner();
 }

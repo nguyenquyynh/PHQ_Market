@@ -42,6 +42,7 @@ public class Adapter_Image_Slide_ItemDetail extends RecyclerView.Adapter<Adapter
             Glide.with(context)
                     .load(img)
                     .into(holder.imageView);
+            Log.d(">>>>>>>>>>>>>>>>>>", img);
         } catch (Exception e) {
             Log.d(">>>>>>>>>>>>>>>>>>", e.getMessage());
         }
