@@ -43,7 +43,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
     private Adapter_Image_Slide_ItemDetail adapter_img;
     private ViewPager2 viewPager;
     LinearLayout indicatorLayout;
-    int ID, IDCUSTOMER;
+    int ID;
     //Feedback
     LinearLayoutManager layoutManager_feedback;
     Adapter_Feedback adapter_feedback;

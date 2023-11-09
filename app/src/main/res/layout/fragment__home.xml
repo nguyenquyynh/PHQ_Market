@@ -14,12 +14,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <ImageView
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/Banner"
                 android:layout_width="match_parent"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:layout_height="150dp"/>
+                android:layout_height="160dp"/>
             <RelativeLayout
                 android:layout_below="@+id/Banner"
                 android:layout_width="match_parent"
