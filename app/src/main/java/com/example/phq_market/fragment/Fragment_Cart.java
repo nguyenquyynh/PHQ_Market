@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_Checkout;
+import com.example.phq_market.activity.Activity_Login;
 import com.example.phq_market.adapter.Adapter_Cart;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.CART;
@@ -70,13 +71,21 @@ public class Fragment_Cart extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ArrayList<PURCHASE> list_purchase = new ArrayList<>();
-                for (CART ca : list_CART){
-                    list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY()));
+                if(list_CART.size()>0){
+                    ArrayList<PURCHASE> list_purchase = new ArrayList<>();
+                    for (CART ca : list_CART){
+                        list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY()));
+                    }
+                    Intent intent = new Intent(getContext(), Activity_Checkout.class);
+                    intent.putExtra("list_purchase",list_purchase);
+                    startActivity(intent);
+                } else if (email.isEmpty() || pass.isEmpty()) {
+                    Toast.makeText(getContext(), "Hãy đăng nhập", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getContext(), Activity_Login.class));
+                } else {
+                    Toast.makeText(getContext(), "Hãy mua hàng", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(getContext(), Activity_Checkout.class);
-                intent.putExtra("list_purchase",list_purchase);
-                startActivity(intent);
+
 
             }
         });
@@ -120,14 +129,16 @@ public class Fragment_Cart extends Fragment {
 
                            progressDialog_cart.dismiss();
                        }else {
-                           Toast.makeText(getContext(), "Hãy đăng nhập", Toast.LENGTH_SHORT).show();
+                           list_CART.clear();
+                           adapterCart.notifyDataSetChanged();
                            progressDialog_cart.dismiss();
                        }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<CART>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+                        list_CART.clear();
+                        adapterCart.notifyDataSetChanged();
                         progressDialog_cart.dismiss();
                     }
                 });

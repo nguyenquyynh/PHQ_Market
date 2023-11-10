@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_EditAccount;
 import com.example.phq_market.activity.Activity_Login;
+import com.example.phq_market.activity.Activity_Order;
 import com.example.phq_market.activity.Activity_Signup;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.ACCOUNT;
@@ -55,6 +56,7 @@ public class Fragment_Account extends Fragment {
         View view = inflater.inflate(R.layout.fragment__account, container, false);
 
         LinearLayout ic_Edit = view.findViewById(R.id.ic_Edit);
+        LinearLayout lnOrder = view.findViewById(R.id.lnOrder);
         Img_account = view.findViewById(R.id.Img_account);
         Txt_name = view.findViewById(R.id.Txt_name);
         Txt_like = view.findViewById(R.id.Txt_like);
@@ -66,17 +68,12 @@ public class Fragment_Account extends Fragment {
         btn_setUp = view.findViewById(R.id.btn_setUp);
         acc = new EDITACCOUNT();
         sharedPreferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
-        SharedPreferences.Editor editor =  sharedPreferences.edit();
         checkLogin(btn_setUp);
         btn_setUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(btn_setUp.getText() == "Log out"){
                     startActivity(new Intent(getContext(), Activity_Login.class));
-                    editor.putString("Email","");
-                    editor.putString("Pass","");
-                    editor.putBoolean("remember",false);
-                    editor.apply();
                 }else {
                     startActivity(new Intent(getContext(), Activity_Signup.class));
                 }
@@ -85,12 +82,18 @@ public class Fragment_Account extends Fragment {
         ic_Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity_EditAccount edit = new Activity_EditAccount();
                 Intent intent = new Intent(getContext(), Activity_EditAccount.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("acc",acc);
                 intent.putExtras(bundle);
                 startActivity(intent);
+            }
+        });
+
+        lnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), Activity_Order.class));
             }
         });
         return view;

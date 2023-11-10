@@ -115,15 +115,14 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        if(response.isSuccessful() && response.body() != null){
-                            loadList();
-                            progressDialog_cart.dismiss();
-                        }
+                        loadList();
+                        progressDialog_cart.dismiss();
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(context, "lỗi ", Toast.LENGTH_SHORT).show();
+                        loadList();
+                        progressDialog_cart.dismiss();
                     }
                 });
 
@@ -165,14 +164,18 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
                             Toast.makeText(context, "Thành công "+list.size(), Toast.LENGTH_SHORT).show();
                             progressDialog_cart.dismiss();
                         }else {
-                            Toast.makeText(context, "lỗi ", Toast.LENGTH_SHORT).show();
+                            list_CART.clear();
+                            notifyDataSetChanged();
+                            progressDialog_cart.dismiss();
 
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<CART>> call, Throwable t) {
-                        Toast.makeText(context, "lỗi ", Toast.LENGTH_SHORT).show();
+                        list_CART.clear();
+                        notifyDataSetChanged();
+                        progressDialog_cart.dismiss();
                     }
                 });
 
