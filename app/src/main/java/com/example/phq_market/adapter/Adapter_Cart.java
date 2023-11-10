@@ -69,7 +69,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
                 quantityAtPosition = list_CART.get(holder.getAdapterPosition()).getQUANTITY();
                 quantityAtPosition+=1;
                 holder.tvquantity.setText(String.valueOf(quantityAtPosition));
-                updateQUANTITY(cart.getID());
+                list_CART.get(holder.getAdapterPosition()).setQUANTITY(quantityAtPosition);
             }
         });
         holder.btnMinus.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
                     quantityAtPosition = list_CART.get(holder.getAdapterPosition()).getQUANTITY();
                     quantityAtPosition -=1;
                     holder.tvquantity.setText(String.valueOf(quantityAtPosition));
-                    updateQUANTITY(list_CART.get(holder.getAdapterPosition()).getID());
+                    list_CART.get(holder.getAdapterPosition()).setQUANTITY(quantityAtPosition);
                 }
             }
         });
@@ -91,47 +91,6 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
                 deleteItemCart(vitri);
             }
         });
-    }
-
-    private void updateQUANTITY(Integer id){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                handler_cart.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog_cart = new ProgressDialog(context);
-                        progressDialog_cart.setMessage("Dữ liệu đang chạy");
-                        progressDialog_cart.setCancelable(false);
-                        progressDialog_cart.show();
-                    }
-                });
-                Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/cart/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                api api_cart = retrofit_catalog.create(api.class);
-                Call<String> call = api_cart.update_ItemInCart(id, quantityAtPosition);
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        if(response.isSuccessful() && response.body() != null){
-                            loadList();
-                            progressDialog_cart.dismiss();
-                        }
-                        else {
-                            Toast.makeText(context, "lỗi hearre", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(context, "lỗi ", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        }).start();
     }
 
     private void deleteItemCart(Integer id){

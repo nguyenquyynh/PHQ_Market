@@ -283,7 +283,6 @@ public class Activity_ItemDetail extends AppCompatActivity {
             }
         });
 
-
         // Create slide show add img
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
