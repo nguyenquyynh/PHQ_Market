@@ -133,7 +133,7 @@ public class Activity_Signup extends AppCompatActivity {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api apiAccount = retrofit.create(api.class);
-                Call<String> call = apiAccount.register(username,password,Integer.valueOf(phone),email);
+                Call<String> call = apiAccount.register(username,password, phone,email);
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {

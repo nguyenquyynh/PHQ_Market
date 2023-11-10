@@ -2,19 +2,24 @@ package com.example.phq_market.model;
 
 public class ACCOUNT {
     private String NAME;
-    private int PHONE;
+    private String EMAIL;
+    private String PHONE;
     private String ADDRESS;
-    private int LIKE;
-    private int ORDER;
-    private int ITEM;
+    private int LIKED;
+    private int PURCHASE;
+    private int CART;
 
-    public ACCOUNT(String NAME, int PHONE, String ADDRESS, int LIKE, int ORDER, int ITEM) {
+    public ACCOUNT(String NAME, String EMAIL, String PHONE, String ADDRESS, int LIKED, int PURCHASE, int CART) {
         this.NAME = NAME;
+        this.EMAIL = EMAIL;
         this.PHONE = PHONE;
         this.ADDRESS = ADDRESS;
-        this.LIKE = LIKE;
-        this.ORDER = ORDER;
-        this.ITEM = ITEM;
+        this.LIKED = LIKED;
+        this.PURCHASE = PURCHASE;
+        this.CART = CART;
+    }
+
+    public ACCOUNT() {
     }
 
     public String getNAME() {
@@ -25,11 +30,19 @@ public class ACCOUNT {
         this.NAME = NAME;
     }
 
-    public int getPHONE() {
+    public String getEMAIL() {
+        return EMAIL;
+    }
+
+    public void setEMAIL(String EMAIL) {
+        this.EMAIL = EMAIL;
+    }
+
+    public String getPHONE() {
         return PHONE;
     }
 
-    public void setPHONE(int PHONE) {
+    public void setPHONE(String PHONE) {
         this.PHONE = PHONE;
     }
 
@@ -38,30 +51,30 @@ public class ACCOUNT {
     }
 
     public void setADDRESS(String ADDRESS) {
-        ADDRESS = ADDRESS;
+        this.ADDRESS = ADDRESS;
     }
 
-    public int getLIKE() {
-        return LIKE;
+    public int getLIKED() {
+        return LIKED;
     }
 
-    public void setLIKE(int LIKE) {
-        this.LIKE = LIKE;
+    public void setLIKED(int LIKED) {
+        this.LIKED = LIKED;
     }
 
-    public int getORDER() {
-        return ORDER;
+    public int getPURCHASE() {
+        return PURCHASE;
     }
 
-    public void setORDER(int ORDER) {
-        this.ORDER = ORDER;
+    public void setPURCHASE(int PURCHASE) {
+        this.PURCHASE = PURCHASE;
     }
 
-    public int getITEM() {
-        return ITEM;
+    public int getCART() {
+        return CART;
     }
 
-    public void setITEM(int ITEM) {
-        this.ITEM = ITEM;
+    public void setCART(int CART) {
+        this.CART = CART;
     }
 }

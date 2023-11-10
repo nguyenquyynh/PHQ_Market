@@ -26,6 +26,7 @@ import com.example.phq_market.adapter.Adapter_Feedback;
 import com.example.phq_market.adapter.Adapter_Image_Slide_ItemDetail;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.FEEDBACKSHOW;
+import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.ONLYIMAGE;
 import com.example.phq_market.model.PRODUCTDETAIL;
 
@@ -44,6 +45,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
     private ViewPager2 viewPager;
     LinearLayout indicatorLayout;
     int ID;
+    boolean check = false;
     //Feedback
     LinearLayoutManager layoutManager_feedback;
     Adapter_Feedback adapter_feedback;
@@ -52,6 +54,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
     TextView Txt_priceproduct, Txt_priceaddtocart;
     LinearLayout Txt_addcart;
     TextView Txt_nameproduct;
+    ImageView Img_like;
     private ArrayList<ONLYIMAGE> imageList;
     private  ArrayList<FEEDBACKSHOW> list_feedback;
     @Override
@@ -59,6 +62,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
         viewPager = findViewById(R.id.view_pager);
+        Img_like = findViewById(R.id.Img_like);
         Txt_evaluateproduct = findViewById(R.id.Txt_evaluateproduct);
         Txt_priceproduct = findViewById(R.id.Txt_priceproduct);
         Txt_priceaddtocart = findViewById(R.id.Txt_priceaddtocart);
@@ -86,6 +90,32 @@ public class Activity_ItemDetail extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //Lấy trạng thái
+        SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
+        Retrofit retrofit_status = new Retrofit.Builder()
+                .baseUrl("https://phqmarket.000webhostapp.com/liked/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api api_status = retrofit_status.create(api.class);
+        Call<String> call_status = api_status.check_status(ID,s.getString("Email",null), s.getString("Pass", null));
+        call_status.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Img_like.setImageResource(R.drawable.greenheart);
+                    check = true;
+                } else{
+                    Img_like.setImageResource(R.drawable.heart);
+                    check = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(Activity_ItemDetail.this, "igh", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     //Lấy product
         Retrofit retrofit_product = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.000webhostapp.com/product/")
@@ -273,6 +303,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 }
             }
         });
+        // Xử lý sự kiện
         Txt_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -284,6 +315,42 @@ public class Activity_ItemDetail extends AppCompatActivity {
                     Txt_descriptionproduct.setMaxLines(2);
                 }
 
+            }
+        });
+        Img_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
+                if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
+                    Retrofit retrofit_addlike = new Retrofit.Builder()
+                            .baseUrl("https://phqmarket.000webhostapp.com/liked/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    api api_like = retrofit_addlike.create(api.class);
+                    Call<String> call_cart = api_like.add_ItemLike(ID,sharedPreferences.getString("Email", null),sharedPreferences.getString("Pass", null));
+                    call_cart.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.body() != null && response.isSuccessful()) {
+                                Toast.makeText(Activity_ItemDetail.this, "" + response.body(), Toast.LENGTH_SHORT).show();
+                                if (check) {
+                                    Img_like.setImageResource(R.drawable.heart);
+                                    check = false;
+                                } else {
+                                    Img_like.setImageResource(R.drawable.greenheart);
+                                    check = true;
+                                }
+                            } else {
+                                Toast.makeText(Activity_ItemDetail.this, "We have a problem !!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(Activity_ItemDetail.this, "We have a problem !!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 

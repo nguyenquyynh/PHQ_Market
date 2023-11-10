@@ -19,9 +19,9 @@ public interface api {
     @GET("login.php")
     Call<CUSTOMER> login(@Query("NAME") String name , @Query("PASS") String pass);
     @GET("register.php")
-    Call<String> register(@Query("NAME") String name , @Query("PASS") String pass, @Query("PHONE") int phone,@Query("EMAIL") String email);
-    @GET("account.php")
-    Call<ACCOUNT> getDetailAccount();
+    Call<String> register(@Query("NAME") String name , @Query("PASS") String pass, @Query("PHONE") String phone,@Query("EMAIL") String email);
+    @GET("accountdetail.php")
+    Call<ACCOUNT> getDetailAccount(@Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("getlistcatalog.php")
     Call<ArrayList<CATALOGSHOW>> get_Listcatalog();
     @GET("getlistnewproduct.php")
@@ -46,4 +46,10 @@ public interface api {
     Call<String> update_ItemInCart(@Query("IDCART") Integer idcart, @Query("QUANTITY") Integer QUANTITY);
     @GET("getlistbanner.php")
     Call<ArrayList<ONLYIMAGE>> get_listbanner();
+    @GET("addlike.php")
+    Call<String> add_ItemLike(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("getlistlike.php")
+    Call<ArrayList<NEWPRODUCT>> get_listlike(@Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("status.php")
+    Call<String> check_status(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
 }

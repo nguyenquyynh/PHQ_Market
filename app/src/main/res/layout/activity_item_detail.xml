@@ -64,6 +64,7 @@
                 android:gravity="center"
                 android:id="@+id/indicator_layout">
             </LinearLayout>
+
         </LinearLayout>
 
         <RelativeLayout
@@ -78,6 +79,8 @@
                 android:text="Nike Air Max Plus II"
                 android:textSize="18dp"
                 android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/Img_like"
                 android:textColor="@color/text_color"
                 android:layout_marginBottom="17dp"/>
             <ImageView
@@ -119,6 +122,13 @@
                 android:layout_below="@id/Txt_nameproduct"
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="-5dp"/>
+
+            <ImageView
+                android:id="@+id/Img_like"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/heart"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
         <ScrollView
             android:layout_width="match_parent"
@@ -211,4 +221,5 @@ When performance is what you’re looking for, look no further than the all-new 
             android:textSize="20dp"
             android:text=" VND - Add to cart"/>
     </LinearLayout>
+
 </RelativeLayout>
