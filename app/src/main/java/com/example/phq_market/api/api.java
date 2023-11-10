@@ -20,6 +20,8 @@ public interface api {
     Call<CUSTOMER> login(@Query("NAME") String name , @Query("PASS") String pass);
     @GET("register.php")
     Call<String> register(@Query("NAME") String name , @Query("PASS") String pass, @Query("PHONE") String phone,@Query("EMAIL") String email);
+    @GET("updatecustomer.php")
+    Call<String> updatecustomer(@Query("NAME") String name, @Query("EMAIL") String email , @Query("PASS") String pass, @Query("PHONE") String phone, @Query("ADRESS") String adress, @Query("IMG") String img);
     @GET("accountdetail.php")
     Call<ACCOUNT> getDetailAccount(@Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("getlistcatalog.php")

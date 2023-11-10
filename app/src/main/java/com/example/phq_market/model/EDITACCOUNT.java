@@ -1,27 +1,25 @@
 package com.example.phq_market.model;
 
-public class ACCOUNT {
+import java.io.Serializable;
+
+public class EDITACCOUNT implements Serializable {
     private String NAME;
     private String EMAIL;
+    private String PASS;
     private String PHONE;
     private String ADDRESS;
-    private int LIKED;
-    private int PURCHASE;
-    private int CART;
     private String IMG;
 
-    public ACCOUNT(String NAME, String EMAIL, String PHONE, String ADDRESS, int LIKED, int PURCHASE, int CART, String IMG) {
+    public EDITACCOUNT(String NAME, String EMAIL, String PASS, String PHONE, String ADDRESS, String IMG) {
         this.NAME = NAME;
         this.EMAIL = EMAIL;
+        this.PASS = PASS;
         this.PHONE = PHONE;
         this.ADDRESS = ADDRESS;
-        this.LIKED = LIKED;
-        this.PURCHASE = PURCHASE;
-        this.CART = CART;
         this.IMG = IMG;
     }
 
-    public ACCOUNT() {
+    public EDITACCOUNT() {
     }
 
     public String getNAME() {
@@ -40,6 +38,14 @@ public class ACCOUNT {
         this.EMAIL = EMAIL;
     }
 
+    public String getPASS() {
+        return PASS;
+    }
+
+    public void setPASS(String PASS) {
+        this.PASS = PASS;
+    }
+
     public String getPHONE() {
         return PHONE;
     }
@@ -54,30 +60,6 @@ public class ACCOUNT {
 
     public void setADDRESS(String ADDRESS) {
         this.ADDRESS = ADDRESS;
-    }
-
-    public int getLIKED() {
-        return LIKED;
-    }
-
-    public void setLIKED(int LIKED) {
-        this.LIKED = LIKED;
-    }
-
-    public int getPURCHASE() {
-        return PURCHASE;
-    }
-
-    public void setPURCHASE(int PURCHASE) {
-        this.PURCHASE = PURCHASE;
-    }
-
-    public int getCART() {
-        return CART;
-    }
-
-    public void setCART(int CART) {
-        this.CART = CART;
     }
 
     public String getIMG() {
