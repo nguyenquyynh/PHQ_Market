@@ -8,6 +8,7 @@ import com.example.phq_market.model.CUSTOMER;
 import com.example.phq_market.model.FEEDBACKSHOW;
 import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.ONLYIMAGE;
+import com.example.phq_market.model.ORDERANDFEEDBACK;
 import com.example.phq_market.model.PRODUCTDETAIL;
 
 import java.util.ArrayList;
@@ -59,4 +60,6 @@ public interface api {
     Call<String> add_Purchase(@Query("listpurchase") String cart);
     @GET("getitemtoaddpurchase.php")
     Call<ArrayList<CHECKOUT>> getCheckOut(@Query("listcart") String cart);
+    @GET("getListOrder.php")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrder(@Query("EMAIL") String email, @Query("PASS") String pass);
 }
