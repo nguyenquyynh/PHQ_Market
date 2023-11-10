@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class Activity_Main extends AppCompatActivity {
     FrameLayout frameLayout;
     TextView Title_fragment;
     RelativeLayout layout1;
+    ImageView Img_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +37,9 @@ public class Activity_Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.Bottom_navigation);
         frameLayout = findViewById(R.id.Frame_layout);
+        Img_search = findViewById(R.id.Img_search);
         Title_fragment = findViewById(R.id.Title_fragment);
         layout1 = findViewById(R.id.layout1);
-
         changeFragment(new Fragment_Home());
         Title_fragment.setText("Home");
     }
@@ -48,7 +50,8 @@ public class Activity_Main extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+                layout1.setVisibility(View.VISIBLE);
+                Img_search.setVisibility(View.VISIBLE);
                 if (item.getItemId() == R.id.Home) {
                     changeFragment(new Fragment_Home());
                     Title_fragment.setText("Home");
@@ -65,11 +68,9 @@ public class Activity_Main extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.Like) {
                     changeFragment(new Fragment_Like());
+                    Img_search.setVisibility(View.GONE);
                     Title_fragment.setText("Like");
                 }
-
-                layout1.setVisibility(View.VISIBLE);
-
                 if (item.getItemId() == R.id.Account) {
                     layout1.setVisibility(View.GONE);
                     changeFragment(new Fragment_Account());
