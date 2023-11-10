@@ -7,21 +7,29 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_ItemDetail;
+import com.example.phq_market.adapter.Adapter_Banner;
 import com.example.phq_market.adapter.Adapter_Catalog;
 import com.example.phq_market.adapter.Adapter_NewProduct;
 import com.example.phq_market.adapter.Adapter_SaleProduct;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.CATALOGSHOW;
 import com.example.phq_market.model.NEWPRODUCT;
+import com.example.phq_market.model.ONLYIMAGE;
 
 import java.util.ArrayList;
 
@@ -32,7 +40,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment_Discovery extends Fragment {
-
+    //Slide
+    ArrayList<ONLYIMAGE> list_banner;
+    ViewPager2 view_banner;
+    Adapter_Banner banner;
+    private int currenPage = 0;
+    private final Handler handler_banner = new Handler();
+    private final int delay = 2000;
+    //==============================================
     RecyclerView Recycler_viewnew, Recycler_view_catalog, Recycler_viewbest;
     ArrayList<NEWPRODUCT> list_product, list_saleproduct;
     ArrayList<CATALOGSHOW> list_catalog;
@@ -65,12 +80,58 @@ public class Fragment_Discovery extends Fragment {
         list_product = new ArrayList<>();
         list_catalog = new ArrayList<>();
         list_saleproduct = new ArrayList<>();
+        list_banner = new ArrayList<>();
+        view_banner = view.findViewById(R.id.Banner);
         return view;
     }
     @Override
     public void onResume() {
         super.onResume();
 
+        Retrofit retrofit_banner = new Retrofit.Builder()
+                .baseUrl("https://phqmarket.000webhostapp.com/banner/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api api_banner = retrofit_banner.create(api.class);
+        Call<ArrayList<ONLYIMAGE>> call_banner = api_banner.get_listbanner();
+        call_banner.enqueue(new Callback<ArrayList<ONLYIMAGE>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ONLYIMAGE>> call, Response<ArrayList<ONLYIMAGE>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ArrayList<ONLYIMAGE> list = response.body();
+                    list_banner.clear();
+                    list_banner.addAll(list);
+                    banner.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ONLYIMAGE>> call, Throwable t) {
+
+            }
+        });
+
+        banner = new Adapter_Banner(list_banner, getContext());
+        view_banner.setAdapter(banner);
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (currenPage == banner.getItemCount() -1) {
+                    currenPage = 0;
+                } else currenPage++;
+                view_banner.setCurrentItem(currenPage);
+                handler_banner.postDelayed(this, delay);
+            }
+        };
+        handler_banner.postDelayed(runnable, delay);
+        view_banner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                handler_banner.removeCallbacks(runnable);
+                return false;
+            }
+        });
         //hiển thị danh mục
         new Thread(new Runnable() {
             @Override
@@ -218,5 +279,4 @@ public class Fragment_Discovery extends Fragment {
             }
         });
     }
-
 }

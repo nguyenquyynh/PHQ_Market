@@ -29,7 +29,7 @@
             android:layout_centerHorizontal="true"/>
 
         <ImageView
-            android:id="@+id/IMG_Check"
+            android:id="@+id/Img_done"
             android:layout_width="24dp"
             android:layout_height="30dp"
             android:src="@drawable/check"
@@ -40,16 +40,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="360dp"
+        android:background="@color/background"
         android:layout_marginTop="27dp"
         android:layout_gravity="center">
         <ImageView
+            android:id="@+id/Img_avata"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="#63CD58"/>
+            android:layout_height="100dp"/>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/Btn_ChangImage"
+        android:id="@+id/Btn_changeavata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -64,10 +65,11 @@
         android:layout_below="@id/text2"
         android:layout_height="60dp">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_FullName"
+            android:id="@+id/Edt_fullName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Full Name"
+            android:inputType="text"
             android:drawableLeft="@drawable/acthention"
             android:drawablePadding="20dp"
             android:background="@drawable/radius"/>
@@ -79,10 +81,11 @@
         android:layout_below="@id/text2"
         android:layout_height="60dp">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_Email"
+            android:id="@+id/Edt_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Email"
+            android:inputType="text"
             android:drawableLeft="@drawable/email"
             android:drawablePadding="20dp"
             android:background="@drawable/radius"/>
@@ -94,10 +97,11 @@
         android:layout_below="@id/text2"
         android:layout_height="60dp">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_Address"
+            android:id="@+id/Edt_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Adress"
+            android:inputType="text"
             android:drawableLeft="@drawable/home_edit_acconut"
             android:drawablePadding="20dp"
             android:background="@drawable/radius"/>
@@ -109,10 +113,11 @@
         android:layout_below="@id/text2"
         android:layout_height="60dp">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tv_Number"
+            android:id="@+id/Edt_number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Number"
+            android:inputType="number"
             android:drawableLeft="@drawable/phone"
             android:drawablePadding="20dp"
             android:background="@drawable/radius"/>
@@ -128,20 +133,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_password"
+                android:id="@+id/Edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:drawableLeft="@drawable/pass"
                 android:drawablePadding="20dp"
                 android:background="@drawable/radius"/>
         </com.google.android.material.textfield.TextInputLayout>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/open_eye"
+            android:id="@+id/Img_showpass"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:src="@drawable/close_eye"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="23dp"
             android:layout_marginRight="20dp"/>
     </RelativeLayout>
 

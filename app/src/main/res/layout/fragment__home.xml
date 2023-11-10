@@ -14,42 +14,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <HorizontalScrollView
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/Banner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/linear_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="370dp"
-                        android:scaleType="centerCrop"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_launcher_background"/>
-
-                    <ImageView
-                        android:layout_width="370dp"
-                        android:scaleType="centerCrop"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_launcher_foreground"/>
-
-                    <ImageView
-                        android:layout_width="370dp"
-                        android:scaleType="centerCrop"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_launcher_background"/>
-                    <ImageView
-                        android:layout_width="370dp"
-                        android:scaleType="centerCrop"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_launcher_foreground"/>
-                </LinearLayout>
-
-            </HorizontalScrollView>
+                android:layout_height="160dp"/>
             <RelativeLayout
                 android:layout_below="@+id/Banner"
                 android:layout_width="match_parent"

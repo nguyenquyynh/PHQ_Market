@@ -10,14 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp">
-
-        <ImageView
-            android:id="@+id/Img_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/heart" />
         <ImageView
             android:id="@+id/Img_imageproduct"
             android:layout_width="130dp"
@@ -25,8 +17,7 @@
             android:layout_marginTop="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/Img_like"/>
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:id="@+id/Txt_nameproduct"
             android:layout_width="match_parent"

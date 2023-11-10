@@ -9,24 +9,32 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_ItemDetail;
+import com.example.phq_market.adapter.Adapter_Banner;
+import com.example.phq_market.adapter.Adapter_Image_Slide_ItemDetail;
 import com.example.phq_market.adapter.Adapter_NewProduct;
 import com.example.phq_market.adapter.Adapter_PopularProduct;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.NEWPRODUCT;
+import com.example.phq_market.model.ONLYIMAGE;
 
 import java.util.ArrayList;
 
@@ -37,8 +45,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment_Home extends Fragment {
+    ArrayList<ONLYIMAGE> list_banner;
     private Adapter_PopularProduct adapterPopularProduct;
     private GridLayoutManager LayoutManager;
+
+    //Slide
+    ViewPager2 view_banner;
+    Adapter_Banner banner;
+    private int currenPage = 0;
+    private final Handler handler_banner = new Handler();
+    private final int delay = 2000;
+    //==============================================
     private ArrayList<NEWPRODUCT> listProduct;
     private  RecyclerView rcv_Home;
     ProgressDialog progressDialog;
@@ -50,7 +67,6 @@ public class Fragment_Home extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -59,12 +75,59 @@ public class Fragment_Home extends Fragment {
         View view = inflater.inflate(R.layout.fragment__home, container, false);
         rcv_Home = view.findViewById(R.id.rcv_Home);
         listProduct = new ArrayList<>();
+        list_banner = new ArrayList<>();
+        view_banner = view.findViewById(R.id.Banner);
+
         return view;
     }
-
     @Override
     public void onResume() {
         super.onResume();
+
+        Retrofit retrofit_banner = new Retrofit.Builder()
+                .baseUrl("https://phqmarket.000webhostapp.com/banner/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api api_banner = retrofit_banner.create(api.class);
+        Call<ArrayList<ONLYIMAGE>> call_banner = api_banner.get_listbanner();
+        call_banner.enqueue(new Callback<ArrayList<ONLYIMAGE>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ONLYIMAGE>> call, Response<ArrayList<ONLYIMAGE>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ArrayList<ONLYIMAGE> list = response.body();
+                    list_banner.clear();
+                    list_banner.addAll(list);
+                    banner.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ONLYIMAGE>> call, Throwable t) {
+
+            }
+        });
+
+        banner = new Adapter_Banner(list_banner, getContext());
+        view_banner.setAdapter(banner);
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (currenPage == banner.getItemCount() -1) {
+                    currenPage = 0;
+                } else currenPage++;
+                view_banner.setCurrentItem(currenPage);
+                handler_banner.postDelayed(this, delay);
+            }
+        };
+        handler_banner.postDelayed(runnable, delay);
+        view_banner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                handler_banner.removeCallbacks(runnable);
+                return false;
+            }
+        });
 
         new Thread(new Runnable() {
             @Override
@@ -111,6 +174,7 @@ public class Fragment_Home extends Fragment {
         adapterPopularProduct = new Adapter_PopularProduct(listProduct,getContext());
         rcv_Home.setAdapter(adapterPopularProduct);
 
+
         adapterPopularProduct.setOnClickProduct(new Adapter_PopularProduct.OnClickProduct() {
             @Override
             public void clickproduct(int ID) {
@@ -120,4 +184,5 @@ public class Fragment_Home extends Fragment {
             }
         });
     }
+
 }
