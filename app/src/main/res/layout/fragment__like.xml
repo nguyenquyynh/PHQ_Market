@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="20dp"
+    android:padding="15dp"
     tools:context=".fragment.Fragment_Like">
 
     <LinearLayout
@@ -15,6 +15,7 @@
         android:weightSum="100">
 
         <EditText
+            android:id="@+id/Edt_Search"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="83"
@@ -26,6 +27,7 @@
             android:drawablePadding="20dp"/>
 
         <ImageButton
+            android:id="@+id/Btn_filter"
             android:layout_width="0dp"
             android:layout_weight="16"
             android:layout_height="match_parent"

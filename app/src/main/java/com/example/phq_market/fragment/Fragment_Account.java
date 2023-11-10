@@ -5,6 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +20,23 @@ import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_EditAccount;
 import com.example.phq_market.activity.Activity_Login;
 import com.example.phq_market.activity.Activity_Signup;
+import com.example.phq_market.api.api;
+import com.example.phq_market.model.ACCOUNT;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment_Account extends Fragment {
     public Fragment_Account() {
     }
-
-    private TextView tv_Email;
-    private TextView tv_Phone;
-    private TextView tv_Address;
+    Button btn_setUp;
+    private TextView Txt_name, Txt_like, Txt_order, Txt_cart;
+    private TextView Txt_email;
+    private TextView Txt_phone;
+    private TextView Txt_address;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -40,10 +50,14 @@ public class Fragment_Account extends Fragment {
         View view = inflater.inflate(R.layout.fragment__account, container, false);
 
         LinearLayout ic_Edit = view.findViewById(R.id.ic_Edit);
-        tv_Email = view.findViewById(R.id.tv_Email);
-        tv_Phone = view.findViewById(R.id.tv_Phone);
-        tv_Address = view.findViewById(R.id.tv_Address);
-        Button btn_setUp = view.findViewById(R.id.btn_setUp);
+        Txt_name = view.findViewById(R.id.Txt_name);
+        Txt_like = view.findViewById(R.id.Txt_like);
+        Txt_order = view.findViewById(R.id.Txt_order);
+        Txt_cart = view.findViewById(R.id.Txt_cart);
+        Txt_email = view.findViewById(R.id.Txt_email);
+        Txt_phone = view.findViewById(R.id.Txt_phone);
+        Txt_address = view.findViewById(R.id.Txt_address);
+        btn_setUp = view.findViewById(R.id.btn_setUp);
 
 
         sharedPreferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
@@ -69,10 +83,6 @@ public class Fragment_Account extends Fragment {
                 startActivity(new Intent(getContext(), Activity_EditAccount.class));
             }
         });
-
-
-
-
         return view;
     }
 
@@ -90,5 +100,46 @@ public class Fragment_Account extends Fragment {
             Log.e("->>>>>>>>>>>",e+"");
             btn_setUp.setText("Log in");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences s = getContext().getSharedPreferences("account", MODE_PRIVATE);
+                if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
+                    Retrofit retrofit_account = new Retrofit.Builder()
+                            .baseUrl("https://phqmarket.000webhostapp.com/account/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    api api_account = retrofit_account.create(api.class);
+                    Call<ACCOUNT> call_account = api_account.getDetailAccount(s.getString("Email", null), s.getString("Pass", null));
+                    call_account.enqueue(new Callback<ACCOUNT>() {
+                        @Override
+                        public void onResponse(Call<ACCOUNT> call, Response<ACCOUNT> response) {
+                            if (response.isSuccessful() && response.body() != null){
+                                ACCOUNT account = response.body();
+                                Txt_name.setText(account.getNAME());
+                                Txt_email.setText(account.getEMAIL());
+                                Txt_phone.setText(account.getPHONE());
+                                Txt_address.setText(account.getADDRESS());
+                                Txt_like.setText(String.valueOf(account.getLIKED()));
+                                Txt_order.setText(String.valueOf(account.getPURCHASE()));
+                                Txt_cart.setText(String.valueOf(account.getCART()));
+                            } else {
+                                Log.d(">>>>>>>>>>>>>>>>>>>>>>>,", response.toString());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ACCOUNT> call, Throwable t) {
+
+                        }
+                    });
+                }
+            ;}
+        }).start();
     }
 }

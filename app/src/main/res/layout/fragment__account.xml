@@ -5,16 +5,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.Fragment_Account"
-    android:background="#8BBEC1">
+    android:background="#A8D2D1">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:background="#8BBEC1">
         <ImageView
-            android:layout_centerHorizontal="true"
-            android:layout_width="373dp"
-            android:layout_height="177dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
             android:src="@drawable/banner_account"/>
     </LinearLayout>
 
@@ -38,14 +40,14 @@
         android:layout_marginRight="15dp"
         android:padding="10dp"
         android:background="@drawable/background_card_account">
-
         <TextView
-            android:id="@+id/tv_FullName"
+            android:id="@+id/Txt_name"
             android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="43dp"
-            android:text="Full Name : Nguyễn Văn Bê"/>
-
+            android:text="Nguyễn Văn Bê"/>
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,26 +83,32 @@
         
         <LinearLayout
             android:id="@+id/ln1"
-            android:layout_below="@+id/tv_FullName"
+            android:layout_below="@+id/Txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="10dp"
+                android:background="@drawable/nen_search"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tvLike"
+                    android:id="@+id/Txt_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20dp"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Like"/>
+                    android:textColor="#338313"
+                    android:textStyle="bold"
+                    android:text="  Like "/>
             </LinearLayout>
 
             <LinearLayout
@@ -108,68 +116,108 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/nen_search"
                 android:layout_marginLeft="30dp"
+                android:padding="10dp"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tvOrder"
+                    android:id="@+id/Txt_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20dp"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#338313"
+                    android:textStyle="bold"
                     android:text="Order"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:orientation="vertical"
+                android:background="@drawable/nen_search"
                 android:gravity="center">
                 <TextView
-                    android:id="@+id/tvItem"
+                    android:id="@+id/Txt_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20dp"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Item"/>
+                    android:textColor="#338313"
+                    android:textStyle="bold"
+                    android:text=" Cart "/>
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ln2"
-            android:layout_marginTop="22dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/info"
             android:layout_below="@+id/ln1"
-            android:orientation="vertical">
-
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tv_Email"
-                android:layout_width="match_parent"
+                android:id="@+id/email"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="Email :  TaoDoiQua@gmail.com"/>
-
+                android:textSize="16dp"
+                android:textColor="#338313"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:text="Email : "/>
             <TextView
-                android:id="@+id/tv_Phone"
-                android:layout_width="match_parent"
+                android:id="@+id/Txt_email"
+                android:layout_toRightOf="@+id/email"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Phone : 0123159321"/>
-
+                android:layout_marginBottom="10dp"
+                android:textSize="16dp"
+                android:text="abcgfhask.@gmail.com"/>
             <TextView
-                android:id="@+id/tv_Address"
-                android:layout_width="match_parent"
+                android:id="@+id/phone"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Address : TaoDoiQua25/3a ,Châu Thành "/>
-        </LinearLayout>
-
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/Txt_email"
+                android:textColor="#338313"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:text="Phone : "/>
+            <TextView
+                android:id="@+id/Txt_phone"
+                android:layout_toRightOf="@+id/phone"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/Txt_email"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="0323651xxx"/>
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone"
+                android:textColor="#338313"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:text="Address : "/>
+            <TextView
+                android:id="@+id/Txt_address"
+                android:layout_toRightOf="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Txt_phone"
+                android:textSize="16dp"
+                android:text="xx/x, yy, vv, cc"/>
+        </RelativeLayout>
         <LinearLayout
             android:id="@+id/ln3"
-            android:layout_below="@+id/ln2"
+            android:layout_below="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
