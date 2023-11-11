@@ -12,24 +12,11 @@
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:layout_height="60dp">
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/text_color"
-            android:layout_marginLeft="20dp"
-            android:textSize="15dp"
-            android:text="Hello, "/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/text"
-            android:layout_centerVertical="true"
-            android:textColor="@color/navigation_selected"
-            android:textSize="15dp"
-            android:text="name"/>
+       <ImageView
+           android:layout_marginLeft="15dp"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:src="@drawable/phqmarket"/>
         <TextView
             android:id="@+id/Title_fragment"
             android:layout_width="wrap_content"
@@ -72,6 +59,7 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="selected"
+        app:itemIconTint="@color/navigation_selected"
         app:menu="@menu/menu"
         android:background="@drawable/nen_bottomnavigation"/>
 </RelativeLayout>

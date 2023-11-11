@@ -42,6 +42,7 @@
                 android:id="@+id/Txt_nameproduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="Product +"
                 android:ellipsize="end"
                 android:maxLines="1"
@@ -67,7 +68,8 @@
                     android:id="@+id/Txt_evaluate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4.5"
+                    android:text="1"
+                    android:textColor="@color/black"
                     android:layout_toRightOf="@+id/start"
                     android:textSize="18dp"/>
             </LinearLayout>
@@ -101,9 +103,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Feedback"
+                android:layout_marginTop="48dp"
                 android:textSize="13dp"
+                android:textColor="@color/white"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:backgroundTint="@color/navigation_selected"/>
         </RelativeLayout>
     </LinearLayout>

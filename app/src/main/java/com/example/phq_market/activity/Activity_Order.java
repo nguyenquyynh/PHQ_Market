@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.phq_market.R;
 import com.example.phq_market.adapter.Adapter_Order_FeedBack;
@@ -27,6 +29,7 @@ public class Activity_Order extends AppCompatActivity {
     private RecyclerView rcv_order;
     private Adapter_Order_FeedBack adapterOrderFeedBack;
     private LinearLayoutManager linearLayoutManager;
+    private ImageView Img_back;
     private ArrayList<ORDERANDFEEDBACK> listOrder;
     private SharedPreferences sharedPreferences;
     @Override
@@ -35,12 +38,19 @@ public class Activity_Order extends AppCompatActivity {
         setContentView(R.layout.activity_order);
         sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
         rcv_order = findViewById(R.id.rcv_order);
+        Img_back = findViewById(R.id.Img_back);
         listOrder = new ArrayList<>();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         new Thread(new Runnable() {
             @Override
             public void run() {

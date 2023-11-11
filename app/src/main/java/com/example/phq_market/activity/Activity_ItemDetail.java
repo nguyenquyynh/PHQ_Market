@@ -113,7 +113,6 @@ public class Activity_ItemDetail extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(Activity_ItemDetail.this, "igh", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -128,11 +127,14 @@ public class Activity_ItemDetail extends AppCompatActivity {
             @Override
             public void onResponse(Call<PRODUCTDETAIL> call, Response<PRODUCTDETAIL> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(Activity_ItemDetail.this, ""+ ID, Toast.LENGTH_SHORT).show();
                     PRODUCTDETAIL product = response.body();
                     Txt_catalog.setText(product.getCATALOG());
                     Txt_nameproduct.setText(product.getNAME());
-                    Txt_evaluateproduct.setText(String.format("%.3s",product.getEVALUATE()));
+                    if (!product.getEVALUATE().toString().isEmpty()) {
+                        Txt_evaluateproduct.setText(String.format("%.3s",product.getEVALUATE()));
+                    } else {
+                        Txt_evaluateproduct.setText(0);
+                    }
                     Txt_priceproduct.setText(String.valueOf(product.getPRICE()));
                     Txt_priceaddtocart.setText(String.valueOf(product.getPRICE()));
                     Txt_descriptionproduct.setText(product.getDESCRIBED());

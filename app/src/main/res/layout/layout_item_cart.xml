@@ -15,6 +15,7 @@
 
        <RelativeLayout
            android:layout_width="match_parent"
+           android:background="@drawable/nen_search"
            android:layout_height="100dp">
 
            <ImageView

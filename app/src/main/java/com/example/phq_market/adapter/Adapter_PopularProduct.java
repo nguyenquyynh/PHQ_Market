@@ -52,12 +52,7 @@ public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_Popular
                     onClickProduct.clickproduct(product.getID());
                 }
             });
-            holder.Img_like.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         } catch (Exception e) {
             Log.d(">>>>>>>>>>>>", e.getMessage());
         }
@@ -71,11 +66,10 @@ public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_Popular
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView Img_like, Img_imageproduct;
+        public ImageView  Img_imageproduct;
         public TextView Txt_nameproduct, Txt_priceproduct, Txt_evaluate;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Img_like = itemView.findViewById(R.id.Img_like);
             Img_imageproduct = itemView.findViewById(R.id.Img_imageproduct);
             Txt_nameproduct = itemView.findViewById(R.id.Txt_nameproduct);
             Txt_priceproduct = itemView.findViewById(R.id.Txt_priceproduct);

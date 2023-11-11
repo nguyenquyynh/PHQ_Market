@@ -30,20 +30,12 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="New Arrivals"
+                   android:textColor="@color/black"
                    android:textStyle="bold"
                    android:textSize="20dp"
+                   android:layout_centerVertical="true"
                    android:layout_alignParentTop="true"
                    android:layout_alignParentLeft="true"/>
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="See all"
-                   android:textColor="@color/navigation_selected"
-                   android:textSize="15dp"
-                   android:layout_marginTop="4dp"
-                   android:layout_alignParentTop="true"
-                   android:layout_alignParentRight="true"/>
 
                <androidx.recyclerview.widget.RecyclerView
                    android:id="@+id/Recycler_viewnew"
@@ -62,26 +54,19 @@
            <RelativeLayout
                android:layout_below="@+id/New"
                android:layout_width="match_parent"
+               android:layout_marginTop="10dp"
                android:layout_height="wrap_content">
                <TextView
                    android:id="@+id/Bestsale_item"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
+                   android:textColor="@color/black"
                    android:text="Best saler"
                    android:textStyle="bold"
                    android:textSize="20dp"
+                   android:layout_centerVertical="true"
                    android:layout_alignParentTop="true"
                    android:layout_alignParentLeft="true"/>
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="See all"
-                   android:textColor="@color/navigation_selected"
-                   android:textSize="15dp"
-                   android:layout_marginTop="4dp"
-                   android:layout_alignParentTop="true"
-                   android:layout_alignParentRight="true"/>
 
                <androidx.recyclerview.widget.RecyclerView
                    android:id="@+id/Recycler_viewbest"
