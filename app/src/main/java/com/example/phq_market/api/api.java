@@ -67,4 +67,6 @@ public interface api {
 
     @GET("getDateAndPay.php")
     Call<ArrayList<MONTHANDDAY>> get_DateAndPay(@Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("getlistallproduct.php")
+    Call<ArrayList<NEWPRODUCT>> get_listall();
 }
