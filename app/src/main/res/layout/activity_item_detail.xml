@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="20dp"
     tools:context=".activity.Activity_ItemDetail"
     android:background="@color/background">
 
@@ -10,8 +11,9 @@
         android:id="@+id/rlt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"
-        android:padding="25dp">
+        android:layout_above="@+id/Txt_addcart"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp">
 
         <RelativeLayout
             android:id="@+id/rlt1"
@@ -25,7 +27,7 @@
                 android:src="@drawable/back"
                 android:layout_alignParentStart="true"/>
             <TextView
-                android:id="@+id/tvCart"
+                android:id="@+id/Txt_catalog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Shoes"
