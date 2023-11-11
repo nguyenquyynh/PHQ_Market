@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_card_account"
+    android:padding="25dp"
+    android:orientation="vertical"
+    tools:context=".activity_BuySuccess">
+
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <ImageView
+               android:id="@+id/IMG_Back"
+               android:layout_width="24dp"
+               android:layout_height="24dp"
+               android:src="@drawable/back"
+               android:layout_gravity="center"/>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Information"
+               android:textStyle="bold"
+               android:textSize="25dp"
+               android:layout_centerHorizontal="true"/>
+
+       </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_buy_success"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your order has been placed: "
+                    android:textSize="17dp"/>
+                <TextView
+                    android:id="@+id/Txt_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17dp"
+                    android:text="0123231"/>
+                
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/check"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:text="Purchase successfull"
+                android:textSize="20dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:src="@drawable/buy_success"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thanks for: "
+                    android:textSize="25dp"/>
+                <TextView
+                    android:id="@+id/Txt_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:text="user" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_continueShopping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/navigation_selected"
+        android:text="Contiue shopping"
+        android:textSize="25dp"
+        app:cornerRadius="10dp" />
+
+</LinearLayout>
