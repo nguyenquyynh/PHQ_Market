@@ -39,6 +39,7 @@ public class Activity_EditAccount extends AppCompatActivity {
     private EditText Edt_fullName, Edt_email, Edt_address, Edt_number, Edt_password;
     private ImageView Img_avata, Img_done, Img_showpass;
     Button Btn_changeavata;
+    String oldemail, oldpass;
     ArrayList<String> avatarURLs = new ArrayList<>();
     int stt =0;
 
@@ -105,6 +106,8 @@ public class Activity_EditAccount extends AppCompatActivity {
                 Edt_address.setText(acc.getADDRESS());
                 Edt_number.setText(acc.getPHONE());
                 Edt_password.setText(acc.getPASS());
+                oldemail = acc.getEMAIL();
+                oldpass = acc.getPASS();
             } catch (Exception e) {}
         }
 
@@ -170,7 +173,7 @@ public class Activity_EditAccount extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api api_acc = retrofit_acc.create(api.class);
-                    Call<String> call_acc = api_acc.updatecustomer(editacc.getNAME(),editacc.getEMAIL(),editacc.getPASS(),editacc.getPHONE(),editacc.getADDRESS(),editacc.getIMG());
+                    Call<String> call_acc = api_acc.updatecustomer(editacc.getNAME(),editacc.getEMAIL(),editacc.getPASS(),editacc.getPHONE(),editacc.getADDRESS(),editacc.getIMG(),oldemail, oldpass);
                     call_acc.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
