@@ -1,12 +1,17 @@
 package com.example.phq_market.model;
 
-public class ORDERANDFEEDBACK {
+import java.io.Serializable;
+
+public class ORDERANDFEEDBACK implements Serializable {
     private Integer ID;
     private String NAME;
     private Float PAY;
     private Integer QUANTITY;
     private String IMG;
     private Integer checkFeedBack;
+
+    public ORDERANDFEEDBACK() {
+    }
 
     public ORDERANDFEEDBACK(Integer ID, String NAME, Float PAY, Integer QUANTITY, String IMG, Integer checkFeedBack) {
         this.ID = ID;
