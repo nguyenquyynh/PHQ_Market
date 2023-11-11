@@ -1,10 +1,12 @@
-package com.example.phq_market;
+package com.example.phq_market.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class activity_BuySuccess extends AppCompatActivity {
+import com.example.phq_market.R;
+
+public class Activity_BuySuccess extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
