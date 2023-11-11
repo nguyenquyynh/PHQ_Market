@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
@@ -46,7 +47,7 @@ public class Fragment_Discovery extends Fragment {
     Adapter_Banner banner;
     private int currenPage = 0;
     private final Handler handler_banner = new Handler();
-    private final int delay = 2000;
+    private final int delay = 2800;
     //==============================================
     RecyclerView Recycler_viewnew, Recycler_view_catalog, Recycler_viewbest;
     ArrayList<NEWPRODUCT> list_product, list_saleproduct;
@@ -55,10 +56,6 @@ public class Fragment_Discovery extends Fragment {
     Adapter_Catalog adapter_catalog;
     Adapter_NewProduct adapter_newProduct;
     Adapter_SaleProduct adapter_saleProduct;
-    ProgressDialog progressDialog_catalog, progressDialog, progressDialog_saleproduct;
-    Handler handler = new Handler();
-    Handler handler_catalog = new Handler();
-    Handler handler_saleproduct = new Handler();
 
     public Fragment_Discovery() {
         // Required empty public constructor
@@ -133,18 +130,6 @@ public class Fragment_Discovery extends Fragment {
             }
         });
         //hiển thị danh mục
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                handler_catalog.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog_catalog = new ProgressDialog(getContext());
-                        progressDialog_catalog.setMessage("Dữ liệu đang chạy");
-                        progressDialog_catalog.setCancelable(false);
-                        progressDialog_catalog.show();
-                    }
-                });
                 Retrofit retrofit_catalog = new Retrofit.Builder()
                         .baseUrl("https://phqmarket.000webhostapp.com/catalog/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -159,7 +144,6 @@ public class Fragment_Discovery extends Fragment {
                             list_catalog.clear();
                             list_catalog.addAll(list);
                             adapter_catalog.notifyDataSetChanged();
-                            progressDialog_catalog.dismiss();
                         }
                     }
                     @Override
@@ -168,33 +152,19 @@ public class Fragment_Discovery extends Fragment {
                     }
                 });
 
-            }
-        }).start();
         layoutManager_catalog = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
         Recycler_view_catalog.setLayoutManager(layoutManager_catalog);
         adapter_catalog = new Adapter_Catalog(list_catalog,getContext());
         Recycler_view_catalog.setAdapter(adapter_catalog);
 //        ===============================================New Product===================================================
         //hiển thị sản phẩm mới
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog = new ProgressDialog(getContext());
-                        progressDialog.setMessage("Dữ liệu đang chạy");
-                        progressDialog.setCancelable(false);
-                        progressDialog.show();
-                    }
-                });
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://phqmarket.000webhostapp.com/product/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_product = retrofit.create(api.class);
-                Call<ArrayList<NEWPRODUCT>> call = api_product.get_Listnewproduct();
-                call.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
+                Call<ArrayList<NEWPRODUCT>> call_new = api_product.get_Listnewproduct();
+        call_new.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
                     @Override
                     public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
                         if (response.isSuccessful() && response.body() != null) {
@@ -202,7 +172,6 @@ public class Fragment_Discovery extends Fragment {
                             list_product.clear();
                             list_product.addAll(list);
                             adapter_newProduct.notifyDataSetChanged();
-                            progressDialog.dismiss();
                         }
                     }
                     @Override
@@ -211,26 +180,13 @@ public class Fragment_Discovery extends Fragment {
                     }
                 });
 
-            }
-        }).start();
         layoutManager = new LinearLayoutManager(getContext());
         Recycler_viewnew.setLayoutManager(layoutManager);
         adapter_newProduct = new Adapter_NewProduct(list_product,getContext());
         Recycler_viewnew.setAdapter(adapter_newProduct);
 //        ===============================================Catagori===================================================
         //HIển thị best sale của app
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                handler_saleproduct.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog_saleproduct = new ProgressDialog(getContext());
-                        progressDialog_saleproduct.setMessage("Dữ liệu đang chạy");
-                        progressDialog_saleproduct.setCancelable(false);
-                        progressDialog_saleproduct.show();
-                    }
-                });
+
                 Retrofit retrofit_sale = new Retrofit.Builder()
                         .baseUrl("https://phqmarket.000webhostapp.com/product/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -245,7 +201,6 @@ public class Fragment_Discovery extends Fragment {
                             list_saleproduct.clear();
                             list_saleproduct.addAll(list);
                             adapter_saleProduct.notifyDataSetChanged();
-                            progressDialog_saleproduct.dismiss();
                         }
                     }
                     @Override
@@ -254,8 +209,6 @@ public class Fragment_Discovery extends Fragment {
                     }
                 });
 
-            }
-        }).start();
         layoutManager_sale= new LinearLayoutManager(getContext());
         Recycler_viewbest.setLayoutManager(layoutManager_sale);
         adapter_saleProduct = new Adapter_SaleProduct(list_saleproduct,getContext());

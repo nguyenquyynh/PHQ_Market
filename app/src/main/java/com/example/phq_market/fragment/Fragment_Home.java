@@ -54,7 +54,7 @@ public class Fragment_Home extends Fragment {
     Adapter_Banner banner;
     private int currenPage = 0;
     private final Handler handler_banner = new Handler();
-    private final int delay = 2000;
+    private final int delay = 2500;
     //==============================================
     private ArrayList<NEWPRODUCT> listProduct;
     private  RecyclerView rcv_Home;

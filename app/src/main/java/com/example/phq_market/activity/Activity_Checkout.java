@@ -24,6 +24,7 @@ import com.example.phq_market.model.CHECKOUT;
 import com.example.phq_market.model.PURCHASE;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -45,6 +46,8 @@ public class Activity_Checkout extends AppCompatActivity {
     private ArrayList<PURCHASE> listCart;
     private ProgressDialog progressDialog;
     private Handler handler = new Handler();
+    DecimalFormat formatter = new DecimalFormat("#,###");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,10 +96,10 @@ public class Activity_Checkout extends AppCompatActivity {
         }
         totalPayment = totalCostItem + Fee;
 
-        Txt_totalCostItem.setText(totalCostItem+"");
-        Txt_totalPayment.setText(totalPayment+" VND");
-        Txt_transportFee.setText(Fee+"");
-        Txt_totalPaymentPart2.setText(totalPayment+"");
+        Txt_totalCostItem.setText(formatter.format(totalCostItem));
+        Txt_totalPayment.setText(formatter.format(totalPayment)+" VND");
+        Txt_transportFee.setText(formatter.format(Fee));
+        Txt_totalPaymentPart2.setText(formatter.format(totalPayment));
     }
     private void addpurchase(String cart) {
         new Thread(new Runnable() {

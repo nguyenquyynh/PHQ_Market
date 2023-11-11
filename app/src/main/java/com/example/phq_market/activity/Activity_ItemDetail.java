@@ -30,6 +30,7 @@ import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.ONLYIMAGE;
 import com.example.phq_market.model.PRODUCTDETAIL;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -129,16 +130,20 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     PRODUCTDETAIL product = response.body();
                     Txt_catalog.setText(product.getCATALOG());
+                    Toast.makeText(Activity_ItemDetail.this, "" + product.getEVALUATE(), Toast.LENGTH_SHORT).show();
                     Txt_nameproduct.setText(product.getNAME());
                     if (!product.getEVALUATE().toString().isEmpty()) {
                         Txt_evaluateproduct.setText(String.format("%.3s",product.getEVALUATE()));
                     } else {
                         Txt_evaluateproduct.setText(0);
                     }
-                    Txt_priceproduct.setText(String.valueOf(product.getPRICE()));
-                    Txt_priceaddtocart.setText(String.valueOf(product.getPRICE()));
+                    DecimalFormat formatter = new DecimalFormat("#,###");
+                    Txt_priceproduct.setText(formatter.format(product.getPRICE()));
+                    Txt_priceaddtocart.setText(formatter.format(product.getPRICE()));
                     Txt_descriptionproduct.setText(product.getDESCRIBED());
                     Log.d(">>>>>>>>>>>>>>>", "Succesfull");
+                } else {
+                    Toast.makeText(Activity_ItemDetail.this, ""+ response.body(), Toast.LENGTH_SHORT).show();
                 }
             }
 

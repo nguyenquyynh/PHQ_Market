@@ -49,13 +49,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_gravity="center"
             android:textSize="23dp"
             android:text="Product"
             android:textColor="@color/navigation_selected"
             />
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:id="@+id/dg"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal"
             android:layout_marginTop="15dp">
             <ImageView
@@ -93,18 +96,18 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/star_white"/>
-
-            <TextView
-                android:id="@+id/Txt_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Mém tuyệt zời"
-                android:textSize="16dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="6dp"/>
         </RelativeLayout>
 
+
+    <TextView
+        android:id="@+id/Txt_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="It works fine !"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

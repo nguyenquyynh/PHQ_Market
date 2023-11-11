@@ -37,6 +37,7 @@
             android:layout_below="@+id/Txt_nameuser"
             android:layout_toRightOf="@id/line"
             android:layout_marginTop="5dp"
+            android:textColor="@color/black"
             android:textSize="11dp"
             android:text="this is conhtent off your FEEDBACKSHOW"/>
         <ImageView
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="15dp"
+            android:textColor="@color/black"
             android:layout_alignParentRight="true"
             android:text="4.5"/>
     </RelativeLayout>

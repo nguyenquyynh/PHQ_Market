@@ -114,6 +114,7 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 1;
                 feedback(evaluate);
+                Txt_status.setText("It's not worth the price !");
             }
 
         });
@@ -123,6 +124,7 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 2;
                 feedback(evaluate);
+                Txt_status.setText("It's a bad product !");
             }
 
         });
@@ -132,6 +134,7 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 3;
                 feedback(evaluate);
+                Txt_status.setText("It's a temporary product !");
             }
 
         });
@@ -141,6 +144,7 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 4;
                 feedback(evaluate);
+                Txt_status.setText("It's a good product !");
             }
 
         });
@@ -150,6 +154,7 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 5;
                 feedback(evaluate);
+                Txt_status.setText("It's a great product !");
             }
 
         });
@@ -163,7 +168,7 @@ public class Activity_FeedBack extends AppCompatActivity {
                     public void run() {
                         SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
                         if (!s.getString("Email","").isEmpty() && !s.getString("Pass","").isEmpty()) {
-                            String content = Edt_content.getText().toString();
+                            String content =  Edt_content.getText().toString();
                             if (content.isEmpty()) {
                                 content = Txt_status.getText().toString();
                             }
@@ -177,10 +182,10 @@ public class Activity_FeedBack extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
                                     if (response.isSuccessful() && response.body() != null) {
-                                        Toast.makeText(Activity_FeedBack.this, response.body(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Activity_FeedBack.this, response.body() + "", Toast.LENGTH_SHORT).show();
                                         finish();
                                     } else {
-                                        Toast.makeText(Activity_FeedBack.this, response.body(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Activity_FeedBack.this, response.body()+"", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 

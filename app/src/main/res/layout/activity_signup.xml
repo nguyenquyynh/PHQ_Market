@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:padding="25dp"
     tools:context=".activity.Activity_Signup">
 
@@ -170,6 +171,7 @@
         android:backgroundTint="@color/button_login"
         android:text="Sign up"
         android:textSize="20dp"
+        android:textColor="@color/white"
         app:cornerRadius="10dp" />
 
     <LinearLayout

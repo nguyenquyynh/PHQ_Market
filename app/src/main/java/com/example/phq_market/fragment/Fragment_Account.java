@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -293,7 +294,7 @@ public class Fragment_Account extends Fragment {
             @Override
             public void run() {
 
-                if (email.isEmpty() && pass.isEmpty()){
+                if (TextUtils.isEmpty(email) ||TextUtils.isEmpty(pass)){
                     Txt_name.setText("");
                     Txt_email.setText("");
                     Txt_phone.setText("");

@@ -23,202 +23,225 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Check out"
             android:textStyle="bold"
             android:textSize="25dp"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:background="@drawable/nen_search">
-        <TextView
-            android:id="@+id/Txt_name"
-            android:layout_marginLeft="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name: Nguyễn Văn Lâm "/>
-        <TextView
-            android:id="@+id/Txt_adress"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adress: Phạm Đình Triểu "/>
-        <TextView
-            android:id="@+id/Txt_phone"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone: 0324567824 "/>
-    </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvListPurchase"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/background_green">
-                <TextView
-                    android:id="@+id/TextviewPayment"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Payment methods"
-                    android:textColor="@color/navigation_selected"/>
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <RadioButton
-                        android:id="@+id/Chk_direct"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Direct payment" />
-                    <RadioButton
-                        android:id="@+id/Chk_Online"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Online payment" />
-                </RadioGroup>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="10dp"
-                android:background="@drawable/background_green">
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:background="@drawable/nen_search">
+                <TextView
+                    android:id="@+id/Txt_name"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Total cost of item:"
-                        android:textSize="16dp"
-                        android:textColor="@color/navigation_selected"/>
-                    <TextView
-                        android:id="@+id/Txt_totalCostItem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="280000"
-                        android:textSize="16dp"
-                        android:layout_marginLeft="10dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="VND"
-                        android:textSize="16dp"
-                        android:layout_marginLeft="10dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:text="Name: Nguyễn Văn Lâm "/>
+                <TextView
+                    android:id="@+id/Txt_adress"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Transport fee:"
-                        android:textSize="16dp"
-                        android:textColor="@color/navigation_selected"/>
-                    <TextView
-                        android:id="@+id/Txt_transportFee"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="35000"
-                        android:textSize="16dp"
-                        android:layout_marginLeft="10dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="VND"
-                        android:textSize="16dp"
-                        android:layout_marginLeft="10dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:text="Adress: Phạm Đình Triểu "/>
+                <TextView
+                    android:id="@+id/Txt_phone"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Total Payment:"
-                        android:textSize="16dp"
-                        android:textColor="@color/navigation_selected"/>
-                    <TextView
-                        android:id="@+id/Txt_totalPayment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="280000"
-                        android:textSize="16dp"
-                        android:layout_marginLeft="10dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="VND"
-                        android:textSize="16dp"
-                        android:layout_marginLeft="10dp"/>
-                </LinearLayout>
+                    android:text="Phone: 0324567824 "/>
             </LinearLayout>
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvListPurchase"
+                android:layout_below="@+id/info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal"
-                android:background="@color/white"
-                android:padding="10dp">
-                <RelativeLayout
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/total"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Total Payment"/>
-                    <TextView
-                        android:id="@+id/Txt_totalPaymentPart2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/total"
-                        android:text="2835000"/>
-                    <TextView
-                        android:layout_toRightOf="@+id/Txt_totalPaymentPart2"
-                        android:layout_below="@+id/total"
-                        android:layout_marginLeft="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="VND"/>
-                </RelativeLayout>
-
-                <Button
-                    android:id="@+id/Btn_order"
-                    android:layout_width="wrap_content"
+                android:layout_marginTop="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rcvListPurchase"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="150dp"
-                    android:backgroundTint="@color/navigation_selected"
-                    android:padding="0dp"
-                    android:text="Order"
-                    android:textColor="@color/white"
-                    app:cornerRadius="10dp" />
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/background_green">
+                    <TextView
+                        android:id="@+id/TextviewPayment"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Payment methods"
+                        android:textColor="@color/navigation_selected"/>
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <RadioButton
+                            android:id="@+id/Chk_direct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="Direct payment" />
+                        <RadioButton
+                            android:id="@+id/Chk_Online"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="Online payment" />
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:background="@drawable/background_green">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total cost of item:"
+                            android:textSize="16dp"
+                            android:textColor="@color/navigation_selected"/>
+                        <TextView
+                            android:id="@+id/Txt_totalCostItem"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:text="280000"
+                            android:textSize="16dp"
+                            android:layout_marginLeft="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" VND"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Transport fee:"
+                            android:textSize="16dp"
+                            android:textColor="@color/navigation_selected"/>
 
+                        <TextView
+                            android:id="@+id/Txt_transportFee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="35000"
+                            android:textColor="#FF0000"
+                            android:textSize="16dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" VND"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Payment:"
+                            android:textSize="16dp"
+                            android:textColor="@color/navigation_selected"/>
+                        <TextView
+                            android:id="@+id/Txt_totalPayment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="280000"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" VND"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:padding="10dp">
+                        <TextView
+                            android:id="@+id/total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="20dp"
+                            android:text="Total Payment"/>
+                        <TextView
+                            android:id="@+id/Txt_totalPaymentPart2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/total"
+                            android:textStyle="bold"
+                            android:textSize="16dp"
+                            android:textColor="#FF0000"
+                            android:text="2835000"/>
+                        <TextView
+                            android:layout_toRightOf="@+id/Txt_totalPaymentPart2"
+                            android:layout_below="@+id/total"
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            android:layout_height="wrap_content"
+                            android:text="VND"/>
+
+                    <Button
+                        android:id="@+id/Btn_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/navigation_selected"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="Order"
+                        android:textColor="@color/white"
+                        app:cornerRadius="10dp" />
+
+                </RelativeLayout>
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 </LinearLayout>
