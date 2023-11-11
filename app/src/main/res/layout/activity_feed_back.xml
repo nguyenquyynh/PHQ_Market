@@ -26,6 +26,7 @@
             android:text="Feedback"
             android:textStyle="bold"
             android:textSize="25dp"
+            android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
 
         <ImageView
@@ -52,7 +53,7 @@
             android:text="Product"
             android:textColor="@color/navigation_selected"
             />
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -61,10 +62,12 @@
                 android:id="@+id/Img_star1"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
                 android:src="@drawable/star_white"/>
             <ImageView
                 android:id="@+id/Img_star2"
                 android:layout_width="30dp"
+                android:layout_toRightOf="@id/Img_star1"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/star_white"/>
@@ -72,18 +75,22 @@
                 android:id="@+id/Img_star3"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
+                android:layout_toRightOf="@id/Img_star2"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/star_white"/>
             <ImageView
                 android:id="@+id/Img_star4"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
+                android:layout_toRightOf="@id/Img_star3"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/star_white"/>
             <ImageView
                 android:id="@+id/Img_star5"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
+                android:layout_toRightOf="@id/Img_star4"
+                android:layout_marginRight="20dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/star_white"/>
 
@@ -91,28 +98,29 @@
                 android:id="@+id/Txt_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="Mém tuyệt zời"
                 android:textSize="16dp"
-                android:layout_marginLeft="60dp"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="6dp"/>
-        </LinearLayout>
+        </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Feedback"
-        android:textColor="@color/button"
-        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
         android:layout_marginTop="20dp"/>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:id="@+id/Edt_content"
-            android:layout_height="wrap_content"
+            android:layout_height="170dp"
             android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>

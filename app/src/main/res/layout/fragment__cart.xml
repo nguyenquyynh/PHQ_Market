@@ -81,5 +81,6 @@
         android:backgroundTint="@color/button_login"
         android:layout_alignParentBottom="true"
         android:textSize="20dp"
+        android:textColor="@color/white"
         app:cornerRadius="10dp"/>
 </RelativeLayout>

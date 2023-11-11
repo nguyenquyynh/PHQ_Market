@@ -52,6 +52,7 @@
                     android:layout_width="wrap_content"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="43dp"
                     android:text="Nguyễn Văn Bê"/>
@@ -84,6 +85,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
+                            android:textColor="@color/black"
                             android:text="Edit Account" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -109,6 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20dp"
+                            android:textColor="@color/black"
                             android:text="0"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -133,6 +136,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20dp"
+                            android:textColor="@color/black"
                             android:text="0"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -154,6 +158,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20dp"
+                            android:textColor="@color/black"
                             android:text="0"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -184,6 +189,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
+                        android:textColor="@color/black"
                         android:textSize="16dp"
                         android:text="abcgfhask.@gmail.com"/>
                     <TextView
@@ -201,6 +207,7 @@
                         android:layout_toRightOf="@+id/phone"
                         android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
+                        android:textColor="@color/black"
                         android:layout_below="@+id/Txt_email"
                         android:layout_height="wrap_content"
                         android:textSize="16dp"
@@ -221,6 +228,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/Txt_phone"
                         android:textSize="16dp"
+                        android:textColor="@color/black"
                         android:text="xx/x, yy, vv, cc"/>
                 </RelativeLayout>
                 <LinearLayout
