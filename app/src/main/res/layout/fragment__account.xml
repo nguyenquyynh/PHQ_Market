@@ -20,227 +20,237 @@
             android:src="@drawable/banner_account"/>
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="360dp"
-        android:layout_marginLeft="37dp"
-        android:layout_marginTop="127dp">
-        <ImageView
-            android:id="@+id/Img_account"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@color/navigation_selected"/>
-    </androidx.cardview.widget.CardView>
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="165dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:padding="10dp"
-        android:background="@drawable/background_card_account">
-        <TextView
-            android:id="@+id/Txt_name"
-            android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="43dp"
-            android:text="Nguyễn Văn Bê"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="21dp"
-            android:layout_marginRight="17dp">
-
-            <LinearLayout
-                android:id="@+id/ic_Edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingStart="9dp"
-                android:paddingTop="5dp"
-                android:paddingRight="9dp"
-                android:paddingBottom="5dp"
-                android:background="@drawable/outline_edit_account">
-
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/edit" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Edit Account" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        
-        <LinearLayout
-            android:id="@+id/ln1"
-            android:layout_below="@+id/Txt_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_centerHorizontal="true">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:background="@drawable/nen_search"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/Txt_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="0"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#338313"
-                    android:textStyle="bold"
-                    android:text="  Like "/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lnOrder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/nen_search"
-                android:layout_marginLeft="30dp"
-                android:padding="10dp"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/Txt_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="0"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#338313"
-                    android:textStyle="bold"
-                    android:text="Order"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/nen_search"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/Txt_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="0"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#338313"
-                    android:textStyle="bold"
-                    android:text=" Cart "/>
-            </LinearLayout>
-        </LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_height="match_parent">
         <RelativeLayout
-            android:id="@+id/info"
-            android:layout_below="@+id/ln1"
             android:layout_width="match_parent"
-            android:padding="20dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:textColor="#338313"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:text="Email : "/>
-            <TextView
-                android:id="@+id/Txt_email"
-                android:layout_toRightOf="@+id/email"
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:textSize="16dp"
-                android:text="abcgfhask.@gmail.com"/>
-            <TextView
-                android:id="@+id/phone"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/Txt_email"
-                android:textColor="#338313"
-                android:textStyle="bold"
-                android:textSize="16dp"
-                android:text="Phone : "/>
-            <TextView
-                android:id="@+id/Txt_phone"
-                android:layout_toRightOf="@+id/phone"
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_below="@+id/Txt_email"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:text="0323651xxx"/>
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/phone"
-                android:textColor="#338313"
-                android:textStyle="bold"
-                android:textSize="16dp"
-                android:text="Address : "/>
-            <TextView
-                android:id="@+id/Txt_address"
-                android:layout_toRightOf="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Txt_phone"
-                android:textSize="16dp"
-                android:text="xx/x, yy, vv, cc"/>
-        </RelativeLayout>
-        <LinearLayout
-            android:id="@+id/ln3"
-            android:layout_below="@+id/info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart"
+                app:cardCornerRadius="360dp"
+                android:layout_marginLeft="37dp"
+                android:layout_marginTop="127dp">
+                <ImageView
+                    android:id="@+id/Img_account"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@color/navigation_selected"/>
+            </androidx.cardview.widget.CardView>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="20dp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginTop="165dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="10dp"
+                android:background="@drawable/background_card_account">
+                <TextView
+                    android:id="@+id/Txt_name"
+                    android:layout_width="wrap_content"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="43dp"
+                    android:text="Nguyễn Văn Bê"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="21dp"
+                    android:layout_marginRight="17dp">
 
-        <Button
-            android:id="@+id/btn_setUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:backgroundTint="@color/input_text"
-            android:text="Log out"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            app:cornerRadius="10dp" />
+                    <LinearLayout
+                        android:id="@+id/ic_Edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="9dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="9dp"
+                        android:paddingBottom="5dp"
+                        android:background="@drawable/outline_edit_account">
 
-    </RelativeLayout>
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/edit" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Edit Account" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/ln1"
+                    android:layout_below="@+id/Txt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_centerHorizontal="true">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:background="@drawable/nen_search"
+                        android:gravity="center">
+                        <TextView
+                            android:id="@+id/Txt_like"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20dp"
+                            android:text="0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#338313"
+                            android:textStyle="bold"
+                            android:text="  Like "/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/nen_search"
+                        android:layout_marginLeft="30dp"
+                        android:padding="10dp"
+                        android:gravity="center">
+                        <TextView
+                            android:id="@+id/Txt_order"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20dp"
+                            android:text="0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#338313"
+                            android:textStyle="bold"
+                            android:text="Order"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/nen_search"
+                        android:gravity="center">
+                        <TextView
+                            android:id="@+id/Txt_cart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20dp"
+                            android:text="0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#338313"
+                            android:textStyle="bold"
+                            android:text=" Cart "/>
+                    </LinearLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/info"
+                    android:layout_below="@+id/ln1"
+                    android:layout_width="match_parent"
+                    android:padding="20dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:textColor="#338313"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:text="Email : "/>
+                    <TextView
+                        android:id="@+id/Txt_email"
+                        android:layout_toRightOf="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="16dp"
+                        android:text="abcgfhask.@gmail.com"/>
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/Txt_email"
+                        android:textColor="#338313"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:text="Phone : "/>
+                    <TextView
+                        android:id="@+id/Txt_phone"
+                        android:layout_toRightOf="@+id/phone"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@+id/Txt_email"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:text="0323651xxx"/>
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/phone"
+                        android:textColor="#338313"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:text="Address : "/>
+                    <TextView
+                        android:id="@+id/Txt_address"
+                        android:layout_toRightOf="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Txt_phone"
+                        android:textSize="16dp"
+                        android:text="xx/x, yy, vv, cc"/>
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/ln3"
+                    android:layout_below="@+id/info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="20dp" />
+                    <Button
+                        android:id="@+id/btn_setUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:backgroundTint="@color/input_text"
+                        android:text="Log out"
+                        android:textColor="@color/black"
+                        android:textSize="24dp"
+                        app:cornerRadius="10dp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

@@ -53,6 +53,7 @@ public class Fragment_Account extends Fragment {
     }
     Button btn_setUp;
     ImageView Img_account;
+    private LinearLayout lnOrder;
     private TextView Txt_name, Txt_like, Txt_order, Txt_cart;
     private TextView Txt_email;
     private TextView Txt_phone;
@@ -60,8 +61,12 @@ public class Fragment_Account extends Fragment {
     private SharedPreferences sharedPreferences;
     private ArrayList<MONTHANDDAY> listmonthandday;
     private LineChart lineChart;
+    private LinearLayout ic_Edit;
     EDITACCOUNT acc;
     SharedPreferences s;
+
+    private String email = "";
+    private String pass = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +77,8 @@ public class Fragment_Account extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__account, container, false);
 
-        LinearLayout ic_Edit = view.findViewById(R.id.ic_Edit);
-        LinearLayout lnOrder = view.findViewById(R.id.lnOrder);
+        ic_Edit = view.findViewById(R.id.ic_Edit);
+        lnOrder = view.findViewById(R.id.lnOrder);
         Img_account = view.findViewById(R.id.Img_account);
         Txt_name = view.findViewById(R.id.Txt_name);
         Txt_like = view.findViewById(R.id.Txt_like);
@@ -277,11 +282,28 @@ public class Fragment_Account extends Fragment {
             ;}
         }).start();
 
+        try {
+            email = sharedPreferences.getString("Email", "");
+            pass = sharedPreferences.getString("Pass", "");
+        } catch (Exception e) {
+
+        }
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()){
+
+                if (email.isEmpty() && pass.isEmpty()){
+                    Txt_name.setText("");
+                    Txt_email.setText("");
+                    Txt_phone.setText("");
+                    Txt_address.setText("");
+                    Txt_like.setText("0");
+                    Txt_order.setText("0");
+                    Txt_cart.setText("0");
+                    ic_Edit.setVisibility(View.GONE);
+                    lnOrder.setEnabled(false);
+                }else {
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
                             .addConverterFactory(GsonConverterFactory.create())
@@ -307,10 +329,10 @@ public class Fragment_Account extends Fragment {
 
                         }
                     });
-                }else {
-                    Toast.makeText(getContext(), "Please login", Toast.LENGTH_SHORT).show();
                 }
             }
         }).start();
+
+
     }
 }
