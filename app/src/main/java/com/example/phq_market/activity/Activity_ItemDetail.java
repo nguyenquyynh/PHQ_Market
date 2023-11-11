@@ -193,7 +193,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
                     adapter_feedback = new Adapter_Feedback(list_feedback,Activity_ItemDetail.this);
                     Recycler_feedback.setAdapter(adapter_feedback);
                 }else {
-                    Log.d(">>>>>>>>>>>>>", response.body().toString());
+                    Log.d(">>>>>>>>>>>>>", response.body()+"");
                 }
             }
 

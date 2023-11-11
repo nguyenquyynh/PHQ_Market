@@ -157,6 +157,7 @@ public class Activity_FeedBack extends AppCompatActivity {
         Img_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("--->>>>>>>",item.getID()+"");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
