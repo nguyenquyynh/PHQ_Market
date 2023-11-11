@@ -6,11 +6,13 @@ import com.example.phq_market.model.CATALOGSHOW;
 import com.example.phq_market.model.CHECKOUT;
 import com.example.phq_market.model.CUSTOMER;
 import com.example.phq_market.model.FEEDBACKSHOW;
+import com.example.phq_market.model.MONTHANDDAY;
 import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.ONLYIMAGE;
 import com.example.phq_market.model.ORDERANDFEEDBACK;
 import com.example.phq_market.model.PRODUCTDETAIL;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -62,4 +64,7 @@ public interface api {
     Call<ArrayList<CHECKOUT>> getCheckOut(@Query("listcart") String cart);
     @GET("getListOrder.php")
     Call<ArrayList<ORDERANDFEEDBACK>> get_listOrder(@Query("EMAIL") String email, @Query("PASS") String pass);
+
+    @GET("getDateAndPay.php")
+    Call<ArrayList<MONTHANDDAY>> get_DateAndPay(@Query("EMAIL") String email, @Query("PASS") String pass);
 }
