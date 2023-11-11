@@ -34,6 +34,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Activity_Checkout extends AppCompatActivity {
 
+    private TextView Txt_totalCostItem;
+    private TextView Txt_transportFee;
+    private TextView Txt_totalPayment;
+    private TextView Txt_totalPaymentPart2;
     private RecyclerView rcvListPurchase;
     private Adapter_Checkout adapter_checkout;
     private LinearLayoutManager linearLayoutManager;
@@ -52,10 +56,10 @@ public class Activity_Checkout extends AppCompatActivity {
         rcvListPurchase = findViewById(R.id.rcvListPurchase);
         RadioButton Chk_direct = findViewById(R.id.Chk_direct);
         RadioButton Chk_Online = findViewById(R.id.Chk_Online);
-        TextView Txt_totalCostItem = findViewById(R.id.Txt_totalCostItem);
-        TextView Txt_transportFee = findViewById(R.id.Txt_transportFee);
-        TextView Txt_totalPayment = findViewById(R.id.Txt_totalPayment);
-        TextView Txt_totalPaymentPart2 = findViewById(R.id.Txt_totalPaymentPart2);
+        Txt_totalCostItem = findViewById(R.id.Txt_totalCostItem);
+        Txt_transportFee = findViewById(R.id.Txt_transportFee);
+        Txt_totalPayment = findViewById(R.id.Txt_totalPayment);
+        Txt_totalPaymentPart2 = findViewById(R.id.Txt_totalPaymentPart2);
         Button Btn_order = findViewById(R.id.Btn_order);
 
         Intent intent = getIntent();
@@ -80,6 +84,20 @@ public class Activity_Checkout extends AppCompatActivity {
         });
     }
 
+    private void updatecost(){
+        float totalCostItem = 0;
+        float Fee = 300000;
+        float totalPayment = 0;
+        for (CHECKOUT pu : list){
+            totalCostItem+=pu.getPRICE()* pu.getQUANTITY();
+        }
+        totalPayment = totalCostItem + Fee;
+
+        Txt_totalCostItem.setText(totalCostItem+"");
+        Txt_totalPayment.setText(totalPayment+" VND");
+        Txt_transportFee.setText(Fee+"");
+        Txt_totalPaymentPart2.setText(totalPayment+"");
+    }
     private void addpurchase(String cart) {
         new Thread(new Runnable() {
             @Override
@@ -110,12 +128,14 @@ public class Activity_Checkout extends AppCompatActivity {
                         }else {
                             progressDialog.dismiss();
                             Log.e("----->",response.body()+"");
+                            startActivity(new Intent(Activity_Checkout.this, Activity_Main.class));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         progressDialog.dismiss();
+                        startActivity(new Intent(Activity_Checkout.this, Activity_Main.class));
                         Log.e("----->",t+"");
                         Toast.makeText(Activity_Checkout.this, "error for connection", Toast.LENGTH_SHORT).show();
                     }
@@ -159,6 +179,7 @@ public class Activity_Checkout extends AppCompatActivity {
                             linearLayoutManager = new LinearLayoutManager(Activity_Checkout.this);
                             rcvListPurchase.setLayoutManager(linearLayoutManager);
                             rcvListPurchase.setAdapter(adapter_checkout);
+                            updatecost();
                             progressDialog.dismiss();
                         }else {
                             Log.e("->>>>>>>>>>>>>>>>",response.body()+"");
