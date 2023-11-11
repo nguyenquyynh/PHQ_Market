@@ -70,5 +70,5 @@ public interface api {
     @GET("getlistallproduct.php")
     Call<ArrayList<NEWPRODUCT>> get_listall();
     @GET("sendfeedback.php")
-    Call<String> add_feedback(@Query("EVALUATE") Integer evaluate, @Query("CONTENT") String content, @Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
+    Call<String> add_feedback(@Query("EVALUATE") Integer evaluate, @Query("CONTENT") String content, @Query("IDPURCHASE") Integer idpurchase, @Query("EMAIL") String email, @Query("PASS") String pass);
 }
