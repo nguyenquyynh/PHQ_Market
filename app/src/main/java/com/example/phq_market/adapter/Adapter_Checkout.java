@@ -25,7 +25,6 @@ public class Adapter_Checkout extends RecyclerView.Adapter<Adapter_Checkout.View
         this.context = context;
         this.listCheckout = listCheckout;
     }
-
     @NonNull
     @Override
     public Adapter_Checkout.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,13 +45,6 @@ public class Adapter_Checkout extends RecyclerView.Adapter<Adapter_Checkout.View
         }catch (Exception e){
 
         }
-
-        holder.Img_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override
@@ -61,12 +53,11 @@ public class Adapter_Checkout extends RecyclerView.Adapter<Adapter_Checkout.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView Img_Anh,Img_cancel;
+        public ImageView Img_Anh;
         public TextView Txt_name,Txt_cost,Txt_quantity;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Img_Anh = itemView.findViewById(R.id.Img_Anh);
-            Img_cancel = itemView.findViewById(R.id.Img_cancel);
             Txt_name = itemView.findViewById(R.id.Txt_name);
             Txt_cost = itemView.findViewById(R.id.Txt_cost);
             Txt_quantity = itemView.findViewById(R.id.Txt_quantity);

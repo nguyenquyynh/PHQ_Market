@@ -101,6 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="10dp"
                 android:background="@drawable/background_green">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -110,20 +111,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total cost of item:"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textColor="@color/navigation_selected"/>
                     <TextView
                         android:id="@+id/Txt_totalCostItem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="280000"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:layout_marginLeft="10dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="VND"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:layout_marginLeft="10dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -134,20 +135,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Transport fee:"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textColor="@color/navigation_selected"/>
                     <TextView
                         android:id="@+id/Txt_transportFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="35000"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:layout_marginLeft="10dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="VND"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:layout_marginLeft="10dp"/>
                 </LinearLayout>
                 <LinearLayout
@@ -158,20 +159,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total Payment:"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textColor="@color/navigation_selected"/>
                     <TextView
                         android:id="@+id/Txt_totalPayment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="280000"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:layout_marginLeft="10dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="VND"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:layout_marginLeft="10dp"/>
                 </LinearLayout>
             </LinearLayout>
