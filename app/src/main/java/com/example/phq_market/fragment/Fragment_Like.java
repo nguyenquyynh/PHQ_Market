@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +51,7 @@ public class Fragment_Like extends Fragment {
     RecyclerView Recycler_view;
     Adapter_Like adapter_like;
     GridLayoutManager layoutManager;
+    ArrayList<NEWPRODUCT> listsearch;
     Handler handler = new Handler();
     ProgressDialog progressDialog;
 
@@ -70,6 +73,7 @@ public class Fragment_Like extends Fragment {
         Edt_Search = view.findViewById(R.id.Edt_Search);
         Btn_filter = view.findViewById(R.id.Btn_filter);
         Recycler_view = view.findViewById(R.id.Recycler_view);
+        listsearch = new ArrayList<>();
         return view;
 
     }
@@ -77,6 +81,28 @@ public class Fragment_Like extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Edt_Search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String s1 = s.toString();
+                if (!s1.isEmpty()) {
+                    list_like.clear();
+                    for (NEWPRODUCT pro: listsearch) {
+                        if (pro.getNAME().contains(s1)) {
+                            list_like.add(pro);
+                        }
+                    }
+                }else {
+                    list_like.clear();
+                    list_like.addAll(listsearch);
+                }
+                adapter_like.notifyDataSetChanged();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -92,6 +118,8 @@ public class Fragment_Like extends Fragment {
                         @Override
                         public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
                             ArrayList<NEWPRODUCT> list = response.body();
+                            listsearch.clear();
+                            listsearch.addAll(list);
                             list_like.clear();
                             list_like.addAll(list);
                             adapter_like.notifyDataSetChanged();
