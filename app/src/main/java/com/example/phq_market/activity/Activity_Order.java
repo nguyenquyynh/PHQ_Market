@@ -41,38 +41,43 @@ public class Activity_Order extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        String email = sharedPreferences.getString("Email",null);
-        String pass = sharedPreferences.getString("Pass",null);
-
-        api Api = retrofit.create(api.class);
-        Call<ArrayList<ORDERANDFEEDBACK>> call = Api.get_listOrder(email,pass);
-        call.enqueue(new Callback<ArrayList<ORDERANDFEEDBACK>>() {
+        new Thread(new Runnable() {
             @Override
-            public void onResponse(Call<ArrayList<ORDERANDFEEDBACK>> call, Response<ArrayList<ORDERANDFEEDBACK>> response) {
-                if(response.isSuccessful() && response.body()!=null){
-                    ArrayList<ORDERANDFEEDBACK> list = response.body();
-                    if(list.size()>0){
-                        listOrder.clear();
-                        listOrder.addAll(list);
-                        linearLayoutManager = new LinearLayoutManager(Activity_Order.this);
-                        rcv_order.setLayoutManager(linearLayoutManager);
-                        adapterOrderFeedBack = new Adapter_Order_FeedBack(Activity_Order.this,listOrder);
-                        rcv_order.setAdapter(adapterOrderFeedBack);
+            public void run() {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                String email = sharedPreferences.getString("Email",null);
+                String pass = sharedPreferences.getString("Pass",null);
+
+                api Api = retrofit.create(api.class);
+                Call<ArrayList<ORDERANDFEEDBACK>> call = Api.get_listOrder(email,pass);
+                call.enqueue(new Callback<ArrayList<ORDERANDFEEDBACK>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ORDERANDFEEDBACK>> call, Response<ArrayList<ORDERANDFEEDBACK>> response) {
+                        if(response.isSuccessful() && response.body()!=null){
+                            ArrayList<ORDERANDFEEDBACK> list = response.body();
+                            if(list.size()>0){
+                                listOrder.clear();
+                                listOrder.addAll(list);
+                                linearLayoutManager = new LinearLayoutManager(Activity_Order.this);
+                                rcv_order.setLayoutManager(linearLayoutManager);
+                                adapterOrderFeedBack = new Adapter_Order_FeedBack(Activity_Order.this,listOrder);
+                                rcv_order.setAdapter(adapterOrderFeedBack);
+                            }
+                        }else {
+                            Log.e("------>",response.body()+"");
+                        }
                     }
-                }else {
-                    Log.e("------>",response.body()+"");
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
-                Log.e("------>",t+"");
+                    @Override
+                    public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
+                        Log.e("------>",t+"");
+                    }
+                });
             }
-        });
+        }).start();
     }
 }
