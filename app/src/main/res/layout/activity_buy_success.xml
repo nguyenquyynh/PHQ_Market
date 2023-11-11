@@ -7,7 +7,7 @@
     android:background="@drawable/background_card_account"
     android:padding="25dp"
     android:orientation="vertical"
-    tools:context=".activity_BuySuccess">
+    tools:context=".activity.Activity_BuySuccess">
 
 
        <RelativeLayout
