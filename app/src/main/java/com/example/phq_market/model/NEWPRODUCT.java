@@ -1,6 +1,8 @@
 package com.example.phq_market.model;
 
-public class NEWPRODUCT {
+import java.io.Serializable;
+
+public class NEWPRODUCT implements Serializable {
     private Integer ID;
     private String NAME;
     private Float PRICE;

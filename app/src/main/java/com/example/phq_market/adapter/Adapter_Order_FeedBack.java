@@ -3,6 +3,7 @@ package com.example.phq_market.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,9 @@ public class Adapter_Order_FeedBack extends RecyclerView.Adapter<Adapter_Order_F
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Activity_FeedBack.class);
-                intent.putExtra("ID",listOrder.get(holder.getAdapterPosition()).getID());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ITEM",listOrder.get(holder.getAdapterPosition()));
+                intent.putExtras(bundle);
                 ((Activity)context).startActivity(intent);
             }
         });

@@ -29,7 +29,7 @@
             android:layout_centerHorizontal="true"/>
 
         <ImageView
-            android:id="@+id/imgcheck"
+            android:id="@+id/Img_done"
             android:layout_width="24dp"
             android:layout_height="30dp"
             android:src="@drawable/check"
@@ -37,56 +37,58 @@
     </RelativeLayout>
 
         <ImageView
-            android:layout_width="320dp"
-            android:layout_height="320dp"
+            android:id="@+id/Img_product"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_launcher_background"/>
         <TextView
-            android:id="@+id/tvproduct"
+            android:id="@+id/Txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="25dp"
+            android:textSize="23dp"
             android:text="Product"
-            android:textColor="@color/button"/>
+            android:textColor="@color/navigation_selected"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="15dp">
             <ImageView
-                android:id="@+id/imgStar1"
+                android:id="@+id/Img_star1"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:src="@drawable/star_white"/>
             <ImageView
-                android:id="@+id/imgStar2"
-                android:layout_width="30dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/star_white"/>
-            <ImageView
-                android:id="@+id/imgStar3"
+                android:id="@+id/Img_star2"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/star_white"/>
             <ImageView
-                android:id="@+id/imgStar4"
+                android:id="@+id/Img_star3"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/star_white"/>
             <ImageView
-                android:id="@+id/imgStar5"
+                android:id="@+id/Img_star4"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/star_white"/>
+            <ImageView
+                android:id="@+id/Img_star5"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/star_white"/>
 
             <TextView
-                android:id="@+id/tv6"
+                android:id="@+id/Txt_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mém tuyệt zời"
@@ -99,6 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Feedback"
+        android:textColor="@color/button"
         android:textSize="25dp"
         android:layout_marginTop="20dp"/>
     <com.google.android.material.textfield.TextInputLayout
@@ -108,6 +111,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/Edt_content"
             android:layout_height="wrap_content"
             android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
