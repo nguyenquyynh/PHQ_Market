@@ -104,6 +104,7 @@
         android:layout_below="@id/chk_Remember"
         android:backgroundTint="@color/button_login"
         android:text="Login"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:cornerRadius="10dp" />
 

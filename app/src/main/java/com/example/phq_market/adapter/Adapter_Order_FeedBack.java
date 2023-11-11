@@ -24,6 +24,7 @@ import com.example.phq_market.model.ORDERANDFEEDBACK;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Adapter_Order_FeedBack extends RecyclerView.Adapter<Adapter_Order_FeedBack.ViewHolder> {
@@ -45,7 +46,8 @@ public class Adapter_Order_FeedBack extends RecyclerView.Adapter<Adapter_Order_F
     @Override
     public void onBindViewHolder(@NonNull Adapter_Order_FeedBack.ViewHolder holder, int position) {
             ORDERANDFEEDBACK orderProdcut = listOrder.get(holder.getAdapterPosition());
-            if(orderProdcut.getCheckFeedBack() == null){
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        if(orderProdcut.getCheckFeedBack() == null){
                 holder.Btn_Feedback.setVisibility(View.VISIBLE);
             }else {
                 holder.Btn_Feedback.setVisibility(View.GONE);
@@ -57,7 +59,7 @@ public class Adapter_Order_FeedBack extends RecyclerView.Adapter<Adapter_Order_F
                         .into(holder.Img_imageproduct);
                 holder.Txt_nameproduct.setText(orderProdcut.getNAME());
                 holder.Txt_evaluate.setText(orderProdcut.getQUANTITY()+"");
-                holder.Txt_priceproduct.setText(orderProdcut.getPAY()+"");
+                holder.Txt_priceproduct.setText(formatter.format(orderProdcut.getPAY()));
 
             }catch (Exception e){
 

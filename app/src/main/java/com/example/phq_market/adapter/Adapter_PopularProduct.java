@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.model.NEWPRODUCT;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_PopularProduct.ViewHolder> {
@@ -39,13 +40,16 @@ public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_Popular
     @Override
     public void onBindViewHolder(@NonNull Adapter_PopularProduct.ViewHolder holder, int position) {
         NEWPRODUCT product = list_product.get(position);
+        DecimalFormat formatter = new DecimalFormat("#,###");
         try {
             Glide.with(context)
                     .load(product.getIMG())
                     .into(holder.Img_imageproduct);
             holder.Txt_nameproduct.setText(product.getNAME());
-            holder.Txt_priceproduct.setText(String.valueOf(product.getPRICE()));
-            holder.Txt_evaluate.setText(String.format("%.3s",product.getEVALUATE()));
+            if (product.getPRICE() != null) {
+                holder.Txt_evaluate.setText(String.format("%.3s",product.getEVALUATE()));
+            } else holder.Txt_evaluate.setText(String.format("%.3s",0.0));
+            holder.Txt_priceproduct.setText(formatter.format(product.getPRICE()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

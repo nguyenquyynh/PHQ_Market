@@ -179,6 +179,11 @@ public class Activity_EditAccount extends AppCompatActivity {
                         public void onResponse(Call<String> call, Response<String> response) {
                             if (response.isSuccessful() && response.body() != null) {
                                 Toast.makeText(Activity_EditAccount.this, "" + response.body(), Toast.LENGTH_SHORT).show();
+                                SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
+                                SharedPreferences.Editor e = s.edit();
+                                e.putString("Email",editacc.getEMAIL());
+                                e.putString("Pass",editacc.getPASS());
+                                e.apply();
                                 finish();
                             } else {
                                 Toast.makeText(Activity_EditAccount.this, "" + response.body(), Toast.LENGTH_SHORT).show();
