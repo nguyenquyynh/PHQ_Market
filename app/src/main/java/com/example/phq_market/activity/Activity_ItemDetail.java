@@ -50,7 +50,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
     LinearLayoutManager layoutManager_feedback;
     Adapter_Feedback adapter_feedback;
     RecyclerView Recycler_feedback;
-    TextView Txt_evaluateproduct, Txt_descriptionproduct, Txt_more;
+    TextView Txt_evaluateproduct, Txt_descriptionproduct, Txt_more, Txt_catalog;
     TextView Txt_priceproduct, Txt_priceaddtocart;
     LinearLayout Txt_addcart;
     TextView Txt_nameproduct;
@@ -63,6 +63,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail);
         viewPager = findViewById(R.id.view_pager);
         Img_like = findViewById(R.id.Img_like);
+        Txt_catalog = findViewById(R.id.Txt_catalog);
         Txt_evaluateproduct = findViewById(R.id.Txt_evaluateproduct);
         Txt_priceproduct = findViewById(R.id.Txt_priceproduct);
         Txt_priceaddtocart = findViewById(R.id.Txt_priceaddtocart);
@@ -129,6 +130,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(Activity_ItemDetail.this, ""+ ID, Toast.LENGTH_SHORT).show();
                     PRODUCTDETAIL product = response.body();
+                    Txt_catalog.setText(product.getCATALOG());
                     Txt_nameproduct.setText(product.getNAME());
                     Txt_evaluateproduct.setText(String.format("%.3s",product.getEVALUATE()));
                     Txt_priceproduct.setText(String.valueOf(product.getPRICE()));

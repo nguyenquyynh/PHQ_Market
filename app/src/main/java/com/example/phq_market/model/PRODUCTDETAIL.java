@@ -6,16 +6,18 @@ public class PRODUCTDETAIL {
     private String DESCRIBED;
     private Float PRICE;
     private Double EVALUATE;
+    private String CATALOG;
 
     public PRODUCTDETAIL() {
     }
 
-    public PRODUCTDETAIL(Integer ID, String NAME, String DESCRIBED, Float PRICE, Double EVALUATE) {
+    public PRODUCTDETAIL(Integer ID, String NAME, String DESCRIBED, Float PRICE, Double EVALUATE, String CATALOG) {
         this.ID = ID;
         this.NAME = NAME;
         this.DESCRIBED = DESCRIBED;
         this.PRICE = PRICE;
         this.EVALUATE = EVALUATE;
+        this.CATALOG = CATALOG;
     }
 
     public Integer getID() {
@@ -56,5 +58,13 @@ public class PRODUCTDETAIL {
 
     public void setEVALUATE(Double EVALUATE) {
         this.EVALUATE = EVALUATE;
+    }
+
+    public String getCATALOG() {
+        return CATALOG;
+    }
+
+    public void setCATALOG(String CATALOG) {
+        this.CATALOG = CATALOG;
     }
 }
