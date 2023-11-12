@@ -130,7 +130,6 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     PRODUCTDETAIL product = response.body();
                     Txt_catalog.setText(product.getCATALOG());
-                    Toast.makeText(Activity_ItemDetail.this, "" + product.getEVALUATE(), Toast.LENGTH_SHORT).show();
                     Txt_nameproduct.setText(product.getNAME());
                     if (!product.getEVALUATE().toString().isEmpty()) {
                         Txt_evaluateproduct.setText(String.format("%.3s",product.getEVALUATE()));
