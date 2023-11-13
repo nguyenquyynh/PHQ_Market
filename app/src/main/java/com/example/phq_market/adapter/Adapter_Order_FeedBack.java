@@ -60,7 +60,6 @@ public class Adapter_Order_FeedBack extends RecyclerView.Adapter<Adapter_Order_F
                 holder.Txt_nameproduct.setText(orderProdcut.getNAME());
                 holder.Txt_evaluate.setText(orderProdcut.getQUANTITY()+"");
                 holder.Txt_priceproduct.setText(formatter.format(orderProdcut.getPAY()));
-
             }catch (Exception e){
 
             }

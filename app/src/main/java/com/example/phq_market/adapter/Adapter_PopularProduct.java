@@ -55,7 +55,6 @@ public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_Popular
                 @Override
                 public void onClick(View v) {
                     onClickProduct.clickproduct(product.getID());
-                    Toast.makeText(context, "" + product.getID(), Toast.LENGTH_SHORT).show();
                 }
             });
 
