@@ -30,7 +30,7 @@ public class Activity_FeedBack extends AppCompatActivity {
     private EditText Edt_content;
     ORDERANDFEEDBACK item;
 
-    int evaluate = 1;
+    int evaluate = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class Activity_FeedBack extends AppCompatActivity {
         Txt_name = findViewById(R.id.Txt_name);
         Edt_content = findViewById(R.id.Edt_content);
 
+        feedback(evaluate);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle!=null){
@@ -114,7 +115,6 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 1;
                 feedback(evaluate);
-                Txt_status.setText("It's not worth the price !");
             }
 
         });
@@ -124,7 +124,6 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 2;
                 feedback(evaluate);
-                Txt_status.setText("It's a bad product !");
             }
 
         });
@@ -134,7 +133,6 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 3;
                 feedback(evaluate);
-                Txt_status.setText("It's a temporary product !");
             }
 
         });
@@ -144,7 +142,6 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 4;
                 feedback(evaluate);
-                Txt_status.setText("It's a good product !");
             }
 
         });
@@ -154,7 +151,6 @@ public class Activity_FeedBack extends AppCompatActivity {
                 unfeedback();
                 evaluate = 5;
                 feedback(evaluate);
-                Txt_status.setText("It's a great product !");
             }
 
         });
@@ -162,15 +158,13 @@ public class Activity_FeedBack extends AppCompatActivity {
         Img_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("--->>>>>>>",item.getID()+"");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
                         if (!s.getString("Email","").isEmpty() && !s.getString("Pass","").isEmpty()) {
-                            String content =  Edt_content.getText().toString();
-                            if (content.isEmpty()) {
-                                content = Txt_status.getText().toString();
+                            String content = Edt_content.getText().toString();
+                            if (content.isEmpty()) {content = Txt_status.getText().toString();
                             }
                             Retrofit retrofit_feedback = new Retrofit.Builder()
                                     .baseUrl("https://phqmarket.000webhostapp.com/feedback/")
@@ -182,10 +176,10 @@ public class Activity_FeedBack extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
                                     if (response.isSuccessful() && response.body() != null) {
-                                        Toast.makeText(Activity_FeedBack.this, response.body() + "", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Activity_FeedBack.this, response.body(), Toast.LENGTH_SHORT).show();
                                         finish();
                                     } else {
-                                        Toast.makeText(Activity_FeedBack.this, response.body()+"", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Activity_FeedBack.this, response.body(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
