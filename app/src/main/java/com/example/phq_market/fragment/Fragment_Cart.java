@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phq_market.R;
@@ -25,9 +26,11 @@ import com.example.phq_market.activity.Activity_Login;
 import com.example.phq_market.adapter.Adapter_Cart;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.CART;
+import com.example.phq_market.model.CARTCHECKBOX;
 import com.example.phq_market.model.PURCHASE;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -40,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Fragment_Cart extends Fragment {
 
     private RecyclerView rcvCart;
-    private ArrayList<CART> list_CART;
+    private ArrayList<CARTCHECKBOX> list_CARTCHECKBOX;
     private Adapter_Cart adapterCart;
     private LinearLayoutManager linearLayoutManager;
     private ProgressDialog progressDialog_cart;
@@ -48,6 +51,7 @@ public class Fragment_Cart extends Fragment {
     private SharedPreferences sharedPreferences;
     private  String email;
     private String pass;
+    private TextView tvCost;
     public Fragment_Cart() {
         // Required empty public constructor
     }
@@ -65,16 +69,24 @@ public class Fragment_Cart extends Fragment {
         View view = inflater.inflate(R.layout.fragment__cart, container, false);
         Button btnCheckOut = view.findViewById(R.id.btnCheckOut);
         rcvCart = view.findViewById(R.id.rcvCart);
-        list_CART= new ArrayList<>();
+        list_CARTCHECKBOX = new ArrayList<>();
+        tvCost = view.findViewById(R.id.tvCost);
+
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        rcvCart.setLayoutManager(linearLayoutManager);
+        adapterCart = new Adapter_Cart(getContext(),list_CARTCHECKBOX);
+        rcvCart.setAdapter(adapterCart);
 
         btnCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(list_CART.size()>0){
+                if(Float.valueOf(tvCost.getText().toString()) > 0){
                     ArrayList<PURCHASE> list_purchase = new ArrayList<>();
-                    for (CART ca : list_CART){
-                        list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY()));
+                    for (CARTCHECKBOX ca : list_CARTCHECKBOX){
+                        if(ca.isCheck()){
+                            list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY()));
+                        }
                     }
                     Intent intent = new Intent(getContext(), Activity_Checkout.class);
                     intent.putExtra("list_purchase",list_purchase);
@@ -89,12 +101,26 @@ public class Fragment_Cart extends Fragment {
 
             }
         });
+
+
         return view;
+    }
+
+    private void setPrice(){
+        tvCost.setText("0");
+        float sum = 0;
+        for(CARTCHECKBOX ca : list_CARTCHECKBOX){
+            if (ca.isCheck()){
+                sum += ca.getPRICE()*ca.getQUANTITY()/1000;
+            }
+        }
+        tvCost.setText(sum+"000");
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        tvCost.setText("0");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -113,31 +139,49 @@ public class Fragment_Cart extends Fragment {
                         .build();
                 api api_cart = retrofit_catalog.create(api.class);
 
-                email = sharedPreferences.getString("Email",null);
-                pass = sharedPreferences.getString("Pass",null);
+                email = sharedPreferences.getString("Email","null");
+                pass = sharedPreferences.getString("Pass","null");
                 Call<ArrayList<CART>> call = api_cart.get_Listcart(email,pass);
                 call.enqueue(new Callback<ArrayList<CART>>() {
                     @Override
                     public void onResponse(Call<ArrayList<CART>> call, Response<ArrayList<CART>> response) {
-                       if(response.isSuccessful() && response.body() != null){
-                           ArrayList<CART> list = response.body();
-                           if(list.size()>0){
-                               list_CART.clear();
-                               list_CART.addAll(list);
-                               adapterCart.notifyDataSetChanged();
-                           }
+                        if(response.isSuccessful() && response.body() != null){
+                            ArrayList<CART> list = response.body();
+                            if(list.size()>0){
+                                list_CARTCHECKBOX.clear();
+                                addlist(list);
+                                adapterCart.notifyDataSetChanged();
+                                adapterCart.SetCheckKerListener(new Adapter_Cart.CheckKerListener() {
+                                    @Override
+                                    public void check(int position, boolean check) {
+                                        list_CARTCHECKBOX.get(position).setCheck(check);
+                                        setPrice();
+                                        adapterCart.notifyDataSetChanged();
+                                    }
+                                });
 
-                           progressDialog_cart.dismiss();
-                       }else {
-                           list_CART.clear();
-                           adapterCart.notifyDataSetChanged();
-                           progressDialog_cart.dismiss();
-                       }
+                                adapterCart.SetUpdateQuantity(new Adapter_Cart.UpdateQuantity() {
+                                    @Override
+                                    public void quantity(int position, int quantity) {
+                                        list_CARTCHECKBOX.get(position).setQUANTITY(quantity);
+                                        setPrice();
+                                        adapterCart.notifyDataSetChanged();
+                                    }
+                                });
+
+                                progressDialog_cart.dismiss();
+                            }
+
+                        }else {
+                            list_CARTCHECKBOX.clear();
+                            adapterCart.notifyDataSetChanged();
+                            progressDialog_cart.dismiss();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<CART>> call, Throwable t) {
-                        list_CART.clear();
+                        list_CARTCHECKBOX.clear();
                         adapterCart.notifyDataSetChanged();
                         progressDialog_cart.dismiss();
                     }
@@ -145,10 +189,11 @@ public class Fragment_Cart extends Fragment {
 
             }
         }).start();
+    }
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
-        rcvCart.setLayoutManager(linearLayoutManager);
-        adapterCart = new Adapter_Cart(getContext(),list_CART);
-        rcvCart.setAdapter(adapterCart);
+    private void addlist(ArrayList<CART> list) {
+        for(CART a: list){
+            list_CARTCHECKBOX.add(new CARTCHECKBOX(a.getID(),a.getNAME(),a.getPRICE(),a.getQUANTITY(),a.getIMG(),false));
+        }
     }
 }
