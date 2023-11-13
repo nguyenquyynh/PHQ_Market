@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -19,8 +20,10 @@ import android.widget.Toast;
 import com.example.phq_market.R;
 import com.example.phq_market.adapter.Adapter_Checkout;
 import com.example.phq_market.api.api;
+import com.example.phq_market.model.ACCOUNT;
 import com.example.phq_market.model.CART;
 import com.example.phq_market.model.CHECKOUT;
+import com.example.phq_market.model.CUSTOMER;
 import com.example.phq_market.model.PURCHASE;
 import com.google.gson.Gson;
 
@@ -39,6 +42,9 @@ public class Activity_Checkout extends AppCompatActivity {
     private TextView Txt_transportFee;
     private TextView Txt_totalPayment;
     private TextView Txt_totalPaymentPart2;
+    private TextView Txt_name;
+    private TextView Txt_adress;
+    private TextView Txt_phone;
     private RecyclerView rcvListPurchase;
     private Adapter_Checkout adapter_checkout;
     private LinearLayoutManager linearLayoutManager;
@@ -53,9 +59,9 @@ public class Activity_Checkout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         ImageView img_back = findViewById(R.id.Img_back);
-        TextView Txt_name = findViewById(R.id.Txt_name);
-        TextView Txt_adress = findViewById(R.id.Txt_adress);
-        TextView Txt_phone = findViewById(R.id.Txt_phone);
+        Txt_name = findViewById(R.id.Txt_name);
+        Txt_adress = findViewById(R.id.Txt_adress);
+        Txt_phone = findViewById(R.id.Txt_phone);
         rcvListPurchase = findViewById(R.id.rcvListPurchase);
         RadioButton Chk_direct = findViewById(R.id.Chk_direct);
         RadioButton Chk_Online = findViewById(R.id.Chk_Online);
@@ -74,8 +80,13 @@ public class Activity_Checkout extends AppCompatActivity {
         Btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String cart = new Gson().toJson(listCart);
-                addpurchase(cart);
+                if(Txt_adress.getText().toString().isEmpty()){
+                    Toast.makeText(Activity_Checkout.this, "Hãy vào cài đặt để thêm địa chỉ khi đặt hàng", Toast.LENGTH_SHORT).show();
+                }else {
+                    String cart = new Gson().toJson(listCart);
+                    addpurchase(cart);
+                }
+
             }
         });
 
@@ -89,7 +100,7 @@ public class Activity_Checkout extends AppCompatActivity {
 
     private void updatecost(){
         float totalCostItem = 0;
-        float Fee = 300000;
+        float Fee = 30000;
         float totalPayment = 0;
         for (CHECKOUT pu : list){
             totalCostItem+=pu.getPRICE()* pu.getQUANTITY();
@@ -140,7 +151,6 @@ public class Activity_Checkout extends AppCompatActivity {
                         progressDialog.dismiss();
                         startActivity(new Intent(Activity_Checkout.this, Activity_Main.class));
                         Log.e("----->",t+"");
-                        Toast.makeText(Activity_Checkout.this, "error for connection", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -194,6 +204,42 @@ public class Activity_Checkout extends AppCompatActivity {
                     public void onFailure(Call<ArrayList<CHECKOUT>> call, Throwable t) {
                         Log.e("->>>>>>>>>>>>>>>>",t+"");
                         progressDialog.dismiss();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
+                String email = sharedPreferences.getString("Email",null);
+                String pass = sharedPreferences.getString("Pass",null);
+
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://phqmarket.000webhostapp.com/account/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                api Api  = retrofit.create(api.class);
+                Call<ACCOUNT> call = Api.getDetailAccount(email,pass);
+                call.enqueue(new Callback<ACCOUNT>() {
+                    @Override
+                    public void onResponse(Call<ACCOUNT> call, Response<ACCOUNT> response) {
+                        if(response.isSuccessful() && response.body()!=null){
+                            ACCOUNT acc = response.body();
+                            Txt_name.setText("Name: "+acc.getNAME());
+                            Txt_adress.setText("Adress: "+acc.getADDRESS());
+                            Txt_phone.setText("Phone: "+acc.getPHONE());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ACCOUNT> call, Throwable t) {
+
                     }
                 });
             }

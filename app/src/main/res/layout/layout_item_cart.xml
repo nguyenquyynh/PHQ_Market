@@ -18,12 +18,19 @@
            android:background="@drawable/nen_search"
            android:layout_height="100dp">
 
+           <CheckBox
+               android:id="@+id/Chk_check"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerVertical="true"/>
+
            <ImageView
                android:id="@+id/imgAnh"
                android:layout_width="100dp"
                android:layout_height="100dp"
                android:layout_centerVertical="true"
                android:src="@drawable/logo"
+               android:layout_toRightOf="@id/Chk_check"
                android:layout_marginRight="20dp"/>
 
            <TextView
