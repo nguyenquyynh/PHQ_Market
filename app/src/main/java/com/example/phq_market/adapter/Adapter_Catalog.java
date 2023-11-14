@@ -2,6 +2,7 @@ package com.example.phq_market.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
+import com.example.phq_market.activity.Activity_Search;
 import com.example.phq_market.model.CATALOGSHOW;
 
 import java.util.ArrayList;
@@ -49,6 +51,16 @@ public class Adapter_Catalog extends RecyclerView.Adapter<Adapter_Catalog.ViewHo
         } catch (Exception e) {
             Log.d(">>>>>>>>>>>>>>", e.getMessage());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Activity_Search.class);
+                intent.putExtra("IDCATALOG",list_catalog.get(holder.getAdapterPosition()).getID());
+                intent.putExtra("NAMECATALOG",list_catalog.get(holder.getAdapterPosition()).getNAME());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
