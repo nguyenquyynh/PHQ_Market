@@ -69,6 +69,8 @@ public interface api {
     Call<ArrayList<MONTHANDDAY>> get_DateAndPay(@Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("getlistallproduct.php")
     Call<ArrayList<NEWPRODUCT>> get_listall();
+    @GET("getlistasCaTaLogproduct.php")
+    Call<ArrayList<NEWPRODUCT>> get_listasCaTaLog(@Query("IDCATALOG") Integer IDCATALOG);
     @GET("sendfeedback.php")
     Call<String> add_feedback(@Query("EVALUATE") Integer evaluate, @Query("CONTENT") String content, @Query("IDPURCHASE") Integer idpurchase, @Query("EMAIL") String email, @Query("PASS") String pass);
 }
