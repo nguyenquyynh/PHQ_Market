@@ -52,6 +52,7 @@ public class Activity_Checkout extends AppCompatActivity {
     private ArrayList<PURCHASE> listCart;
     private ProgressDialog progressDialog;
     private Handler handler = new Handler();
+    private String street;
     DecimalFormat formatter = new DecimalFormat("#,###");
 
     @Override
@@ -80,7 +81,7 @@ public class Activity_Checkout extends AppCompatActivity {
         Btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Txt_adress.getText().toString().isEmpty()){
+                if(street == null){
                     Toast.makeText(Activity_Checkout.this, "Hãy vào cài đặt để thêm địa chỉ khi đặt hàng", Toast.LENGTH_SHORT).show();
                 }else {
                     String cart = new Gson().toJson(listCart);
@@ -112,6 +113,7 @@ public class Activity_Checkout extends AppCompatActivity {
         Txt_transportFee.setText(formatter.format(Fee));
         Txt_totalPaymentPart2.setText(formatter.format(totalPayment));
     }
+
     private void addpurchase(String cart) {
         new Thread(new Runnable() {
             @Override
@@ -232,7 +234,8 @@ public class Activity_Checkout extends AppCompatActivity {
                         if(response.isSuccessful() && response.body()!=null){
                             ACCOUNT acc = response.body();
                             Txt_name.setText("Name: "+acc.getNAME());
-                            Txt_adress.setText("Adress: "+acc.getADDRESS());
+                            street = acc.getADDRESS();
+                            Txt_adress.setText("Address: "+street);
                             Txt_phone.setText("Phone: "+acc.getPHONE());
                         }
                     }

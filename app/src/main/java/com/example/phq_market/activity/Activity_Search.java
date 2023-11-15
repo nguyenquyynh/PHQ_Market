@@ -1,18 +1,27 @@
 package com.example.phq_market.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.phq_market.R;
 import com.example.phq_market.adapter.Adapter_PopularProduct;
@@ -20,6 +29,9 @@ import com.example.phq_market.api.api;
 import com.example.phq_market.model.NEWPRODUCT;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +44,9 @@ public class Activity_Search extends AppCompatActivity {
     private EditText Edt_Search;
     private RecyclerView Recycler_view;
     private ImageButton Btn_filter;
+    private LinearLayout Filter_show;
+    private ToggleButton Btn_Price;
+    private ToggleButton Btn_Name;
     ArrayList<NEWPRODUCT> list_all;
     ArrayList<NEWPRODUCT> listsearch;
     GridLayoutManager layoutManager;
@@ -45,6 +60,9 @@ public class Activity_Search extends AppCompatActivity {
         Edt_Search = findViewById(R.id.Edt_Search);
         Recycler_view = findViewById(R.id.Recycler_view);
         Btn_filter = findViewById(R.id.Btn_filter);
+        Filter_show = findViewById(R.id.Filter_show);
+        Btn_Price = findViewById(R.id.Btn_Price);
+        Btn_Name = findViewById(R.id.Btn_Name);
 
         list_all = new ArrayList<>();
         layoutManager = new GridLayoutManager(Activity_Search.this,2);
@@ -59,6 +77,41 @@ public class Activity_Search extends AppCompatActivity {
         }else {
             getAllList();
         }
+
+        Btn_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Filter_show.getVisibility() == View.VISIBLE)
+                    Filter_show.setVisibility(View.GONE);
+                else
+                    Filter_show.setVisibility(View.VISIBLE);
+            }
+        });
+        Btn_Price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Btn_Price.isChecked()){
+                    sortPriceASC();
+                }else {
+                    sortPriceDESC();
+                }
+                Filter_show.setVisibility(View.GONE);
+            }
+        });
+
+        Btn_Name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Btn_Name.isChecked()){
+                    Btn_Name.setText("Sort name ascending");
+                    sortNameASC();
+                }else {
+                    Btn_Name.setText("Sort name descending");
+                    sortNameDESC();
+                }
+                Filter_show.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -168,4 +221,65 @@ public class Activity_Search extends AppCompatActivity {
             }
         }).start();
     }
+
+    private void sortNameASC(){
+        Collections.sort(list_all, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o1.getNAME().compareTo(o2.getNAME());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
+    private void sortNameDESC(){
+        Collections.sort(list_all, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o2.getNAME().compareTo(o1.getNAME());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
+    private void sortPriceASC(){
+        Collections.sort(list_all, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o1.getPRICE().compareTo(o2.getPRICE());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
+    private void sortPriceDESC(){
+        Collections.sort(list_all, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o2.getPRICE().compareTo(o1.getPRICE());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
+    private void sortEVALUATEASC(){
+        Collections.sort(list_all, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o1.getEVALUATE().compareTo(o2.getEVALUATE());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
+    private void sortEVALUATEDESC(){
+        Collections.sort(list_all, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o2.getEVALUATE().compareTo(o1.getEVALUATE());
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
 }
