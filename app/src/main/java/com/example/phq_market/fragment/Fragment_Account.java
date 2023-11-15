@@ -2,6 +2,7 @@ package com.example.phq_market.fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
@@ -63,6 +66,10 @@ public class Fragment_Account extends Fragment {
     private ArrayList<MONTHANDDAY> listmonthandday;
     private LineChart lineChart;
     private LinearLayout ic_Edit;
+
+    private LinearLayout lnCart;
+
+    private LinearLayout lnLike;
     EDITACCOUNT acc;
     SharedPreferences s;
 
@@ -73,6 +80,7 @@ public class Fragment_Account extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,6 +98,7 @@ public class Fragment_Account extends Fragment {
         Txt_address = view.findViewById(R.id.Txt_address);
         btn_setUp = view.findViewById(R.id.btn_setUp);
         lineChart = view.findViewById(R.id.lineChart);
+        lnCart = view.findViewById(R.id.lnCart);
         acc = new EDITACCOUNT();
         listmonthandday = new ArrayList<>();
         sharedPreferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
@@ -112,6 +121,24 @@ public class Fragment_Account extends Fragment {
                 bundle.putSerializable("acc",acc);
                 intent.putExtras(bundle);
                 startActivity(intent);
+            }
+        });
+
+        lnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Frame_layout,new Fragment_Cart()).commit();
+            }
+        });
+
+        lnLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Frame_layout,new Fragment_Like()).commit();
             }
         });
 

@@ -100,6 +100,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_centerHorizontal="true">
                     <LinearLayout
+                        android:id="@+id/lnLike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -147,6 +148,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/lnCart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
