@@ -83,7 +83,7 @@ public class Fragment_Cart extends Fragment {
                     ArrayList<PURCHASE> list_purchase = new ArrayList<>();
                     for (CARTCHECKBOX ca : list_CARTCHECKBOX){
                         if(ca.isCheck()){
-                            list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY()));
+                            list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY(),0));
                         }
                     }
                     Intent intent = new Intent(getContext(), Activity_Checkout.class);

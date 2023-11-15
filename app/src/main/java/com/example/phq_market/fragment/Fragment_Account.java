@@ -99,6 +99,7 @@ public class Fragment_Account extends Fragment {
         btn_setUp = view.findViewById(R.id.btn_setUp);
         lineChart = view.findViewById(R.id.lineChart);
         lnCart = view.findViewById(R.id.lnCart);
+        lnLike = view.findViewById(R.id.lnLike);
         acc = new EDITACCOUNT();
         listmonthandday = new ArrayList<>();
         sharedPreferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
