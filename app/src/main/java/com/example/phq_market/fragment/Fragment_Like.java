@@ -52,8 +52,6 @@ public class Fragment_Like extends Fragment {
     Adapter_Like adapter_like;
     GridLayoutManager layoutManager;
     ArrayList<NEWPRODUCT> listsearch;
-    Handler handler = new Handler();
-    ProgressDialog progressDialog;
 
     Button btn;
     public Fragment_Like() {

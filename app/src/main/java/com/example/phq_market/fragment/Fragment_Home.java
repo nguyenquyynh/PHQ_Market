@@ -58,8 +58,6 @@ public class Fragment_Home extends Fragment {
     //==============================================
     private ArrayList<NEWPRODUCT> listProduct;
     private  RecyclerView rcv_Home;
-    ProgressDialog progressDialog;
-    Handler handler = new Handler();
     public Fragment_Home() {
         // Required empty public constructor
     }
@@ -132,15 +130,7 @@ public class Fragment_Home extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog = new ProgressDialog(getContext());
-                        progressDialog.setMessage("Dữ liệu đang chạy");
-                        progressDialog.setCancelable(false);
-                        progressDialog.show();
-                    }
-                });
+
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://phqmarket.000webhostapp.com/product/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -155,7 +145,6 @@ public class Fragment_Home extends Fragment {
                             listProduct.clear();
                             listProduct.addAll(list);
                             adapterPopularProduct.notifyDataSetChanged();
-                            progressDialog.dismiss();
                         }else {
                             Log.d(">>>>>>>>>>>>>>>>>>>", "Lỗi");
                         }

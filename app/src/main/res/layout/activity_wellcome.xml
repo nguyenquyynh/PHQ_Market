@@ -14,6 +14,7 @@
         android:gravity="center"
         android:layout_marginTop="100dp">
         <TextView
+            android:id="@+id/Tv_Well"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wellcome"
@@ -23,6 +24,7 @@
             android:textColor="@color/black"
             />
         <TextView
+            android:id="@+id/Tv_To"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="To"

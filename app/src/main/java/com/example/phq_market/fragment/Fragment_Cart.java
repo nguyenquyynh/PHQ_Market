@@ -46,8 +46,6 @@ public class Fragment_Cart extends Fragment {
     private ArrayList<CARTCHECKBOX> list_CARTCHECKBOX;
     private Adapter_Cart adapterCart;
     private LinearLayoutManager linearLayoutManager;
-    private ProgressDialog progressDialog_cart;
-    private Handler handler_cart = new Handler();
     private SharedPreferences sharedPreferences;
     private  String email;
     private String pass;
@@ -124,15 +122,6 @@ public class Fragment_Cart extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                handler_cart.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog_cart = new ProgressDialog(getContext());
-                        progressDialog_cart.setMessage("Loading......");
-                        progressDialog_cart.setCancelable(false);
-                        progressDialog_cart.show();
-                    }
-                });
                 Retrofit retrofit_catalog = new Retrofit.Builder()
                         .baseUrl("https://phqmarket.000webhostapp.com/cart/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -168,14 +157,11 @@ public class Fragment_Cart extends Fragment {
                                         adapterCart.notifyDataSetChanged();
                                     }
                                 });
-
-                                progressDialog_cart.dismiss();
                             }
 
                         }else {
                             list_CARTCHECKBOX.clear();
                             adapterCart.notifyDataSetChanged();
-                            progressDialog_cart.dismiss();
                         }
                     }
 
@@ -183,7 +169,6 @@ public class Fragment_Cart extends Fragment {
                     public void onFailure(Call<ArrayList<CART>> call, Throwable t) {
                         list_CARTCHECKBOX.clear();
                         adapterCart.notifyDataSetChanged();
-                        progressDialog_cart.dismiss();
                     }
                 });
 
