@@ -101,7 +101,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:text="Direct payment" />
+                            android:text="Direct payment"
+                            android:checked="true"/>
                         <RadioButton
                             android:id="@+id/Chk_Online"
                             android:layout_width="wrap_content"

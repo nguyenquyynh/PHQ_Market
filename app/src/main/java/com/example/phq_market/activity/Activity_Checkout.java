@@ -45,6 +45,8 @@ public class Activity_Checkout extends AppCompatActivity {
     private TextView Txt_name;
     private TextView Txt_adress;
     private TextView Txt_phone;
+    private RadioButton Chk_direct;
+    private RadioButton Chk_Online;
     private RecyclerView rcvListPurchase;
     private Adapter_Checkout adapter_checkout;
     private LinearLayoutManager linearLayoutManager;
@@ -58,14 +60,15 @@ public class Activity_Checkout extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_checkout);
         ImageView img_back = findViewById(R.id.Img_back);
         Txt_name = findViewById(R.id.Txt_name);
         Txt_adress = findViewById(R.id.Txt_adress);
         Txt_phone = findViewById(R.id.Txt_phone);
         rcvListPurchase = findViewById(R.id.rcvListPurchase);
-        RadioButton Chk_direct = findViewById(R.id.Chk_direct);
-        RadioButton Chk_Online = findViewById(R.id.Chk_Online);
+        Chk_direct = findViewById(R.id.Chk_direct);
+        Chk_Online = findViewById(R.id.Chk_Online);
         Txt_totalCostItem = findViewById(R.id.Txt_totalCostItem);
         Txt_transportFee = findViewById(R.id.Txt_transportFee);
         Txt_totalPayment = findViewById(R.id.Txt_totalPayment);
@@ -81,6 +84,7 @@ public class Activity_Checkout extends AppCompatActivity {
         Btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addpaymenttolist();
                 if(street == null){
                     Toast.makeText(Activity_Checkout.this, "Hãy vào cài đặt để thêm địa chỉ khi đặt hàng", Toast.LENGTH_SHORT).show();
                 }else {
@@ -97,6 +101,15 @@ public class Activity_Checkout extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void addpaymenttolist(){
+        for(PURCHASE pu: listCart){
+            pu.setPAYMENT(checkpayment());
+        }
+    }
+
+    private int checkpayment(){
+        return Chk_direct.isChecked() ? 1 : 0;
     }
 
     private void updatecost(){

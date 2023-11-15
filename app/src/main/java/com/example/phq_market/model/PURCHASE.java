@@ -7,13 +7,24 @@ public class PURCHASE implements Serializable {
     private String Email;
     private String Password;
     private int QUANTITY;
+    private int PAYMENT;
 
-    public PURCHASE(int IDCART, String email, String password, int QUANTITY) {
+    public PURCHASE(int IDCART, String email, String password, int QUANTITY, int PAYMENT) {
         this.IDCART = IDCART;
-        this.Email = email;
-        this.Password = password;
+        Email = email;
+        Password = password;
         this.QUANTITY = QUANTITY;
+        this.PAYMENT = PAYMENT;
     }
+
+    public int getPAYMENT() {
+        return PAYMENT;
+    }
+
+    public void setPAYMENT(int PAYMENT) {
+        this.PAYMENT = PAYMENT;
+    }
+
     public String getEmail() {
         return Email;
     }
