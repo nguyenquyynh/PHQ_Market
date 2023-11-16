@@ -3,6 +3,7 @@ package com.example.phq_market.fragment;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -72,7 +73,7 @@ public class Fragment_Account extends Fragment {
     private LinearLayout lnLike;
     EDITACCOUNT acc;
     SharedPreferences s;
-
+    private Dialog dialog;
     private String email = "";
     private String pass = "";
     @Override
@@ -263,6 +264,7 @@ public class Fragment_Account extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        showLoading();
         s = getContext().getSharedPreferences("account", MODE_PRIVATE);
         new Thread(new Runnable() {
             @Override
@@ -296,15 +298,17 @@ public class Fragment_Account extends Fragment {
                                 acc.setNAME(account.getNAME());
                                 acc.setPASS(s.getString("Pass",null));
                                 acc.setPHONE(account.getPHONE());
+                                dialog.cancel();
                                 Log.d(">>>>>>>>>>>>>>>>>>>>>>>", acc+"");
                             } else {
                                 Log.d(">>>>>>>>>>>>>>>>>>>>>>>,", response.toString());
+                                dialog.cancel();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ACCOUNT> call, Throwable t) {
-
+                            dialog.cancel();
                         }
                     });
                 }
@@ -361,7 +365,29 @@ public class Fragment_Account extends Fragment {
                 }
             }
         }).start();
+    }
 
+    private String load;
+    private void showLoading(){
+        dialog = new Dialog(getContext(),R.style.Theme_PHQ_Market);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_wellcome,null);
+        dialog.setContentView(view);
 
+        TextView Tv_Well = view.findViewById(R.id.Tv_Well);
+        TextView Tv_To = view.findViewById(R.id.Tv_To);
+
+        Tv_Well.setText("Loading");
+        Tv_To.setText(".");
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                load = load == "." ? ".." :  load == ".." ? "..." :  load == "..." ? "." : ".";
+                Tv_To.setText(load);
+                handler.postDelayed(this, 500);
+            }
+        }, 500);
+        dialog.show();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.phq_market.fragment;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phq_market.R;
@@ -45,15 +47,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment_Like extends Fragment {
-    ArrayList<NEWPRODUCT> list_like;
-    EditText Edt_Search;
-    ImageButton Btn_filter;
-    RecyclerView Recycler_view;
-    Adapter_Like adapter_like;
-    GridLayoutManager layoutManager;
-    ArrayList<NEWPRODUCT> listsearch;
+    private ArrayList<NEWPRODUCT> list_like;
+    private EditText Edt_Search;
+    private ImageButton Btn_filter;
+    private RecyclerView Recycler_view;
+    private Adapter_Like adapter_like;
+    private GridLayoutManager layoutManager;
+    private ArrayList<NEWPRODUCT> listsearch;
+    private Dialog dialog;
 
-    Button btn;
     public Fragment_Like() {
     }
 
@@ -79,6 +81,7 @@ public class Fragment_Like extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        showLoading();
         Edt_Search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -121,11 +124,12 @@ public class Fragment_Like extends Fragment {
                             list_like.clear();
                             list_like.addAll(list);
                             adapter_like.notifyDataSetChanged();
+                            dialog.cancel();
                         }
 
                         @Override
                         public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
-
+                            dialog.cancel();
                         }
                     });
                 }
@@ -146,5 +150,29 @@ public class Fragment_Like extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    private String load;
+    private void showLoading(){
+        dialog = new Dialog(getContext(),R.style.Theme_PHQ_Market);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_wellcome,null);
+        dialog.setContentView(view);
+
+        TextView Tv_Well = view.findViewById(R.id.Tv_Well);
+        TextView Tv_To = view.findViewById(R.id.Tv_To);
+
+        Tv_Well.setText("Loading");
+        Tv_To.setText(".");
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                load = load == "." ? ".." :  load == ".." ? "..." :  load == "..." ? "." : ".";
+                Tv_To.setText(load);
+                handler.postDelayed(this, 500);
+            }
+        }, 500);
+        dialog.show();
     }
 }

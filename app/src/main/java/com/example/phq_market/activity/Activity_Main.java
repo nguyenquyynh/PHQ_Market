@@ -54,7 +54,6 @@ public class Activity_Main extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         Img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +63,6 @@ public class Activity_Main extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                showLoading();
                 layout1.setVisibility(View.VISIBLE);
                 Img_search.setVisibility(View.VISIBLE);
                 if (item.getItemId() == R.id.Home) {
@@ -94,36 +92,6 @@ public class Activity_Main extends AppCompatActivity {
                 return true;
             }
         });
-    }
-    String load;
-    private void showLoading(){
-        Dialog dialog = new Dialog(this,R.style.Theme_PHQ_Market);
-        View view = LayoutInflater.from(Activity_Main.this).inflate(R.layout.activity_wellcome,null);
-        dialog.setContentView(view);
-
-        TextView Tv_Well = view.findViewById(R.id.Tv_Well);
-        TextView Tv_To = view.findViewById(R.id.Tv_To);
-
-        Tv_Well.setText("Loading");
-        Tv_To.setText(".");
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                load = load == "." ? ".." :  load == ".." ? "..." :  load == "..." ? "." : ".";
-                Tv_To.setText(load);
-                handler.postDelayed(this, 500);
-            }
-        }, 500);
-        dialog.show();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dialog.cancel();
-            }
-        },3000);
     }
 
     private void showWelcome(){
