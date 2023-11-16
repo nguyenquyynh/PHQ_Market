@@ -109,7 +109,13 @@ public class Fragment_Account extends Fragment {
             @Override
             public void onClick(View v) {
                 if(btn_setUp.getText() == "Log out"){
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     startActivity(new Intent(getContext(), Activity_Login.class));
+                    if(!sharedPreferences.getBoolean("remember",false)){
+                        editor.putString("Email","");
+                        editor.putString("Pass","");
+                        editor.apply();
+                    }
                 }else {
                     startActivity(new Intent(getContext(), Activity_Signup.class));
                 }
@@ -311,6 +317,8 @@ public class Fragment_Account extends Fragment {
                             dialog.cancel();
                         }
                     });
+                }else {
+                    dialog.cancel();
                 }
             ;}
         }).start();
@@ -336,6 +344,7 @@ public class Fragment_Account extends Fragment {
                     Txt_cart.setText("0");
                     ic_Edit.setVisibility(View.GONE);
                     lnOrder.setEnabled(false);
+                    dialog.cancel();
                 }else {
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
@@ -352,14 +361,16 @@ public class Fragment_Account extends Fragment {
                                 listmonthandday.clear();
                                 listmonthandday.addAll(list);
                                 SetChart();
+                                dialog.cancel();
                             }else {
                                 listmonthandday.clear();
+                                dialog.cancel();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ArrayList<MONTHANDDAY>> call, Throwable t) {
-
+                            dialog.cancel();
                         }
                     });
                 }

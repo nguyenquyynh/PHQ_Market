@@ -125,13 +125,17 @@ public class Fragment_Like extends Fragment {
                             list_like.addAll(list);
                             adapter_like.notifyDataSetChanged();
                             dialog.cancel();
+                            Log.e("------>",response.body()+"");
                         }
 
                         @Override
                         public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
                             dialog.cancel();
+                            Log.e("------>",t+"");
                         }
                     });
+                }else {
+                    dialog.cancel();
                 }
 
             }
