@@ -1,5 +1,6 @@
 package com.example.phq_market.fragment;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -56,6 +58,7 @@ public class Fragment_Discovery extends Fragment {
     Adapter_Catalog adapter_catalog;
     Adapter_NewProduct adapter_newProduct;
     Adapter_SaleProduct adapter_saleProduct;
+    private Dialog dialog;
 
     public Fragment_Discovery() {
         // Required empty public constructor
@@ -84,7 +87,7 @@ public class Fragment_Discovery extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        showLoading();
         Retrofit retrofit_banner = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.000webhostapp.com/banner/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -201,6 +204,7 @@ public class Fragment_Discovery extends Fragment {
                             list_saleproduct.clear();
                             list_saleproduct.addAll(list);
                             adapter_saleProduct.notifyDataSetChanged();
+                            dialog.cancel();
                         }
                     }
                     @Override
@@ -231,5 +235,29 @@ public class Fragment_Discovery extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    private String load;
+    private void showLoading(){
+        dialog = new Dialog(getContext(),R.style.Theme_PHQ_Market);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_wellcome,null);
+        dialog.setContentView(view);
+
+        TextView Tv_Well = view.findViewById(R.id.Tv_Well);
+        TextView Tv_To = view.findViewById(R.id.Tv_To);
+
+        Tv_Well.setText("Loading");
+        Tv_To.setText(".");
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                load = load == "." ? ".." :  load == ".." ? "..." :  load == "..." ? "." : ".";
+                Tv_To.setText(load);
+                handler.postDelayed(this, 500);
+            }
+        }, 500);
+        dialog.show();
     }
 }

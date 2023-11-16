@@ -1,5 +1,6 @@
 package com.example.phq_market.fragment;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,11 +24,13 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_ItemDetail;
+import com.example.phq_market.activity.Activity_Main;
 import com.example.phq_market.adapter.Adapter_Banner;
 import com.example.phq_market.adapter.Adapter_Image_Slide_ItemDetail;
 import com.example.phq_market.adapter.Adapter_NewProduct;
@@ -56,6 +59,7 @@ public class Fragment_Home extends Fragment {
     private final Handler handler_banner = new Handler();
     private final int delay = 2500;
     //==============================================
+    private Dialog dialog;
     private ArrayList<NEWPRODUCT> listProduct;
     private  RecyclerView rcv_Home;
     public Fragment_Home() {
@@ -81,7 +85,7 @@ public class Fragment_Home extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        showLoading();
         Retrofit retrofit_banner = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.000webhostapp.com/banner/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -126,7 +130,7 @@ public class Fragment_Home extends Fragment {
                 return false;
             }
         });
-
+        // product
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -144,6 +148,7 @@ public class Fragment_Home extends Fragment {
                             ArrayList<NEWPRODUCT> list = response.body();
                             listProduct.clear();
                             listProduct.addAll(list);
+                            dialog.cancel();
                             adapterPopularProduct.notifyDataSetChanged();
                         }else {
                             Log.d(">>>>>>>>>>>>>>>>>>>", "Lỗi");
@@ -151,7 +156,7 @@ public class Fragment_Home extends Fragment {
                     }
                     @Override
                     public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
-                        Toast.makeText(getContext(), "Lỗi !!"+ t.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Lỗi !!"+ t, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -172,6 +177,30 @@ public class Fragment_Home extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    private String load;
+    private void showLoading(){
+        dialog = new Dialog(getContext(),R.style.Theme_PHQ_Market);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_wellcome,null);
+        dialog.setContentView(view);
+
+        TextView Tv_Well = view.findViewById(R.id.Tv_Well);
+        TextView Tv_To = view.findViewById(R.id.Tv_To);
+
+        Tv_Well.setText("Loading");
+        Tv_To.setText(".");
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                load = load == "." ? ".." :  load == ".." ? "..." :  load == "..." ? "." : ".";
+                Tv_To.setText(load);
+                handler.postDelayed(this, 500);
+            }
+        }, 500);
+        dialog.show();
     }
 
 }

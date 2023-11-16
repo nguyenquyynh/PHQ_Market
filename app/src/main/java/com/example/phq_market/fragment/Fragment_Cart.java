@@ -2,6 +2,7 @@ package com.example.phq_market.fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +51,7 @@ public class Fragment_Cart extends Fragment {
     private  String email;
     private String pass;
     private TextView tvCost;
+    private Dialog dialog;
     public Fragment_Cart() {
         // Required empty public constructor
     }
@@ -119,6 +121,7 @@ public class Fragment_Cart extends Fragment {
     public void onResume() {
         super.onResume();
         tvCost.setText("0");
+        showLoading();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -158,10 +161,11 @@ public class Fragment_Cart extends Fragment {
                                     }
                                 });
                             }
-
+                            dialog.cancel();
                         }else {
                             list_CARTCHECKBOX.clear();
                             adapterCart.notifyDataSetChanged();
+                            dialog.cancel();
                         }
                     }
 
@@ -169,11 +173,35 @@ public class Fragment_Cart extends Fragment {
                     public void onFailure(Call<ArrayList<CART>> call, Throwable t) {
                         list_CARTCHECKBOX.clear();
                         adapterCart.notifyDataSetChanged();
+                        dialog.cancel();
                     }
                 });
 
             }
         }).start();
+    }
+    private String load;
+    private void showLoading(){
+        dialog = new Dialog(getContext(),R.style.Theme_PHQ_Market);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_wellcome,null);
+        dialog.setContentView(view);
+
+        TextView Tv_Well = view.findViewById(R.id.Tv_Well);
+        TextView Tv_To = view.findViewById(R.id.Tv_To);
+
+        Tv_Well.setText("Loading");
+        Tv_To.setText(".");
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                load = load == "." ? ".." :  load == ".." ? "..." :  load == "..." ? "." : ".";
+                Tv_To.setText(load);
+                handler.postDelayed(this, 500);
+            }
+        }, 500);
+        dialog.show();
     }
 
     private void addlist(ArrayList<CART> list) {
