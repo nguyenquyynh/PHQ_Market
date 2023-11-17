@@ -90,12 +90,16 @@ public class Activity_Signup extends AppCompatActivity {
 
                 if(username.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
                     Toast.makeText(Activity_Signup.this,"The input box cannot be left blank", Toast.LENGTH_SHORT).show();
-                }
-//                else if (email.matches("\\w+@[a-zA-Z0-9]+.[a-zA-Z0-9]+")) {
-//                    Toast.makeText(Activity_Signup.this,"Enter correct gmail", Toast.LENGTH_SHORT).show();
-//                }
-                else if (!password.equals(confirmPassword)) {
-                    edtConfirmPassword.setFocusable(true);
+                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(Activity_Signup.this,"Enter correct gmail", Toast.LENGTH_SHORT).show();
+                } else if (phone.length()<10) {
+                    Toast.makeText(Activity_Signup.this,"Phone number need 10 number", Toast.LENGTH_SHORT).show();
+                } else if (password.length()<8) {
+                    Toast.makeText(Activity_Signup.this, "The password need more than 8 letter", Toast.LENGTH_SHORT).show();
+                } else if (!isPasswordValid(password)) {
+                    Toast.makeText(Activity_Signup.this, "The password need at least 1 lowercase letter,1 uppercase letter , 1 number and special characters ", Toast.LENGTH_SHORT).show();
+                } else if (!password.equals(confirmPassword)) {
+                    edtConfirmPassword.requestFocus();
                     Toast.makeText(Activity_Signup.this, "Enter the same password", Toast.LENGTH_SHORT).show();
                 } else if (!chkAgreeCondition.isChecked()) {
                     Toast.makeText(Activity_Signup.this, "Please confirm saving information", Toast.LENGTH_SHORT).show();
@@ -162,5 +166,12 @@ public class Activity_Signup extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+
+    private boolean isPasswordValid(String password) {
+        // Yêu cầu ít nhất 1 chữ cái thường, 1 chữ cái hoa, 1 kí tự đặt biệt và 1 số
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        return password.matches(passwordPattern);
     }
 }

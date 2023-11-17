@@ -90,6 +90,7 @@
             android:inputType="number"
             android:drawableLeft="@drawable/phone"
             android:drawablePadding="20dp"
+            android:maxLength="10"
             android:background="@drawable/radius"/>
 
     </com.google.android.material.textfield.TextInputLayout>

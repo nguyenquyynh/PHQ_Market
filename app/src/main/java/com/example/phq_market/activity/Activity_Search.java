@@ -71,6 +71,8 @@ public class Activity_Search extends AppCompatActivity {
         Recycler_view.setAdapter(adapter);
         listsearch = new ArrayList<>();
 
+        Edt_Search.requestFocus();
+
         if(getIntent().getIntExtra("IDCATALOG",0)>0){
             getListHasCataLog(getIntent().getIntExtra("IDCATALOG",0));
             Edt_Search.setText(getIntent().getStringExtra("NAMECATALOG"));
