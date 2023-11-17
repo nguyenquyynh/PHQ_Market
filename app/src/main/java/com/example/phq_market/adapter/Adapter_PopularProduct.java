@@ -47,9 +47,10 @@ public class Adapter_PopularProduct extends RecyclerView.Adapter<Adapter_Popular
                     .load(product.getIMG())
                     .into(holder.Img_imageproduct);
             holder.Txt_nameproduct.setText(product.getNAME());
-            if (product.getPRICE() != null) {
+            if (product.getEVALUATE() != null) {
                 holder.Txt_evaluate.setText(String.format("%.3s",product.getEVALUATE()));
-            } else holder.Txt_evaluate.setText(String.format("%.3s",0.0));
+            } else
+                holder.Txt_evaluate.setText(String.format("%.3s",0.0));
             holder.Txt_priceproduct.setText(formatter.format(product.getPRICE()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

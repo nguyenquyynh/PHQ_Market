@@ -61,7 +61,9 @@ public class Adapter_NewProduct extends RecyclerView.Adapter<Adapter_NewProduct.
             holder.Txt_nameproduct.setText(product.getNAME());
             if (product.getEVALUATE() != null) {
                 holder.Txt_evaluate.setText(String.format("%.3s",product.getEVALUATE()));
-            } else holder.Txt_evaluate.setText(String.format("%.3s",0.0));
+            }
+            else
+                holder.Txt_evaluate.setText(String.format("%.3s",0.0));
             holder.Txt_priceproduct.setText(formatter.format(product.getPRICE()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

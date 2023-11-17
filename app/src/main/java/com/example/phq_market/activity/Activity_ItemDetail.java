@@ -221,12 +221,16 @@ public class Activity_ItemDetail extends AppCompatActivity {
                     call_cart.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Toast.makeText(Activity_ItemDetail.this, "Add is Successful, please check your cart !!", Toast.LENGTH_SHORT).show();
+                            if(response.isSuccessful() && response.body().equals("add succesful")){
+                                Toast.makeText(Activity_ItemDetail.this, "Add is Successful, please check your cart !!", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(Activity_ItemDetail.this, "The product is out of stock", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-                            Toast.makeText(Activity_ItemDetail.this, "Add is Faile !!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Activity_ItemDetail.this, "Check the connection !", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
