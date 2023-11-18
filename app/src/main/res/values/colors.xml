@@ -10,7 +10,7 @@
     <color name="navigation_selected">#38972E</color>
     <color name="background_dark">#414240</color>
     <color name="bottom_navigaton_dark">#252323</color>
-    <color name="button_login">#414138</color>
+    <color name="button_login">#414138</color>z
 
     <style name="Widget.Material3.BottomNavigationView.ActiveIndicator.Selected">
         <item name="android:itemBackground">@color/navigation_selected</item>

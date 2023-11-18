@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".activity.Activity_Status">
+    tools:context=".activity.Activity_Status"
+    android:padding="20dp">
 
     <RelativeLayout
         android:id="@+id/layout1"
@@ -17,7 +18,6 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
             android:src="@drawable/back"/>
         <TextView
             android:id="@+id/Title_fragment"
@@ -36,8 +36,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/notification"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"/>
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
     <HorizontalScrollView
         android:id="@+id/scroll"
@@ -47,55 +46,61 @@
         android:background="@color/white"
         android:scrollbars="none"
         android:layout_height="wrap_content">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/Tv_Confirming"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Confirming"
                 android:textSize="20dp"
+                android:gravity="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/Tv_Shipping"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Shipping"
                 android:textSize="20dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:textStyle="bold"/>
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/Tv_Confirming"/>
             <TextView
                 android:id="@+id/Tv_Done"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Done"
                 android:textSize="20dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:textStyle="bold"/>
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/Tv_Shipping"/>
             <TextView
                 android:id="@+id/Tv_Canceled"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Canceled"
                 android:textSize="20dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/Tv_Done"/>
+            <LinearLayout
+                android:id="@+id/Tab_selected"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Tv_Confirming"
+                android:orientation="horizontal"
+                android:background="@drawable/selected_tab"/>
+        </RelativeLayout>
     </HorizontalScrollView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Rcv_status"

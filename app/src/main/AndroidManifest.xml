@@ -37,9 +37,6 @@
             android:name=".activity.Activity_Signup"
             android:exported="false" />
         <activity
-            android:name=".activity.Activity_Order"
-            android:exported="false" />
-        <activity
             android:name=".activity.Activity_Login"
             android:exported="false" />
         <activity

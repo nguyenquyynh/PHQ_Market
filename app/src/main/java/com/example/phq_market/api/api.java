@@ -73,7 +73,8 @@ public interface api {
     Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderDone(@Query("EMAIL") String email,@Query("PASS") String pass);
     @GET("getListOrderCancel.php")
     Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderCancel(@Query("EMAIL") String email,@Query("PASS") String pass);
-
+    @GET("updateStatus.php")
+    Call<String> update_Status(@Query("ID") int ID);
     @GET("getDateAndPay.php")
     Call<ArrayList<MONTHANDDAY>> get_DateAndPay(@Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("getlistallproduct.php")
