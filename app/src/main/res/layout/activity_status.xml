@@ -52,10 +52,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/Tv_Submiting"
+                android:id="@+id/Tv_Confirming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submiting"
+                android:text="Confirming"
                 android:textSize="20dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
