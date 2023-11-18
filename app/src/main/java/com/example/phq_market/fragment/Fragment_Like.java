@@ -118,12 +118,14 @@ public class Fragment_Like extends Fragment {
                     call_like.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
                         @Override
                         public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
-                            ArrayList<NEWPRODUCT> list = response.body();
-                            listsearch.clear();
-                            listsearch.addAll(list);
-                            list_like.clear();
-                            list_like.addAll(list);
-                            adapter_like.notifyDataSetChanged();
+                            if(response.isSuccessful() && response.body()!=null){
+                                ArrayList<NEWPRODUCT> list = response.body();
+                                listsearch.clear();
+                                listsearch.addAll(list);
+                                list_like.clear();
+                                list_like.addAll(list);
+                                adapter_like.notifyDataSetChanged();
+                            }
                             dialog.cancel();
                             Log.e("------>",response.body()+"");
                         }
