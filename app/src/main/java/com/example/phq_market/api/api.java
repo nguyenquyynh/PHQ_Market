@@ -65,6 +65,15 @@ public interface api {
     @GET("getListOrder.php")
     Call<ArrayList<ORDERANDFEEDBACK>> get_listOrder(@Query("EMAIL") String email, @Query("PASS") String pass);
 
+    @GET("getListOrderConfirm.php")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderConfirm(@Query("EMAIL") String email,@Query("PASS") String pass);
+    @GET("getListOrderShipping.php")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderShipping(@Query("EMAIL") String email,@Query("PASS") String pass);
+    @GET("getListOrderDone.php")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderDone(@Query("EMAIL") String email,@Query("PASS") String pass);
+    @GET("getListOrderCancel.php")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderCancel(@Query("EMAIL") String email,@Query("PASS") String pass);
+
     @GET("getDateAndPay.php")
     Call<ArrayList<MONTHANDDAY>> get_DateAndPay(@Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("getlistallproduct.php")
