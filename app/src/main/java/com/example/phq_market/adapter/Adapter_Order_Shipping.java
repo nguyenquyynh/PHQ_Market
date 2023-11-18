@@ -1,10 +1,6 @@
 package com.example.phq_market.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,60 +14,48 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
-import com.example.phq_market.activity.Activity_FeedBack;
-import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.ORDERANDFEEDBACK;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class Adapter_Order_FeedBack extends RecyclerView.Adapter<Adapter_Order_FeedBack.ViewHolder> {
+public class Adapter_Order_Shipping extends RecyclerView.Adapter<Adapter_Order_Shipping.ViewHolder> {
     private Context context;
     private ArrayList<ORDERANDFEEDBACK> listOrder;
 
-    public Adapter_Order_FeedBack(Context context, ArrayList<ORDERANDFEEDBACK> listOrder) {
+    public Adapter_Order_Shipping(Context context, ArrayList<ORDERANDFEEDBACK> listOrder) {
         this.context = context;
         this.listOrder = listOrder;
     }
-
     @NonNull
     @Override
-    public Adapter_Order_FeedBack.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Adapter_Order_Shipping.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_item_order_feedback,null);
-        return new ViewHolder(view);
+        return new Adapter_Order_Shipping.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_Order_FeedBack.ViewHolder holder, int position) {
-            ORDERANDFEEDBACK orderProdcut = listOrder.get(holder.getAdapterPosition());
+    public void onBindViewHolder(@NonNull Adapter_Order_Shipping.ViewHolder holder, int position) {
+        ORDERANDFEEDBACK orderProdcut = listOrder.get(holder.getAdapterPosition());
         DecimalFormat formatter = new DecimalFormat("#,###");
-        if(orderProdcut.getCheckFeedBack() == null){
-                holder.Btn_Feedback.setVisibility(View.VISIBLE);
-            }else {
-                holder.Btn_Feedback.setVisibility(View.GONE);
-            }
 
-            try{
-                Glide.with(context)
-                        .load(orderProdcut.getIMG())
-                        .into(holder.Img_imageproduct);
-                holder.Txt_nameproduct.setText(orderProdcut.getNAME());
-                holder.Txt_evaluate.setText(orderProdcut.getQUANTITY()+"");
-                holder.Txt_priceproduct.setText(formatter.format(orderProdcut.getPAY()));
-            }catch (Exception e){
+        holder.Btn_Feedback.setVisibility(View.GONE);
 
-            }
+        try{
+            Glide.with(context)
+                    .load(orderProdcut.getIMG())
+                    .into(holder.Img_imageproduct);
+            holder.Txt_nameproduct.setText(orderProdcut.getNAME());
+            holder.Txt_evaluate.setText(orderProdcut.getQUANTITY()+"");
+            holder.Txt_priceproduct.setText(formatter.format(orderProdcut.getPAY()));
+        }catch (Exception e){
+
+        }
 
         holder.Btn_Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Activity_FeedBack.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("ITEM",listOrder.get(holder.getAdapterPosition()));
-                intent.putExtras(bundle);
-                ((Activity)context).startActivity(intent);
+                Toast.makeText(context, "cancel", Toast.LENGTH_SHORT).show();
             }
         });
     }
