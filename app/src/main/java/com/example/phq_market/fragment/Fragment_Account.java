@@ -30,6 +30,7 @@ import com.example.phq_market.activity.Activity_EditAccount;
 import com.example.phq_market.activity.Activity_Login;
 import com.example.phq_market.activity.Activity_Order;
 import com.example.phq_market.activity.Activity_Signup;
+import com.example.phq_market.activity.Activity_Status;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.ACCOUNT;
 import com.example.phq_market.model.EDITACCOUNT;
@@ -153,7 +154,7 @@ public class Fragment_Account extends Fragment {
         lnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), Activity_Order.class));
+                startActivity(new Intent(getContext(), Activity_Status.class));
             }
         });
 
@@ -164,23 +165,6 @@ public class Fragment_Account extends Fragment {
         lineChart.getDescription().setEnabled(false);
         lineChart.setBackgroundColor(Color.WHITE);
         lineChart.setDrawGridBackground(true);
-
-        lineChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h) {
-                Toast.makeText(getContext(), "Value: "
-                        + e.getY()
-                        + ", index: "
-                        + h.getX()
-                        + ", DataSet index: "
-                        + h.getDataSetIndex(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
 
 
         // cột bên phải
