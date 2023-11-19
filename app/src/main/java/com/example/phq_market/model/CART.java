@@ -8,13 +8,23 @@ public class CART implements Serializable {
     private Float PRICE;
     private  Integer QUANTITY;
     private String IMG;
+    private Integer PRODUCTQUANTITY;
 
-    public CART(Integer ID, String NAME, Float PRICE, Integer QUANTITY, String IMG) {
+    public CART(Integer ID, String NAME, Float PRICE, Integer QUANTITY, String IMG, Integer PRODUCTQUANTITY) {
         this.ID = ID;
         this.NAME = NAME;
         this.PRICE = PRICE;
         this.QUANTITY = QUANTITY;
         this.IMG = IMG;
+        this.PRODUCTQUANTITY = PRODUCTQUANTITY;
+    }
+
+    public Integer getPRODUCTQUANTITY() {
+        return PRODUCTQUANTITY;
+    }
+
+    public void setPRODUCTQUANTITY(Integer PRODUCTQUANTITY) {
+        this.PRODUCTQUANTITY = PRODUCTQUANTITY;
     }
 
     public String getIMG() {

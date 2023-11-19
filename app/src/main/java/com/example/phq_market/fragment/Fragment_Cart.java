@@ -111,10 +111,10 @@ public class Fragment_Cart extends Fragment {
         float sum = 0;
         for(CARTCHECKBOX ca : list_CARTCHECKBOX){
             if (ca.isCheck()){
-                sum += ca.getPRICE()*ca.getQUANTITY()/1000;
+                sum += ca.getPRICE()*ca.getQUANTITY();
             }
         }
-        tvCost.setText(sum+"000");
+        tvCost.setText(sum+"");
     }
 
     @Override
@@ -122,6 +122,11 @@ public class Fragment_Cart extends Fragment {
         super.onResume();
         tvCost.setText("0");
         showLoading();
+
+        getLiset();
+    }
+
+    private void getLiset(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -156,8 +161,16 @@ public class Fragment_Cart extends Fragment {
                                     @Override
                                     public void quantity(int position, int quantity) {
                                         list_CARTCHECKBOX.get(position).setQUANTITY(quantity);
-                                        setPrice();
                                         adapterCart.notifyDataSetChanged();
+                                        setPrice();
+                                    }
+                                });
+
+                                adapterCart.OnDeleteProductListener(new Adapter_Cart.DeleteProduct() {
+                                    @Override
+                                    public void delete(int position) {
+                                        deleteItemCart(position);
+                                        setPrice();
                                     }
                                 });
                             }
@@ -180,6 +193,32 @@ public class Fragment_Cart extends Fragment {
             }
         }).start();
     }
+
+    private void deleteItemCart(Integer id){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Retrofit retrofit_catalog = new Retrofit.Builder()
+                        .baseUrl("https://phqmarket.000webhostapp.com/cart/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                api api_cart = retrofit_catalog.create(api.class);
+                Call<String> call = api_cart.delete_ItemInCart(id);
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Toast.makeText(getContext(), "Delete sucessfull", Toast.LENGTH_SHORT).show();
+                        getLiset();
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                    }
+                });
+
+            }
+        }).start();
+    }
     private String load;
     private void showLoading(){
         dialog = new Dialog(getContext(),R.style.Theme_PHQ_Market);
@@ -196,7 +235,7 @@ public class Fragment_Cart extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                load = load == "." ? ".." :  load == ".." ? "..." :  load == "..." ? "." : ".";
+                load = load == "." ? ".." :  load == ".." ? "..." :  "." ;
                 Tv_To.setText(load);
                 handler.postDelayed(this, 500);
             }
@@ -206,7 +245,7 @@ public class Fragment_Cart extends Fragment {
 
     private void addlist(ArrayList<CART> list) {
         for(CART a: list){
-            list_CARTCHECKBOX.add(new CARTCHECKBOX(a.getID(),a.getNAME(),a.getPRICE(),a.getQUANTITY(),a.getIMG(),false));
+            list_CARTCHECKBOX.add(new CARTCHECKBOX(a.getID(),a.getNAME(),a.getPRICE(),a.getQUANTITY(),a.getIMG(),a.getPRODUCTQUANTITY(),false));
         }
     }
 }
