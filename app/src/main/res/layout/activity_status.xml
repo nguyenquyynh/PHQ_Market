@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".activity.Activity_Status"
-    android:padding="20dp">
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp">
 
     <RelativeLayout
         android:id="@+id/layout1"

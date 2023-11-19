@@ -6,6 +6,8 @@ import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -46,6 +49,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
         this.list_CART = list_CART;
     }
 
+    // check item
     public interface CheckKerListener{
         void check(int position , boolean check);
     }
@@ -53,13 +57,21 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
     public void SetCheckKerListener(CheckKerListener checkKerListener){
         this.checkKerListener = checkKerListener;
     }
-
+    //update item
     public interface UpdateQuantity{
         void quantity(int position, int quantity);
     }
     private UpdateQuantity updateQuantity;
     public void SetUpdateQuantity(UpdateQuantity updateQuantity){
         this.updateQuantity = updateQuantity;
+    }
+    //delete item
+    public interface DeleteProduct{
+        void delete(int position);
+    }
+    private DeleteProduct deleteProduct;
+    public void OnDeleteProductListener( DeleteProduct deleteProduct){
+        this.deleteProduct = deleteProduct;
     }
 
     @NonNull
@@ -84,6 +96,16 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
         } catch (Exception e) {
             Log.d(">>>>>>>>>>>>>>", e.getMessage());
         }
+
+        if(cart.getPRODUCTQUANTITY() == 0){
+            holder.imgAnh.setColorFilter(Color.parseColor("#808080"));
+            holder.Chk_check.setEnabled(false);
+            holder.btnPlus.setEnabled(false);
+            holder.btnMinus.setEnabled(false);
+            holder.tvName.setPaintFlags(holder.tvName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.tvCost.setText("Out off stock");
+        }
+
         holder.Chk_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,8 +118,12 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
             public void onClick(View v) {
                 quantityAtPosition = list_CART.get(holder.getAdapterPosition()).getQUANTITY();
                 quantityAtPosition+=1;
-                holder.tvquantity.setText(String.valueOf(quantityAtPosition));
-                updateQuantity.quantity(holder.getAdapterPosition(),quantityAtPosition);
+                if(list_CART.get(holder.getAdapterPosition()).getPRODUCTQUANTITY() < quantityAtPosition){
+                    Toast.makeText(context,  "Too much quantity in stock", Toast.LENGTH_SHORT).show();
+                }else {
+                    holder.tvquantity.setText(String.valueOf(quantityAtPosition));
+                    updateQuantity.quantity(holder.getAdapterPosition(),quantityAtPosition);
+                }
             }
         });
         holder.btnMinus.setOnClickListener(new View.OnClickListener() {
@@ -116,55 +142,9 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
             @Override
             public void onClick(View v) {
                 int vitri = list_CART.get(holder.getAdapterPosition()).getID();
-                deleteItemCart(vitri);
+                deleteProduct.delete(vitri);
             }
         });
-    }
-
-    private void setPrice(){
-        Fragment_Cart fragmentCart = ((Activity)context).getSystemService(Fragment_Cart.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("list",list_CART);
-        if(fragmentCart != null){
-            fragmentCart.setArguments(bundle);
-            fragmentCart.onResume();
-        }
-
-    }
-
-    private void deleteItemCart(Integer id){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                handler_cart.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog_cart = new ProgressDialog(context);
-                        progressDialog_cart.setMessage("Dữ liệu đang chạy");
-                        progressDialog_cart.setCancelable(false);
-                        progressDialog_cart.show();
-                    }
-                });
-                Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/cart/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                api api_cart = retrofit_catalog.create(api.class);
-                Call<String> call = api_cart.delete_ItemInCart(id);
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        progressDialog_cart.dismiss();
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        progressDialog_cart.dismiss();
-                    }
-                });
-
-            }
-        }).start();
     }
 
     @Override

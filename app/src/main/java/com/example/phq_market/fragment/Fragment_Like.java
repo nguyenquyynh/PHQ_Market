@@ -174,7 +174,7 @@ public class Fragment_Like extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                load = load == "." ? ".." :  load == ".." ? "..." :  load == "..." ? "." : ".";
+                load = load == "." ? ".." :  load == ".." ? "..." :  ".";
                 Tv_To.setText(load);
                 handler.postDelayed(this, 500);
             }
