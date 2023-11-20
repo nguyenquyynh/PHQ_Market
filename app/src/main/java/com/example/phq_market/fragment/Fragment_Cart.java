@@ -3,23 +3,20 @@ package com.example.phq_market.fragment;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_Checkout;
@@ -29,9 +26,7 @@ import com.example.phq_market.api.api;
 import com.example.phq_market.model.CART;
 import com.example.phq_market.model.CARTCHECKBOX;
 import com.example.phq_market.model.PURCHASE;
-import com.google.gson.Gson;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -131,7 +126,7 @@ public class Fragment_Cart extends Fragment {
             @Override
             public void run() {
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/cart/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_cart = retrofit_catalog.create(api.class);
@@ -199,7 +194,7 @@ public class Fragment_Cart extends Fragment {
             @Override
             public void run() {
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/cart/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_cart = retrofit_catalog.create(api.class);

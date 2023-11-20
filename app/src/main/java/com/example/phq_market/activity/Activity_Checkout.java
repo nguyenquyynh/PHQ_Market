@@ -109,6 +109,7 @@ public class Activity_Checkout extends AppCompatActivity {
                     Toast.makeText(Activity_Checkout.this, "đang phát triển", Toast.LENGTH_SHORT).show();
                 } else {
                     String cart = new Gson().toJson(listCart);
+
                     addpurchase(cart);
                 }
 
@@ -328,7 +329,7 @@ public class Activity_Checkout extends AppCompatActivity {
                 });
 
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -342,7 +343,7 @@ public class Activity_Checkout extends AppCompatActivity {
                             startActivity(new Intent(Activity_Checkout.this, Activity_Main.class));
                         }else {
                             progressDialog.dismiss();
-                            Log.e("----->",response.body()+"");
+                            Log.e("--------->",response.body()+"");
                             startActivity(new Intent(Activity_Checkout.this, Activity_Main.class));
                         }
                     }
@@ -373,7 +374,7 @@ public class Activity_Checkout extends AppCompatActivity {
                 });
 
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -422,7 +423,7 @@ public class Activity_Checkout extends AppCompatActivity {
                 String pass = sharedPreferences.getString("Pass",null);
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/account/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api Api  = retrofit.create(api.class);

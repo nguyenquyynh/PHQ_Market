@@ -1,12 +1,9 @@
 package com.example.phq_market.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
-import com.example.phq_market.activity.Activity_FeedBack;
 import com.example.phq_market.activity.Activity_Status;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.ORDERANDFEEDBACK;
@@ -93,7 +89,7 @@ public class Adapter_Order_Confirm extends RecyclerView.Adapter<Adapter_Order_Co
 
     private void updateStatus(int ID){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api Api = retrofit.create(api.class);

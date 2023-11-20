@@ -1,7 +1,5 @@
 package com.example.phq_market.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.phq_market.R;
 import com.example.phq_market.api.api;
@@ -116,7 +116,7 @@ public class Activity_Login extends AppCompatActivity {
                 });
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/account/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api apiAccount = retrofit.create(api.class);

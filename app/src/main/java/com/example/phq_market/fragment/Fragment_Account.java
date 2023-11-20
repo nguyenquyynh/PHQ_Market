@@ -257,7 +257,7 @@ public class Fragment_Account extends Fragment {
             public void run() {
                 if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
                     Retrofit retrofit_account = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.000webhostapp.com/account/")
+                            .baseUrl("https://phqmarket.online/controller/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api api_account = retrofit_account.create(api.class);
@@ -327,7 +327,7 @@ public class Fragment_Account extends Fragment {
                     dialog.cancel();
                 }else {
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                            .baseUrl("https://phqmarket.online/controller/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
 
