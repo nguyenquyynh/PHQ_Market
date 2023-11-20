@@ -1,30 +1,35 @@
 package com.example.phq_market.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.phq_market.R;
 import com.example.phq_market.adapter.Adapter_Checkout;
+import com.example.phq_market.adapter.Adapter_Recycleview;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.ACCOUNT;
-import com.example.phq_market.model.CART;
 import com.example.phq_market.model.CHECKOUT;
-import com.example.phq_market.model.CUSTOMER;
 import com.example.phq_market.model.PURCHASE;
+import com.example.phq_market.select_adress.City;
+import com.example.phq_market.select_adress.Districts;
+import com.example.phq_market.select_adress.Wards;
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
@@ -45,6 +50,7 @@ public class Activity_Checkout extends AppCompatActivity {
     private TextView Txt_name;
     private TextView Txt_adress;
     private TextView Txt_phone;
+    private RelativeLayout Rlt_Adress;
     private RadioButton Chk_direct;
     private RadioButton Chk_Online;
     private RecyclerView rcvListPurchase;
@@ -54,8 +60,19 @@ public class Activity_Checkout extends AppCompatActivity {
     private ArrayList<PURCHASE> listCart;
     private ProgressDialog progressDialog;
     private Handler handler = new Handler();
-    private String street;
     DecimalFormat formatter = new DecimalFormat("#,###");
+    private static final String API_URL = "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/";
+    private RecyclerView rcv;
+    private ArrayList<City> city;
+    private ArrayList<Districts> districts;
+    private ArrayList<Wards> wards;
+    private Adapter_Recycleview adapter_recycleview;
+    private ArrayList<String> listString;
+    private int posotioncity;
+    private int positiondisstric;
+    private TextView Txt_city;
+    private TextView Txt_districs ;
+    private TextView Txt_ward ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +90,7 @@ public class Activity_Checkout extends AppCompatActivity {
         Txt_transportFee = findViewById(R.id.Txt_transportFee);
         Txt_totalPayment = findViewById(R.id.Txt_totalPayment);
         Txt_totalPaymentPart2 = findViewById(R.id.Txt_totalPaymentPart2);
+        Rlt_Adress = findViewById(R.id.Rlt_Adress);
         Button Btn_order = findViewById(R.id.Btn_order);
 
         Intent intent = getIntent();
@@ -85,12 +103,88 @@ public class Activity_Checkout extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addpaymenttolist();
-                if(street == null){
-                    Toast.makeText(Activity_Checkout.this, "Hãy vào cài đặt để thêm địa chỉ khi đặt hàng", Toast.LENGTH_SHORT).show();
-                }else {
+                if(Txt_adress.getText().toString().equals("null") || Txt_adress.getText().toString().isEmpty() ){
+                    Toast.makeText(Activity_Checkout.this, "Hãy thêm địa chỉ khi đặt hàng", Toast.LENGTH_SHORT).show();
+                } else if (Chk_Online.isChecked()) {
+                    Toast.makeText(Activity_Checkout.this, "đang phát triển", Toast.LENGTH_SHORT).show();
+                } else {
                     String cart = new Gson().toJson(listCart);
                     addpurchase(cart);
                 }
+
+            }
+        });
+
+        Rlt_Adress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Checkout.this);
+                View view = LayoutInflater.from(Activity_Checkout.this).inflate(R.layout.layout_select_adress,null);
+                builder.setView(view);
+
+                Txt_city = view.findViewById(R.id.Txt_city);
+                Txt_districs = view.findViewById(R.id.Txt_districs);
+                Txt_ward = view.findViewById(R.id.Txt_ward);
+                Button Btn_Confirm = view.findViewById(R.id.Btn_Confirm);
+                rcv = view.findViewById(R.id.rcv);
+
+                city = new ArrayList<>();
+                districts = new ArrayList<>();
+                wards = new ArrayList<>();
+
+                getListAddress();
+
+                Txt_city.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Txt_districs.setVisibility(View.GONE);
+                        Txt_districs.setText("");
+                        Txt_ward.setVisibility(View.GONE);
+                        Txt_ward.setText("");
+
+                        rcv.setVisibility(View.VISIBLE);
+                        listString.clear();
+                        listString.addAll(listStringCity());
+                        adapter_recycleview.notifyDataSetChanged();
+                    }
+                });
+
+                Txt_districs.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Txt_ward.setVisibility(View.GONE);
+                        Txt_ward.setText("");
+                        rcv.setVisibility(View.VISIBLE);
+                        listString.clear();
+                        listString.addAll(listStringDistrics(posotioncity));
+                        adapter_recycleview.notifyDataSetChanged();
+                    }
+                });
+
+                Txt_ward.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rcv.setVisibility(View.VISIBLE);
+                        listString.clear();
+                        listString.addAll(listStringWards(positiondisstric));
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                Btn_Confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(Txt_ward.getText().toString().isEmpty() || Txt_districs.getText().toString().isEmpty() || Txt_city.getText().toString().isEmpty()){
+                            Toast.makeText(Activity_Checkout.this, "Hãy chọn địa chỉ ", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Txt_adress.setText(Txt_ward.getText().toString()+", "+Txt_districs.getText().toString()+", "+Txt_city.getText().toString());
+                            dialog.cancel();
+                        }
+
+                    }
+                });
+
+
+                dialog.show();
 
             }
         });
@@ -99,6 +193,98 @@ public class Activity_Checkout extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+    }
+
+    private ArrayList<String> listStringCity(){
+        ArrayList<String> string = new ArrayList<>();
+        for (City a: city){
+            string.add(a.getName());
+        }
+        return string;
+    }
+
+    private ArrayList<String> listStringDistrics(int posotion){
+        ArrayList<String> string = new ArrayList<>();
+        districts.clear();
+        districts.addAll(city.get(posotion).getDistricts());
+        for (Districts a: districts){
+            string.add(a.getName());
+        }
+        return string;
+    }
+    private ArrayList<String> listStringWards(int posotion){
+        ArrayList<String> string = new ArrayList<>();
+        wards.clear();
+        wards.addAll(districts.get(posotion).getWards());
+        for (Wards a: wards){
+            string.add(a.getName());
+        }
+        return string;
+    }
+
+    private void getListAddress(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Activity_Checkout.this);
+        rcv.setLayoutManager(linearLayoutManager);
+        listString = new ArrayList<>();
+        adapter_recycleview= new Adapter_Recycleview(Activity_Checkout.this, listString);
+        rcv.setAdapter(adapter_recycleview);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api api = retrofit.create(api.class);
+        Call<ArrayList<City>> call = api.get_listAdress();
+        call.enqueue(new Callback<ArrayList<City>>() {
+            @Override
+            public void onResponse(Call<ArrayList<City>> call, Response<ArrayList<City>> response) {
+                if(response.isSuccessful() && response.body() != null) {
+                    ArrayList<City> cities = response.body();
+                    city.clear();
+                    city.addAll(cities);
+                    listString.clear();
+                    listString.addAll(listStringCity());
+                    adapter_recycleview.notifyDataSetChanged();
+                    adapter_recycleview.onGetIDListener(new Adapter_Recycleview.GetIDListener() {
+                        @Override
+                        public void id(int posotion, String name) {
+                            if(Txt_districs.getVisibility() == View.GONE){
+                                Txt_city.setVisibility(View.VISIBLE);
+                                Txt_districs.setVisibility(View.VISIBLE);
+                                Txt_city.setText(name);
+
+
+                                posotioncity = posotion;
+                                listString.clear();
+                                listString.addAll(listStringDistrics(posotion));
+                                adapter_recycleview.notifyDataSetChanged();
+                            } else if (Txt_ward.getVisibility() == View.GONE) {
+                                Txt_districs.setVisibility(View.VISIBLE);
+                                Txt_ward.setVisibility(View.VISIBLE);
+                                Txt_districs.setText(name);
+
+                                positiondisstric = posotion;
+
+                                listString.clear();
+                                listString.addAll(listStringWards(posotion));
+                                adapter_recycleview.notifyDataSetChanged();
+                            } else{
+                                Txt_ward.setText(name);
+
+                                rcv.setVisibility(View.GONE);
+                                adapter_recycleview.notifyDataSetChanged();
+                            }
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<City>> call, Throwable t) {
+
             }
         });
     }
@@ -147,7 +333,7 @@ public class Activity_Checkout extends AppCompatActivity {
                         .build();
 
                 api api_cart = retrofit_catalog.create(api.class);
-                Call<String> call = api_cart.add_Purchase(cart);
+                Call<String> call = api_cart.add_Purchase(cart,Txt_adress.getText().toString());
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -247,8 +433,7 @@ public class Activity_Checkout extends AppCompatActivity {
                         if(response.isSuccessful() && response.body()!=null){
                             ACCOUNT acc = response.body();
                             Txt_name.setText("Name: "+acc.getNAME());
-                            street = acc.getADDRESS();
-                            Txt_adress.setText("Address: "+street);
+                            Txt_adress.setText(acc.getADDRESS());
                             Txt_phone.setText("Phone: "+acc.getPHONE());
                         }
                     }

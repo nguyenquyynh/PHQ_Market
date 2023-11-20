@@ -59,7 +59,7 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="selected"
-        app:itemIconTint="@color/navigation_selected"
+        app:itemIconTint="@color/icon_color"
         app:menu="@menu/menu"
         android:background="@drawable/nen_bottomnavigation"/>
 </RelativeLayout>

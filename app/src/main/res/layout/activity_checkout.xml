@@ -51,14 +51,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Name: Nguyễn Văn Lâm "/>
-                <TextView
-                    android:id="@+id/Txt_adress"
-                    android:layout_marginTop="12dp"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="25dp"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/Rlt_Adress"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Adress: Phạm Đình Triểu "/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
+                    <TextView
+                        android:id="@+id/tvtv"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Adress: " />
+                    <TextView
+                        android:id="@+id/Txt_adress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Địa chỉ"
+                        android:layout_toRightOf="@+id/tvtv"/>
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/arrow_right"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/Txt_phone"
                     android:layout_marginTop="12dp"

@@ -1,13 +1,10 @@
 package com.example.phq_market.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -18,6 +15,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.phq_market.R;
 import com.example.phq_market.fragment.Fragment_Account;
 import com.example.phq_market.fragment.Fragment_Cart;
@@ -26,6 +30,7 @@ import com.example.phq_market.fragment.Fragment_Home;
 import com.example.phq_market.fragment.Fragment_Like;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.shape.ShapeAppearanceModel;
 
 public class Activity_Main extends AppCompatActivity {
 
@@ -47,6 +52,11 @@ public class Activity_Main extends AppCompatActivity {
         changeFragment(new Fragment_Home());
         Title_fragment.setText("Home");
 
+        bottomNavigationView.setItemActiveIndicatorColor(ColorStateList.valueOf(Color.argb(255,56,151,46)));
+        bottomNavigationView.setItemActiveIndicatorEnabled(true);
+        bottomNavigationView.setItemActiveIndicatorWidth(70);
+        bottomNavigationView.setItemActiveIndicatorHeight(70);
+        bottomNavigationView.setItemActiveIndicatorShapeAppearance(new ShapeAppearanceModel().withCornerSize(15).toBuilder().build());
         showWelcome();
 
     }
@@ -61,6 +71,7 @@ public class Activity_Main extends AppCompatActivity {
             }
         });
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 layout1.setVisibility(View.VISIBLE);
@@ -110,5 +121,11 @@ public class Activity_Main extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.Frame_layout, fragment).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        onResume();
     }
 }
