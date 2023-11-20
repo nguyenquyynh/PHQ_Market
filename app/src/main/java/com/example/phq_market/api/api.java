@@ -11,8 +11,8 @@ import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.ONLYIMAGE;
 import com.example.phq_market.model.ORDERANDFEEDBACK;
 import com.example.phq_market.model.PRODUCTDETAIL;
+import com.example.phq_market.select_adress.City;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -59,7 +59,7 @@ public interface api {
     @GET("status.php")
     Call<String> check_status(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("addpurchase.php")
-    Call<String> add_Purchase(@Query("listpurchase") String cart);
+    Call<String> add_Purchase(@Query("listpurchase") String cart, @Query("ADRESS")  String Adress);
     @GET("getitemtoaddpurchase.php")
     Call<ArrayList<CHECKOUT>> getCheckOut(@Query("listcart") String cart);
     @GET("getListOrder.php")
@@ -83,4 +83,6 @@ public interface api {
     Call<ArrayList<NEWPRODUCT>> get_listasCaTaLog(@Query("IDCATALOG") Integer IDCATALOG);
     @GET("sendfeedback.php")
     Call<String> add_feedback(@Query("EVALUATE") Integer evaluate, @Query("CONTENT") String content, @Query("IDPURCHASE") Integer idpurchase, @Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("data.json")
+    Call<ArrayList<City>> get_listAdress();
 }
