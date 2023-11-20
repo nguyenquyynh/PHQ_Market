@@ -1,7 +1,5 @@
 package com.example.phq_market.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
@@ -167,7 +167,7 @@ public class Activity_FeedBack extends AppCompatActivity {
                             if (content.isEmpty()) {content = Txt_status.getText().toString();
                             }
                             Retrofit retrofit_feedback = new Retrofit.Builder()
-                                    .baseUrl("https://phqmarket.000webhostapp.com/feedback/")
+                                    .baseUrl("https://phqmarket.online/controller/")
                                     .addConverterFactory(GsonConverterFactory.create())
                                     .build();
                             api api_feedback = retrofit_feedback.create(api.class);

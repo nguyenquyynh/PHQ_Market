@@ -110,7 +110,7 @@ public class Fragment_Like extends Fragment {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
                 if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
                     Retrofit retrofit_like = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.000webhostapp.com/liked/")
+                            .baseUrl("https://phqmarket.online/controller/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api api_like = retrofit_like.create(api.class);

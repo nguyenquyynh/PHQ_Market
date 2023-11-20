@@ -1,39 +1,25 @@
 package com.example.phq_market.fragment;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.ButtonBarLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_ItemDetail;
-import com.example.phq_market.activity.Activity_Main;
 import com.example.phq_market.adapter.Adapter_Banner;
-import com.example.phq_market.adapter.Adapter_Image_Slide_ItemDetail;
-import com.example.phq_market.adapter.Adapter_NewProduct;
 import com.example.phq_market.adapter.Adapter_PopularProduct;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.NEWPRODUCT;
@@ -87,7 +73,7 @@ public class Fragment_Home extends Fragment {
         super.onResume();
         showLoading();
         Retrofit retrofit_banner = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.000webhostapp.com/banner/")
+                .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_banner = retrofit_banner.create(api.class);
@@ -136,7 +122,7 @@ public class Fragment_Home extends Fragment {
             public void run() {
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/product/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_product = retrofit.create(api.class);

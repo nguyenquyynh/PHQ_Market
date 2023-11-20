@@ -1,21 +1,11 @@
 package com.example.phq_market.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,13 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.phq_market.R;
 import com.example.phq_market.adapter.Adapter_PopularProduct;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.NEWPRODUCT;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -167,7 +160,7 @@ public class Activity_Search extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit_all = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/product/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_all = retrofit_all.create(api.class);
@@ -197,7 +190,7 @@ public class Activity_Search extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit_all = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/product/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_all = retrofit_all.create(api.class);

@@ -1,19 +1,10 @@
 package com.example.phq_market.activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,12 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.phq_market.R;
 import com.example.phq_market.adapter.Adapter_Feedback;
 import com.example.phq_market.adapter.Adapter_Image_Slide_ItemDetail;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.FEEDBACKSHOW;
-import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.ONLYIMAGE;
 import com.example.phq_market.model.PRODUCTDETAIL;
 
@@ -95,7 +91,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
         //Lấy trạng thái
         SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
         Retrofit retrofit_status = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.000webhostapp.com/liked/")
+                .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_status = retrofit_status.create(api.class);
@@ -119,7 +115,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
 
     //Lấy product
         Retrofit retrofit_product = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.000webhostapp.com/product/")
+                .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_product = retrofit_product.create(api.class);
@@ -154,7 +150,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
 
 //        //lấy list ảnh
         Retrofit retrofit_image = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.000webhostapp.com/image/")
+                .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_image = retrofit_image.create(api.class);
@@ -180,7 +176,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
 
         //Lấy list feaadback
         Retrofit retrofit_feedback = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.000webhostapp.com/feedback/")
+                .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_feedback = retrofit_feedback.create(api.class);
@@ -213,7 +209,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
                 if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
                     Retrofit retrofit_addcart = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.000webhostapp.com/cart/")
+                            .baseUrl("https://phqmarket.online/controller/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api api_cart = retrofit_addcart.create(api.class);
@@ -334,7 +330,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
                 if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
                     Retrofit retrofit_addlike = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.000webhostapp.com/liked/")
+                            .baseUrl("https://phqmarket.online/controller/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api api_like = retrofit_addlike.create(api.class);

@@ -1,9 +1,5 @@
 package com.example.phq_market.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.phq_market.R;
 import com.example.phq_market.adapter.Adapter_Order_Confirm;
@@ -143,7 +143,7 @@ public class Activity_Status extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -183,7 +183,7 @@ public class Activity_Status extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -223,7 +223,7 @@ public class Activity_Status extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -263,7 +263,7 @@ public class Activity_Status extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.000webhostapp.com/purchase/")
+                        .baseUrl("https://phqmarket.online/controller/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

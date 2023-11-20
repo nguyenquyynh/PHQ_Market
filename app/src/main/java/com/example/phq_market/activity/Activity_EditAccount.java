@@ -1,10 +1,5 @@
 package com.example.phq_market.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
@@ -169,7 +169,7 @@ public class Activity_EditAccount extends AppCompatActivity {
                 editacc.setPASS(Edt_password.getText().toString());
                 if (!TextUtils.isEmpty(editacc.getNAME()) && !TextUtils.isEmpty(editacc.getEMAIL()) && !TextUtils.isEmpty(editacc.getPASS()) && !TextUtils.isEmpty(editacc.getADDRESS()) && !TextUtils.isEmpty(editacc.getPHONE()) && !TextUtils.isEmpty(editacc.getIMG())) {
                     Retrofit retrofit_acc = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.000webhostapp.com/account/")
+                            .baseUrl("https://phqmarket.online/controller/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api api_acc = retrofit_acc.create(api.class);
