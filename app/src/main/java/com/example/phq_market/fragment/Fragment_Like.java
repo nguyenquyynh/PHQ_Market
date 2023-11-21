@@ -1,21 +1,10 @@
 package com.example.phq_market.fragment;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,22 +12,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_ItemDetail;
-import com.example.phq_market.activity.Activity_Login;
 import com.example.phq_market.adapter.Adapter_Like;
-import com.example.phq_market.adapter.Adapter_NewProduct;
-import com.example.phq_market.adapter.Adapter_PopularProduct;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.NEWPRODUCT;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +47,9 @@ public class Fragment_Like extends Fragment {
     private GridLayoutManager layoutManager;
     private ArrayList<NEWPRODUCT> listsearch;
     private Dialog dialog;
+    private LinearLayout Filter_show;
+    private ToggleButton Btn_Price;
+    private ToggleButton Btn_Name;
 
     public Fragment_Like() {
     }
@@ -74,8 +69,10 @@ public class Fragment_Like extends Fragment {
         Btn_filter = view.findViewById(R.id.Btn_filter);
         Recycler_view = view.findViewById(R.id.Recycler_view);
         listsearch = new ArrayList<>();
+        Filter_show = view.findViewById(R.id.Filter_show);
+        Btn_Price = view.findViewById(R.id.Btn_Price);
+        Btn_Name = view.findViewById(R.id.Btn_Name);
         return view;
-
     }
 
     @Override
@@ -156,6 +153,82 @@ public class Fragment_Like extends Fragment {
                 startActivity(intent);
             }
         });
+
+        Btn_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Filter_show.getVisibility() == View.VISIBLE)
+                    Filter_show.setVisibility(View.GONE);
+                else
+                    Filter_show.setVisibility(View.VISIBLE);
+            }
+        });
+
+        Btn_Price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Btn_Price.isChecked()){
+                    sortPriceASC();
+                }else {
+                    sortPriceDESC();
+                }
+                Filter_show.setVisibility(View.GONE);
+            }
+        });
+
+        Btn_Name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Btn_Name.isChecked()){
+                    Btn_Name.setText("Sort name ascending");
+                    sortNameASC();
+                }else {
+                    Btn_Name.setText("Sort name descending");
+                    sortNameDESC();
+                }
+                Filter_show.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void sortNameASC(){
+        Collections.sort(list_like, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o1.getNAME().compareTo(o2.getNAME());
+            }
+        });
+        adapter_like.notifyDataSetChanged();
+    }
+
+    private void sortNameDESC(){
+        Collections.sort(list_like, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o2.getNAME().compareTo(o1.getNAME());
+            }
+        });
+        adapter_like.notifyDataSetChanged();
+    }
+
+    private void sortPriceASC(){
+        Collections.sort(list_like, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o1.getPRICE().compareTo(o2.getPRICE());
+            }
+        });
+        adapter_like.notifyDataSetChanged();
+    }
+
+    private void sortPriceDESC(){
+        Collections.sort(list_like, new Comparator<NEWPRODUCT>() {
+            @Override
+            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
+                return o2.getPRICE().compareTo(o1.getPRICE());
+            }
+        });
+        adapter_like.notifyDataSetChanged();
     }
 
     private String load;

@@ -47,7 +47,11 @@ public class Adapter_Like extends RecyclerView.Adapter<Adapter_Like.ViewHolder> 
                     .into(holder.Img_imageproduct);
             holder.Txt_nameproduct.setText(product.getNAME());
             holder.Txt_priceproduct.setText(formatter.format(product.getPRICE()));
-            holder.Txt_evaluate.setText(String.format("%.3s",product.getEVALUATE()));
+            if (product.getEVALUATE() != null) {
+                holder.Txt_evaluate.setText(String.format("%.3s",product.getEVALUATE()));
+            }
+            else
+                holder.Txt_evaluate.setText(String.format("%.3s",0.0));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

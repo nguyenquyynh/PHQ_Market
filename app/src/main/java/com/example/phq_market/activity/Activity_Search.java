@@ -73,6 +73,13 @@ public class Activity_Search extends AppCompatActivity {
             getAllList();
         }
 
+        Img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         Btn_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -69,8 +69,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Địa chỉ"
+                        android:layout_toLeftOf="@+id/Imgadress"
                         android:layout_toRightOf="@+id/tvtv"/>
                     <ImageView
+                        android:id="@+id/Imgadress"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:src="@drawable/arrow_right"
