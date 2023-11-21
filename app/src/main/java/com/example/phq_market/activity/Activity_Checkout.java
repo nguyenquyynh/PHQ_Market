@@ -1,5 +1,6 @@
 package com.example.phq_market.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -109,7 +109,6 @@ public class Activity_Checkout extends AppCompatActivity {
                     Toast.makeText(Activity_Checkout.this, "đang phát triển", Toast.LENGTH_SHORT).show();
                 } else {
                     String cart = new Gson().toJson(listCart);
-
                     addpurchase(cart);
                 }
 
@@ -119,14 +118,14 @@ public class Activity_Checkout extends AppCompatActivity {
         Rlt_Adress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Checkout.this);
+                Dialog dialog = new Dialog(Activity_Checkout.this, R.style.Theme_PHQ_Market);
                 View view = LayoutInflater.from(Activity_Checkout.this).inflate(R.layout.layout_select_adress,null);
-                builder.setView(view);
-
+                dialog.setContentView(view);
                 Txt_city = view.findViewById(R.id.Txt_city);
                 Txt_districs = view.findViewById(R.id.Txt_districs);
                 Txt_ward = view.findViewById(R.id.Txt_ward);
                 Button Btn_Confirm = view.findViewById(R.id.Btn_Confirm);
+                ImageView Img_Cancel = view.findViewById(R.id.Img_Cancel);
                 rcv = view.findViewById(R.id.rcv);
 
                 city = new ArrayList<>();
@@ -135,6 +134,12 @@ public class Activity_Checkout extends AppCompatActivity {
 
                 getListAddress();
 
+                Img_Cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
                 Txt_city.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -170,7 +175,7 @@ public class Activity_Checkout extends AppCompatActivity {
                         listString.addAll(listStringWards(positiondisstric));
                     }
                 });
-                AlertDialog dialog = builder.create();
+
                 Btn_Confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

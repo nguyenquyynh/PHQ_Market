@@ -189,6 +189,10 @@ public class Fragment_Cart extends Fragment {
         }).start();
     }
 
+    private void deleteItemCart() {
+        deleteItemCart(null);
+    }
+
     private void deleteItemCart(Integer id){
         new Thread(new Runnable() {
             @Override

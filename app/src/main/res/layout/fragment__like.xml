@@ -34,20 +34,39 @@
             android:src="@drawable/filt"
             android:background="@drawable/nen_filt"/>
     </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_below="@+id/Menu_search"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Recycler_view"
         android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/Menu_search"
+        tools:listitem="@layout/layout_item_popularproduct"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Recycler_view"
+    <LinearLayout
+        android:id="@+id/Filter_show"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/Menu_search"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:layout_marginTop="-10dp"
+        android:padding="5dp"
+        android:background="@drawable/background_filter">
+        <ToggleButton
+            android:id="@+id/Btn_Price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            tools:listitem="@layout/layout_item_popularproduct"/>
-    </RelativeLayout>
-
+            android:textOn="Sort price ascending"
+            android:textOff="Sort price descending"
+            android:background="@drawable/nen_search"/>
+        <ToggleButton
+            android:id="@+id/Btn_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textOn="Sort name ascending"
+            android:textOff="Sort name descending"
+            android:background="@drawable/nen_search"/>
+    </LinearLayout>
 </RelativeLayout>

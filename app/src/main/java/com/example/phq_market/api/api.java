@@ -48,8 +48,6 @@ public interface api {
     Call<String> add_ItemInCart(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("cart/deleteItemInCart.php")
     Call<String> delete_ItemInCart(@Query("IDCART") Integer idcart);
-    @GET("cart/updateItemInCart.php")
-    Call<String> update_ItemInCart(@Query("IDCART") Integer idcart, @Query("QUANTITY") Integer QUANTITY);
     @GET("banner/getlistbanner.php")
     Call<ArrayList<ONLYIMAGE>> get_listbanner();
     @GET("liked/addlike.php")
@@ -62,9 +60,6 @@ public interface api {
     Call<String> add_Purchase(@Query("listpurchase") String cart, @Query("ADRESS")  String Adress);
     @GET("purchase/getitemtoaddpurchase.php")
     Call<ArrayList<CHECKOUT>> getCheckOut(@Query("listcart") String cart);
-    @GET("getListOrder.php")
-    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrder(@Query("EMAIL") String email, @Query("PASS") String pass);
-
     @GET("purchase/getListOrderConfirm.php")
     Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderConfirm(@Query("EMAIL") String email,@Query("PASS") String pass);
     @GET("purchase/getListOrderShipping.php")
