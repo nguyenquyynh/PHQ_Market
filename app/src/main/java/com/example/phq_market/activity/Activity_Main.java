@@ -34,7 +34,7 @@ import com.google.android.material.shape.ShapeAppearanceModel;
 
 public class Activity_Main extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
+    public BottomNavigationView bottomNavigationView;
     FrameLayout frameLayout;
     TextView Title_fragment;
     RelativeLayout layout1;

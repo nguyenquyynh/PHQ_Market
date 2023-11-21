@@ -102,7 +102,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Adress"
-            android:inputType="text"
+            android:inputType="none"
+            android:focusable="false"
             android:drawableLeft="@drawable/home_edit_acconut"
             android:drawablePadding="20dp"
             android:background="@drawable/radius"/>

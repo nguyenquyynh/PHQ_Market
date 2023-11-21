@@ -3,6 +3,7 @@ package com.example.phq_market.activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -63,6 +64,10 @@ public class Activity_Status extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(Activity_Status.this);
         Rcv_status.setLayoutManager(linearLayoutManager);
 
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int densityDpi = displayMetrics.densityDpi;
+
+        int px = 120*(densityDpi/160);
         // bắt đầu vào thì hiển thị list của confirm
         Confirming();
         setSelected(Tv_Confirming);
@@ -90,7 +95,7 @@ public class Activity_Status extends AppCompatActivity {
             public void onClick(View v) {
                 shipping();
                 setSelected(Tv_Shipping);
-                Tab_selected.animate().translationX(240).setDuration(2000).start();
+                Tab_selected.animate().translationX(px).setDuration(2000).start();
             }
         });
         Tv_Done.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +103,7 @@ public class Activity_Status extends AppCompatActivity {
             public void onClick(View v) {
                 done();
                 setSelected(Tv_Done);
-                Tab_selected.animate().translationX(480).setDuration(2000).start();
+                Tab_selected.animate().translationX((2*px)).setDuration(2000).start();
             }
         });
 
@@ -107,7 +112,7 @@ public class Activity_Status extends AppCompatActivity {
             public void onClick(View v) {
                 cancel();
                 setSelected(Tv_Canceled);
-                Tab_selected.animate().translationX(720).setDuration(2000).start();
+                Tab_selected.animate().translationX((3*px)).setDuration(2000).start();
             }
         });
     }
