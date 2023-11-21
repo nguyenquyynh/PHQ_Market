@@ -81,7 +81,7 @@
         android:orientation="vertical"
         android:layout_below="@id/Menu_search"
         android:layout_alignParentEnd="true"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginTop="-10dp"
         android:padding="5dp"
         android:background="@drawable/background_filter">
