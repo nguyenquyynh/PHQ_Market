@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_card_account"
+    android:background="@color/background"
     android:padding="25dp"
     android:orientation="vertical"
     tools:context=".activity.Activity_BuySuccess">
@@ -47,15 +47,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Your order has been placed: "
+                    android:text="Your order has been placed"
                     android:textSize="17dp"/>
-                <TextView
-                    android:id="@+id/Txt_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:text="0123231"/>
-                
             </LinearLayout>
 
             <ImageView
@@ -70,44 +63,33 @@
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center"
                 android:text="Purchase successfull"
-                android:textSize="20dp"/>
+                android:textSize="25dp"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="250dp"
                 android:layout_gravity="center"
                 android:src="@drawable/buy_success"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thanks for: "
-                    android:textSize="25dp"/>
-                <TextView
-                    android:id="@+id/Txt_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:text="user" />
-
-            </LinearLayout>
-
         </LinearLayout>
 
     <Button
         android:id="@+id/btn_continueShopping"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/navigation_selected"
         android:text="Contiue shopping"
         android:textSize="25dp"
         app:cornerRadius="10dp" />
 
+    <Button
+        android:id="@+id/btn_revieworder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/navigation_selected"
+        android:text="Review your order"
+        android:textSize="25dp"
+        app:cornerRadius="10dp" />
 </LinearLayout>

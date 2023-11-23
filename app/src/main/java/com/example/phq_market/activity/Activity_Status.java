@@ -1,5 +1,6 @@
 package com.example.phq_market.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -76,7 +77,9 @@ public class Activity_Status extends AppCompatActivity {
         Img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(Activity_Status.this, Activity_Main.class);
+                intent.putExtra("where","account");
+                startActivity(intent);
             }
         });
 

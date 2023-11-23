@@ -20,13 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_EditAccount;
 import com.example.phq_market.activity.Activity_Login;
+import com.example.phq_market.activity.Activity_Main;
 import com.example.phq_market.activity.Activity_Signup;
 import com.example.phq_market.activity.Activity_Status;
 import com.example.phq_market.api.api;
@@ -132,18 +131,18 @@ public class Fragment_Account extends Fragment {
         lnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.Frame_layout,new Fragment_Cart()).commit();
+                Intent intent = new Intent(getContext(), Activity_Main.class);
+                intent.putExtra("where","cart");
+                startActivity(intent);
             }
         });
 
         lnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.Frame_layout,new Fragment_Like()).commit();
+                Intent intent = new Intent(getContext(), Activity_Main.class);
+                intent.putExtra("where","like");
+                startActivity(intent);
             }
         });
 
@@ -361,7 +360,7 @@ public class Fragment_Account extends Fragment {
     private String load;
     private void showLoading(){
         dialog = new Dialog(getContext(),R.style.Theme_PHQ_Market);
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_wellcome,null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_wellcome,null);
         dialog.setContentView(view);
 
         TextView Tv_Well = view.findViewById(R.id.Tv_Well);

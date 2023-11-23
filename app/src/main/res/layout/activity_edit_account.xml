@@ -59,100 +59,110 @@
         android:text="Click To Change Image"
         app:cornerRadius="10dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/text2"
-        android:layout_height="60dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Edt_fullName"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Full Name"
-            android:inputType="text"
-            android:drawableLeft="@drawable/acthention"
-            android:drawablePadding="20dp"
-            android:background="@drawable/radius"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/text2"
-        android:layout_height="60dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/radius"
-            android:drawableLeft="@drawable/email"
-            android:drawablePadding="20dp"
-            android:hint="Email"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/text2"
-        android:layout_height="60dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Edt_address"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Adress"
-            android:inputType="none"
-            android:focusable="false"
-            android:drawableLeft="@drawable/home_edit_acconut"
-            android:drawablePadding="20dp"
-            android:background="@drawable/radius"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/text2"
-        android:layout_height="60dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Edt_number"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Number"
-            android:inputType="number"
-            android:drawableLeft="@drawable/phone"
-            android:drawablePadding="20dp"
-            android:background="@drawable/radius"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/text3">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Edt_password"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:drawableLeft="@drawable/pass"
-                android:drawablePadding="20dp"
-                android:background="@drawable/radius"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <ImageView
-            android:id="@+id/Img_showpass"
-            android:layout_width="25dp"
-            android:layout_height="20dp"
-            android:src="@drawable/close_eye"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="23dp"
-            android:layout_marginRight="20dp"/>
-    </RelativeLayout>
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/text2"
+                android:layout_height="60dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Edt_fullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Full Name"
+                    android:inputType="text"
+                    android:drawableLeft="@drawable/acthention"
+                    android:drawablePadding="20dp"
+                    android:background="@drawable/radius"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/text2"
+                android:layout_height="60dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/radius"
+                    android:drawableLeft="@drawable/email"
+                    android:drawablePadding="20dp"
+                    android:hint="Email"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/text2"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Edt_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Adress"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:drawableLeft="@drawable/home_edit_acconut"
+                    android:drawablePadding="20dp"
+                    android:background="@drawable/radius"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/text2"
+                android:layout_height="60dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Edt_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Number"
+                    android:inputType="number"
+                    android:drawableLeft="@drawable/phone"
+                    android:drawablePadding="20dp"
+                    android:background="@drawable/radius"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/text3">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/Edt_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:drawableLeft="@drawable/pass"
+                        android:drawablePadding="20dp"
+                        android:background="@drawable/radius"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/Img_showpass"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/close_eye"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginRight="20dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 
