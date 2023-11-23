@@ -16,6 +16,20 @@
         android:theme="@style/Theme.PHQ_Market"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Acitivity_Select_Payment_with"
+            android:exported="true"
+            android:launchMode="singleTask">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="demozpdk"
+                    android:host="app" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".activity.Activity_Status"
             android:exported="false" />
         <activity
@@ -29,9 +43,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.Activity_EditAccount"
-            android:exported="false" />
-        <activity
-            android:name=".activity.Activity_Wellcome"
             android:exported="false" />
         <activity
             android:name=".activity.Activity_Signup"

@@ -106,7 +106,13 @@ public class Activity_Checkout extends AppCompatActivity {
                 if(Txt_adress.getText().toString().equals("null") || Txt_adress.getText().toString().isEmpty() ){
                     Toast.makeText(Activity_Checkout.this, "Hãy thêm địa chỉ khi đặt hàng", Toast.LENGTH_SHORT).show();
                 } else if (Chk_Online.isChecked()) {
-                    Toast.makeText(Activity_Checkout.this, "đang phát triển", Toast.LENGTH_SHORT).show();
+                    String cart = new Gson().toJson(listCart);
+                    Intent giatien =new Intent(Activity_Checkout.this, Acitivity_Select_Payment_with.class);
+                    giatien.putExtra("cosst",(int)totalPayment+"");
+                    giatien.putExtra("lisst",cart);
+                    giatien.putExtra("diachi", Txt_adress.getText().toString());
+                    startActivity(giatien);
+
                 } else {
                     String cart = new Gson().toJson(listCart);
                     addpurchase(cart);
@@ -303,11 +309,10 @@ public class Activity_Checkout extends AppCompatActivity {
     private int checkpayment(){
         return Chk_direct.isChecked() ? 1 : 0;
     }
-
+    float totalPayment;
     private void updatecost(){
         float totalCostItem = 0;
         float Fee = 30000;
-        float totalPayment = 0;
         for (CHECKOUT pu : list){
             totalCostItem+=pu.getPRICE()* pu.getQUANTITY();
         }
@@ -345,18 +350,18 @@ public class Activity_Checkout extends AppCompatActivity {
                     public void onResponse(Call<String> call, Response<String> response) {
                         if(response.isSuccessful() && response.body() !=null){
                             progressDialog.dismiss();
-                            startActivity(new Intent(Activity_Checkout.this, Activity_Main.class));
+                            startActivity(new Intent(Activity_Checkout.this, Activity_BuySuccess.class));
                         }else {
                             progressDialog.dismiss();
                             Log.e("--------->",response.body()+"");
-                            startActivity(new Intent(Activity_Checkout.this, Activity_Main.class));
+                            startActivity(new Intent(Activity_Checkout.this, Activity_BuySuccess.class));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         progressDialog.dismiss();
-                        startActivity(new Intent(Activity_Checkout.this, Activity_Main.class));
+                        startActivity(new Intent(Activity_Checkout.this, Activity_BuySuccess.class));
                         Log.e("----->",t+"");
                     }
                 });

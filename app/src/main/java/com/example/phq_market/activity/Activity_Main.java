@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,12 +35,11 @@ import com.google.android.material.shape.ShapeAppearanceModel;
 
 public class Activity_Main extends AppCompatActivity {
 
-    public BottomNavigationView bottomNavigationView;
-    FrameLayout frameLayout;
-    TextView Title_fragment;
-    RelativeLayout layout1;
-    ImageView Img_search;
-
+    private BottomNavigationView bottomNavigationView;
+    private FrameLayout frameLayout;
+    private TextView Title_fragment;
+    private RelativeLayout layout1;
+    private ImageView Img_search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +52,46 @@ public class Activity_Main extends AppCompatActivity {
         changeFragment(new Fragment_Home());
         Title_fragment.setText("Home");
 
+        Intent getwhere = getIntent();
+        try {
+            Log.e("------>",getwhere+"");
+            if(getwhere!= null){
+                String where = getwhere.getStringExtra("where");
+                layout1.setVisibility(View.VISIBLE);
+                Img_search.setVisibility(View.VISIBLE);
+
+                if(where.equals("home")){
+                    bottomNavigationView.setSelectedItemId(R.id.Home);
+                    changeFragment(new Fragment_Home());
+                    Title_fragment.setText("Home");
+                } else if (where.equals("cart")) {
+                    bottomNavigationView.setSelectedItemId(R.id.Cart);
+                    changeFragment(new Fragment_Cart());
+                    Title_fragment.setText("Cart");
+                } else if (where.equals("discover")) {
+                    bottomNavigationView.setSelectedItemId(R.id.Discovery);
+                    changeFragment(new Fragment_Discovery());
+                    Title_fragment.setText("Discovery");
+                } else if (where.equals("like")) {
+                    bottomNavigationView.setSelectedItemId(R.id.Like);
+                    changeFragment(new Fragment_Like());
+                    Img_search.setVisibility(View.GONE);
+                    Title_fragment.setText("Like");
+                }else {
+                    bottomNavigationView.setSelectedItemId(R.id.Account);
+                    layout1.setVisibility(View.GONE);
+                    changeFragment(new Fragment_Account());
+                    Title_fragment.setText("Account");
+                }
+            }
+        }catch (Exception e){
+            showWelcome();
+        }
         bottomNavigationView.setItemActiveIndicatorColor(ColorStateList.valueOf(Color.argb(255,56,151,46)));
         bottomNavigationView.setItemActiveIndicatorEnabled(true);
         bottomNavigationView.setItemActiveIndicatorWidth(70);
         bottomNavigationView.setItemActiveIndicatorHeight(70);
         bottomNavigationView.setItemActiveIndicatorShapeAppearance(new ShapeAppearanceModel().withCornerSize(15).toBuilder().build());
-        showWelcome();
-
     }
 
     @Override
@@ -76,6 +109,7 @@ public class Activity_Main extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 layout1.setVisibility(View.VISIBLE);
                 Img_search.setVisibility(View.VISIBLE);
+
                 if (item.getItemId() == R.id.Home) {
                     changeFragment(new Fragment_Home());
                     Title_fragment.setText("Home");
@@ -107,7 +141,7 @@ public class Activity_Main extends AppCompatActivity {
 
     private void showWelcome(){
         Dialog dialog = new Dialog(this,R.style.Theme_PHQ_Market);
-        dialog.setContentView( LayoutInflater.from(Activity_Main.this).inflate(R.layout.activity_wellcome,null));
+        dialog.setContentView( LayoutInflater.from(Activity_Main.this).inflate(R.layout.layout_wellcome,null));
         dialog.show();
         new Handler().postDelayed(new Runnable() {
             @Override

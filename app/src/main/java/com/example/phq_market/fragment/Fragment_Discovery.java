@@ -233,7 +233,7 @@ public class Fragment_Discovery extends Fragment {
     private String load;
     private void showLoading(){
         dialog = new Dialog(getContext(),R.style.Theme_PHQ_Market);
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_wellcome,null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_wellcome,null);
         dialog.setContentView(view);
 
         TextView Tv_Well = view.findViewById(R.id.Tv_Well);
