@@ -52,6 +52,7 @@
             android:layout_height="match_parent"
             android:hint="Email"
             android:inputType="text"
+            android:textColor="@color/black"
             android:drawableLeft="@drawable/email"
             android:drawablePadding="20dp"
             android:background="@drawable/radius"/>
@@ -75,6 +76,7 @@
                 android:layout_height="match_parent"
                 android:hint="Password"
                 android:inputType="textPassword"
+                android:textColor="@color/black"
                 android:drawableLeft="@drawable/pass"
                 android:drawablePadding="20dp"
                 android:background="@drawable/radius"/>
@@ -108,6 +110,14 @@
         android:textSize="20dp"
         app:cornerRadius="10dp" />
 
+    <TextView
+        android:id="@+id/Tv_Forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot password ?"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/btnLogin"/>
     <LinearLayout
         android:id="@+id/text5"
         android:layout_width="match_parent"

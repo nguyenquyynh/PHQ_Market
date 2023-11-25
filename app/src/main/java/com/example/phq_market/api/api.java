@@ -28,6 +28,8 @@ public interface api {
     Call<String> updatecustomer(@Query("NAME") String name, @Query("EMAIL") String email , @Query("PASS") String pass, @Query("PHONE") String phone, @Query("ADRESS") String adress, @Query("IMG") String img, @Query("OLDEMAIL") String oldemail, @Query("OLDPASS") String oldpass);
     @GET("account/accountdetail.php")
     Call<ACCOUNT> getDetailAccount(@Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("account/generatecodeemail.php")
+    Call<String> getCode(@Query("Email") String email);
     @GET("catalog/getlistcatalog.php")
     Call<ArrayList<CATALOGSHOW>> get_Listcatalog();
     @GET("product/getlistnewproduct.php")

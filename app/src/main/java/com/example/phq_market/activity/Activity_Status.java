@@ -68,7 +68,8 @@ public class Activity_Status extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int densityDpi = displayMetrics.densityDpi;
 
-        int px = 120*(densityDpi/160);
+        int px =(int) (120.0*((float)densityDpi/160.0));
+        Log.e("----->", densityDpi+""+px);
         // bắt đầu vào thì hiển thị list của confirm
         Confirming();
         setSelected(Tv_Confirming);

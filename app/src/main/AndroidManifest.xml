@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,20 +15,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PHQ_Market"
+        tools:replace="android:theme"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.Activity_ForgotPassword"
+            android:exported="false" />
         <activity
             android:name=".activity.Acitivity_Select_Payment_with"
             android:exported="true"
             android:launchMode="singleTask">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="demozpdk"
-                    android:host="app" />
-            </intent-filter>
 
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.Activity_Status"

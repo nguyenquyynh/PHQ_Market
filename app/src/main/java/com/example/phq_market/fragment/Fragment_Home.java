@@ -117,6 +117,16 @@ public class Fragment_Home extends Fragment {
             }
         });
         // product
+        getListProductPopular();
+
+        LayoutManager = new GridLayoutManager(getContext(),2);
+        rcv_Home.setLayoutManager(LayoutManager);
+        adapterPopularProduct = new Adapter_PopularProduct(listProduct,getContext());
+        rcv_Home.setAdapter(adapterPopularProduct);
+
+    }
+
+    private void getListProductPopular(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -136,6 +146,16 @@ public class Fragment_Home extends Fragment {
                             listProduct.addAll(list);
                             dialog.cancel();
                             adapterPopularProduct.notifyDataSetChanged();
+
+
+                            adapterPopularProduct.setOnClickProduct(new Adapter_PopularProduct.OnClickProduct() {
+                                @Override
+                                public void clickproduct(int ID) {
+                                    Intent intent = new Intent(getContext(), Activity_ItemDetail.class);
+                                    intent.putExtra("IDPRODUCT", ID);
+                                    startActivity(intent);
+                                }
+                            });
                         }else {
                             Log.d(">>>>>>>>>>>>>>>>>>>", "Lỗi");
                         }
@@ -148,21 +168,6 @@ public class Fragment_Home extends Fragment {
 
             }
         }).start();
-
-        LayoutManager = new GridLayoutManager(getContext(),2);
-        rcv_Home.setLayoutManager(LayoutManager);
-        adapterPopularProduct = new Adapter_PopularProduct(listProduct,getContext());
-        rcv_Home.setAdapter(adapterPopularProduct);
-
-
-        adapterPopularProduct.setOnClickProduct(new Adapter_PopularProduct.OnClickProduct() {
-            @Override
-            public void clickproduct(int ID) {
-                Intent intent = new Intent(getContext(), Activity_ItemDetail.class);
-                intent.putExtra("IDPRODUCT", ID);
-                startActivity(intent);
-            }
-        });
     }
 
     private String load;

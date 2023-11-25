@@ -28,7 +28,7 @@ public class Activity_FeedBack extends AppCompatActivity {
     private ImageView Img_done, Img_product, Img_star1, Img_star2, Img_star3, Img_star4, Img_star5;
     private TextView Txt_status, Txt_name;
     private EditText Edt_content;
-    ORDERANDFEEDBACK item;
+    private ORDERANDFEEDBACK item;
 
     int evaluate = 5;
 
@@ -106,9 +106,8 @@ public class Activity_FeedBack extends AppCompatActivity {
         Img_star4.setImageResource(R.drawable.star_white);
         Img_star5.setImageResource(R.drawable.star_white);
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
+
+    private void clickStar(){
         Img_star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,44 +153,50 @@ public class Activity_FeedBack extends AppCompatActivity {
             }
 
         });
+    }
+    private void confirm(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
+                if (!s.getString("Email","").isEmpty() && !s.getString("Pass","").isEmpty()) {
+                    String content = Edt_content.getText().toString();
+                    if (content.isEmpty()) {content = Txt_status.getText().toString();
+                    }
+                    Retrofit retrofit_feedback = new Retrofit.Builder()
+                            .baseUrl("https://phqmarket.online/controller/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    api api_feedback = retrofit_feedback.create(api.class);
+                    Call<String> call_feedback = api_feedback.add_feedback(evaluate,content,item.getID(),s.getString("Email",""), s.getString("Pass",""));
+                    call_feedback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                Toast.makeText(Activity_FeedBack.this, response.body(), Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(Activity_FeedBack.this, response.body(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                }
+
+            }
+        }).start();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
         Img_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
-                        if (!s.getString("Email","").isEmpty() && !s.getString("Pass","").isEmpty()) {
-                            String content = Edt_content.getText().toString();
-                            if (content.isEmpty()) {content = Txt_status.getText().toString();
-                            }
-                            Retrofit retrofit_feedback = new Retrofit.Builder()
-                                    .baseUrl("https://phqmarket.online/controller/")
-                                    .addConverterFactory(GsonConverterFactory.create())
-                                    .build();
-                            api api_feedback = retrofit_feedback.create(api.class);
-                            Call<String> call_feedback = api_feedback.add_feedback(evaluate,content,item.getID(),s.getString("Email",""), s.getString("Pass",""));
-                            call_feedback.enqueue(new Callback<String>() {
-                                @Override
-                                public void onResponse(Call<String> call, Response<String> response) {
-                                    if (response.isSuccessful() && response.body() != null) {
-                                        Toast.makeText(Activity_FeedBack.this, response.body(), Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    } else {
-                                        Toast.makeText(Activity_FeedBack.this, response.body(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<String> call, Throwable t) {
-
-                                }
-                            });
-                        }
-
-                    }
-                }).start();
+                confirm();
             }
         });
     }

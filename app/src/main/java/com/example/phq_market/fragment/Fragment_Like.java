@@ -75,32 +75,7 @@ public class Fragment_Like extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        showLoading();
-        Edt_Search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String s1 = s.toString();
-                if (!s1.isEmpty()) {
-                    list_like.clear();
-                    for (NEWPRODUCT pro: listsearch) {
-                        if (pro.getNAME().contains(s1)) {
-                            list_like.add(pro);
-                        }
-                    }
-                }else {
-                    list_like.clear();
-                    list_like.addAll(listsearch);
-                }
-                adapter_like.notifyDataSetChanged();
-            }
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
+    private void getListLike(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -139,6 +114,36 @@ public class Fragment_Like extends Fragment {
 
             }
         }).start();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showLoading();
+        Edt_Search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String s1 = s.toString();
+                if (!s1.isEmpty()) {
+                    list_like.clear();
+                    for (NEWPRODUCT pro: listsearch) {
+                        if (pro.getNAME().contains(s1)) {
+                            list_like.add(pro);
+                        }
+                    }
+                }else {
+                    list_like.clear();
+                    list_like.addAll(listsearch);
+                }
+                adapter_like.notifyDataSetChanged();
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        getListLike();
 
         layoutManager = new GridLayoutManager(getContext(),2);
         Recycler_view.setLayoutManager(layoutManager);

@@ -77,10 +77,7 @@ public class Fragment_Discovery extends Fragment {
         view_banner = view.findViewById(R.id.Banner);
         return view;
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        showLoading();
+    private void getListBanner(){
         Retrofit retrofit_banner = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -103,7 +100,81 @@ public class Fragment_Discovery extends Fragment {
 
             }
         });
+    }
 
+    private void getListCatalog(){
+        Retrofit retrofit_catalog = new Retrofit.Builder()
+                .baseUrl("https://phqmarket.online/controller/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api api_catalog = retrofit_catalog.create(api.class);
+        Call<ArrayList<CATALOGSHOW>> call = api_catalog.get_Listcatalog();
+        call.enqueue(new Callback<ArrayList<CATALOGSHOW>>() {
+            @Override
+            public void onResponse(Call<ArrayList<CATALOGSHOW>> call, Response<ArrayList<CATALOGSHOW>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ArrayList<CATALOGSHOW> list = response.body();
+                    list_catalog.clear();
+                    list_catalog.addAll(list);
+                    adapter_catalog.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<CATALOGSHOW>> call, Throwable t) {
+                Log.d(">>>>>>>>>>>>>>>>>>>", t.getMessage());
+            }
+        });
+    }
+    private void getListNewProduct(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://phqmarket.online/controller/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api api_product = retrofit.create(api.class);
+        Call<ArrayList<NEWPRODUCT>> call_new = api_product.get_Listnewproduct();
+        call_new.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
+            @Override
+            public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ArrayList<NEWPRODUCT> list = response.body();
+                    list_product.clear();
+                    list_product.addAll(list);
+                    adapter_newProduct.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
+                Log.d(">>>>>>>>>>>>>>>>>>>>>>>", t.getMessage());
+            }
+        });
+    }
+
+    private void getListBestSale(){
+        Retrofit retrofit_sale = new Retrofit.Builder()
+                .baseUrl("https://phqmarket.online/controller/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api api_sale = retrofit_sale.create(api.class);
+        Call<ArrayList<NEWPRODUCT>> call_sale = api_sale.get_listbestsaleproduct();
+        call_sale.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
+            @Override
+            public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ArrayList<NEWPRODUCT> list = response.body();
+                    list_saleproduct.clear();
+                    list_saleproduct.addAll(list);
+                    adapter_saleProduct.notifyDataSetChanged();
+                    dialog.cancel();
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
+                Log.d(">>>>>>>>>>>>>>>>>>>>>>>", t.getMessage());
+            }
+        });
+    }
+
+    private void setUpbanner(){
         banner = new Adapter_Banner(list_banner, getContext());
         view_banner.setAdapter(banner);
 
@@ -125,28 +196,18 @@ public class Fragment_Discovery extends Fragment {
                 return false;
             }
         });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        showLoading();
+
+        getListBanner();
+
+        setUpbanner();
         //hiển thị danh mục
-                Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                api api_catalog = retrofit_catalog.create(api.class);
-                Call<ArrayList<CATALOGSHOW>> call = api_catalog.get_Listcatalog();
-                call.enqueue(new Callback<ArrayList<CATALOGSHOW>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<CATALOGSHOW>> call, Response<ArrayList<CATALOGSHOW>> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            ArrayList<CATALOGSHOW> list = response.body();
-                            list_catalog.clear();
-                            list_catalog.addAll(list);
-                            adapter_catalog.notifyDataSetChanged();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<ArrayList<CATALOGSHOW>> call, Throwable t) {
-                        Log.d(">>>>>>>>>>>>>>>>>>>", t.getMessage());
-                    }
-                });
+
+        getListCatalog();
 
         layoutManager_catalog = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
         Recycler_view_catalog.setLayoutManager(layoutManager_catalog);
@@ -154,28 +215,8 @@ public class Fragment_Discovery extends Fragment {
         Recycler_view_catalog.setAdapter(adapter_catalog);
 //        ===============================================New Product===================================================
         //hiển thị sản phẩm mới
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                api api_product = retrofit.create(api.class);
-                Call<ArrayList<NEWPRODUCT>> call_new = api_product.get_Listnewproduct();
-        call_new.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            ArrayList<NEWPRODUCT> list = response.body();
-                            list_product.clear();
-                            list_product.addAll(list);
-                            adapter_newProduct.notifyDataSetChanged();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
-                        Log.d(">>>>>>>>>>>>>>>>>>>>>>>", t.getMessage());
-                    }
-                });
 
+        getListNewProduct();
         layoutManager = new LinearLayoutManager(getContext());
         Recycler_viewnew.setLayoutManager(layoutManager);
         adapter_newProduct = new Adapter_NewProduct(list_product,getContext());
@@ -183,29 +224,8 @@ public class Fragment_Discovery extends Fragment {
 //        ===============================================Catagori===================================================
         //HIển thị best sale của app
 
-                Retrofit retrofit_sale = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                api api_sale = retrofit_sale.create(api.class);
-                Call<ArrayList<NEWPRODUCT>> call_sale = api_sale.get_listbestsaleproduct();
-                call_sale.enqueue(new Callback<ArrayList<NEWPRODUCT>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<NEWPRODUCT>> call, Response<ArrayList<NEWPRODUCT>> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            ArrayList<NEWPRODUCT> list = response.body();
-                            list_saleproduct.clear();
-                            list_saleproduct.addAll(list);
-                            adapter_saleProduct.notifyDataSetChanged();
-                            dialog.cancel();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
-                        Log.d(">>>>>>>>>>>>>>>>>>>>>>>", t.getMessage());
-                    }
-                });
 
+        getListBestSale();
         layoutManager_sale= new LinearLayoutManager(getContext());
         Recycler_viewbest.setLayoutManager(layoutManager_sale);
         adapter_saleProduct = new Adapter_SaleProduct(list_saleproduct,getContext());

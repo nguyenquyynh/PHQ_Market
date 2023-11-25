@@ -8,13 +8,16 @@ import android.os.Handler;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.phq_market.R;
@@ -35,6 +38,7 @@ public class Activity_Login extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private  SharedPreferences.Editor editor;
     private CheckBox chk_Remember;
+    private String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,7 @@ public class Activity_Login extends AppCompatActivity {
         TextInputEditText edt_Password = findViewById(R.id.edt_Password);
         chk_Remember = findViewById(R.id.chk_Remember);
         ImageView img_showpas = findViewById(R.id.img_showpas);
-
+        TextView Tv_Forgot_password = findViewById(R.id.Tv_Forgot_password);
 
         sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -93,12 +97,90 @@ public class Activity_Login extends AppCompatActivity {
 
             }
         });
+
+        Tv_Forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setUpAlertDialogForgot();
+            }
+        });
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Activity_Login.this, Activity_Signup.class));
             }
         });
+    }
+
+    private void setUpAlertDialogForgot(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Login.this);
+        View view = LayoutInflater.from(Activity_Login.this).inflate(R.layout.layout_submit_email,null);
+        builder.setView(view);
+
+        EditText Edt_Email = view.findViewById(R.id.Edt_Email);
+        EditText Edt_Code = view.findViewById(R.id.Edt_Code);
+        Button Btn_Send = view.findViewById(R.id.Btn_Send);
+        Button Btn_Code = view.findViewById(R.id.Btn_Code);
+
+        AlertDialog dialog = builder.create();
+        Btn_Send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = Edt_Email.getText().toString();
+                if(email.isEmpty()){
+
+                    Toast.makeText(Activity_Login.this, "Cannot be left blank", Toast.LENGTH_SHORT).show();
+                }else {
+                    Edt_Email.setVisibility(View.GONE);
+                    Btn_Send.setVisibility(View.GONE);
+                    Edt_Code.setVisibility(View.VISIBLE);
+                    Btn_Code.setVisibility(View.VISIBLE);
+                    Toast.makeText(Activity_Login.this, "Check your email", Toast.LENGTH_SHORT).show();
+                    forgotPass(email);
+                }
+            }
+        });
+
+        Btn_Code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String check = Edt_Code.getText().toString();
+                if(code.equals(check)){
+                    startActivity(new Intent(Activity_Login.this, Activity_ForgotPassword.class));
+                }else {
+                    Toast.makeText(Activity_Login.this, "Check the code again", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private void forgotPass(String email){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://phqmarket.online/controller/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                api Api = retrofit.create(api.class);
+                Call<String> call = Api.getCode(email);
+                call.enqueue(new Callback<String>() {
+                    @Override
+
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        code = response.body()+"";
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(Activity_Login.this, "Lost conection", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }).start();
     }
 
     private void login_account(String username, String password){
