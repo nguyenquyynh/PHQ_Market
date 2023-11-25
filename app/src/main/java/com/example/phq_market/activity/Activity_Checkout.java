@@ -98,7 +98,6 @@ public class Activity_Checkout extends AppCompatActivity {
 
         list = new ArrayList<>();
         getList(new Gson().toJson(listCart));
-        Log.e("--->>>>>",new Gson().toJson(listCart)+"");
         Btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,80 +123,7 @@ public class Activity_Checkout extends AppCompatActivity {
         Rlt_Adress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog dialog = new Dialog(Activity_Checkout.this, R.style.Theme_PHQ_Market);
-                View view = LayoutInflater.from(Activity_Checkout.this).inflate(R.layout.layout_select_adress,null);
-                dialog.setContentView(view);
-                Txt_city = view.findViewById(R.id.Txt_city);
-                Txt_districs = view.findViewById(R.id.Txt_districs);
-                Txt_ward = view.findViewById(R.id.Txt_ward);
-                Button Btn_Confirm = view.findViewById(R.id.Btn_Confirm);
-                ImageView Img_Cancel = view.findViewById(R.id.Img_Cancel);
-                rcv = view.findViewById(R.id.rcv);
-
-                city = new ArrayList<>();
-                districts = new ArrayList<>();
-                wards = new ArrayList<>();
-
-                getListAddress();
-
-                Img_Cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.cancel();
-                    }
-                });
-                Txt_city.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Txt_districs.setVisibility(View.GONE);
-                        Txt_districs.setText("");
-                        Txt_ward.setVisibility(View.GONE);
-                        Txt_ward.setText("");
-
-                        rcv.setVisibility(View.VISIBLE);
-                        listString.clear();
-                        listString.addAll(listStringCity());
-                        adapter_recycleview.notifyDataSetChanged();
-                    }
-                });
-
-                Txt_districs.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Txt_ward.setVisibility(View.GONE);
-                        Txt_ward.setText("");
-                        rcv.setVisibility(View.VISIBLE);
-                        listString.clear();
-                        listString.addAll(listStringDistrics(posotioncity));
-                        adapter_recycleview.notifyDataSetChanged();
-                    }
-                });
-
-                Txt_ward.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        rcv.setVisibility(View.VISIBLE);
-                        listString.clear();
-                        listString.addAll(listStringWards(positiondisstric));
-                    }
-                });
-
-                Btn_Confirm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(Txt_ward.getText().toString().isEmpty() || Txt_districs.getText().toString().isEmpty() || Txt_city.getText().toString().isEmpty()){
-                            Toast.makeText(Activity_Checkout.this, "Hãy chọn địa chỉ ", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Txt_adress.setText(Txt_ward.getText().toString()+", "+Txt_districs.getText().toString()+", "+Txt_city.getText().toString());
-                            dialog.cancel();
-                        }
-
-                    }
-                });
-
-
-                dialog.show();
-
+                editAdress();
             }
         });
 
@@ -207,6 +133,83 @@ public class Activity_Checkout extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+
+    private void editAdress(){
+        Dialog dialog = new Dialog(Activity_Checkout.this, R.style.Theme_PHQ_Market);
+        View view = LayoutInflater.from(Activity_Checkout.this).inflate(R.layout.layout_select_adress,null);
+        dialog.setContentView(view);
+        Txt_city = view.findViewById(R.id.Txt_city);
+        Txt_districs = view.findViewById(R.id.Txt_districs);
+        Txt_ward = view.findViewById(R.id.Txt_ward);
+        Button Btn_Confirm = view.findViewById(R.id.Btn_Confirm);
+        ImageView Img_Cancel = view.findViewById(R.id.Img_Cancel);
+        rcv = view.findViewById(R.id.rcv);
+
+        city = new ArrayList<>();
+        districts = new ArrayList<>();
+        wards = new ArrayList<>();
+
+        getListAddress();
+
+        Img_Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        Txt_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Txt_districs.setVisibility(View.GONE);
+                Txt_districs.setText("");
+                Txt_ward.setVisibility(View.GONE);
+                Txt_ward.setText("");
+
+                rcv.setVisibility(View.VISIBLE);
+                listString.clear();
+                listString.addAll(listStringCity());
+                adapter_recycleview.notifyDataSetChanged();
+            }
+        });
+
+        Txt_districs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Txt_ward.setVisibility(View.GONE);
+                Txt_ward.setText("");
+                rcv.setVisibility(View.VISIBLE);
+                listString.clear();
+                listString.addAll(listStringDistrics(posotioncity));
+                adapter_recycleview.notifyDataSetChanged();
+            }
+        });
+
+        Txt_ward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rcv.setVisibility(View.VISIBLE);
+                listString.clear();
+                listString.addAll(listStringWards(positiondisstric));
+            }
+        });
+
+        Btn_Confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Txt_ward.getText().toString().isEmpty() || Txt_districs.getText().toString().isEmpty() || Txt_city.getText().toString().isEmpty()){
+                    Toast.makeText(Activity_Checkout.this, "Hãy chọn địa chỉ ", Toast.LENGTH_SHORT).show();
+                }else {
+                    Txt_adress.setText(Txt_ward.getText().toString()+", "+Txt_districs.getText().toString()+", "+Txt_city.getText().toString());
+                    dialog.cancel();
+                }
+
+            }
+        });
+
+
+        dialog.show();
     }
 
     private ArrayList<String> listStringCity(){

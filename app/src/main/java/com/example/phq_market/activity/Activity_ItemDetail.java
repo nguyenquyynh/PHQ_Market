@@ -85,11 +85,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //Lấy trạng thái
-        SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
+    private void getLike(SharedPreferences s){
         Retrofit retrofit_status = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -113,7 +109,9 @@ public class Activity_ItemDetail extends AppCompatActivity {
             }
         });
 
-    //Lấy product
+    }
+
+    private void getProductDetal(){
         Retrofit retrofit_product = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -147,8 +145,10 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 Log.d(">>>>>>>>>>>>>>>", "Faile !!!");
             }
         });
+    }
 
-//        //lấy list ảnh
+    private void getListImgProduct(){
+        //lấy list ảnh
         Retrofit retrofit_image = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -173,8 +173,9 @@ public class Activity_ItemDetail extends AppCompatActivity {
 
             }
         });
+    }
 
-        //Lấy list feaadback
+    private void getListFeedback(){
         Retrofit retrofit_feedback = new Retrofit.Builder()
                 .baseUrl("https://phqmarket.online/controller/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -202,54 +203,71 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 Log.d(">>>>>>>>" , "false");
             }
         });
+    }
+
+    private void addToCart(SharedPreferences s){
+        if (!s.getString("Email", "").isEmpty() && !s.getString("Pass", "").isEmpty()) {
+            Retrofit retrofit_addcart = new Retrofit.Builder()
+                    .baseUrl("https://phqmarket.online/controller/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            api api_cart = retrofit_addcart.create(api.class);
+            Call<String> call_cart = api_cart.add_ItemInCart(ID,s.getString("Email", null),s.getString("Pass", null));
+            call_cart.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if(response.isSuccessful() && response.body().equals("add succesful")){
+                        Toast.makeText(Activity_ItemDetail.this, "Add is Successful, please check your cart !!", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(Activity_ItemDetail.this, "The product is out of stock", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(Activity_ItemDetail.this, "Check the connection !", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Activity_ItemDetail.this);
+            builder.setTitle("Warning");
+            builder.setIcon(R.drawable.baseline_error_outline_24);
+            builder.setMessage("You are not logged in, Login now ?");
+            builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    startActivity(new Intent(Activity_ItemDetail.this, Activity_Login.class));
+                }
+            });
+            builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
+        getLike(s);
+
+        getProductDetal();
+
+        getListImgProduct();
+
+        getListFeedback();
+
 
         Txt_addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
-                if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
-                    Retrofit retrofit_addcart = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.online/controller/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    api api_cart = retrofit_addcart.create(api.class);
-                    Call<String> call_cart = api_cart.add_ItemInCart(ID,sharedPreferences.getString("Email", null),sharedPreferences.getString("Pass", null));
-                    call_cart.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            if(response.isSuccessful() && response.body().equals("add succesful")){
-                                Toast.makeText(Activity_ItemDetail.this, "Add is Successful, please check your cart !!", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(Activity_ItemDetail.this, "The product is out of stock", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-                            Toast.makeText(Activity_ItemDetail.this, "Check the connection !", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Activity_ItemDetail.this);
-                    builder.setTitle("Warning");
-                    builder.setIcon(R.drawable.baseline_error_outline_24);
-                    builder.setMessage("You are not logged in, Login now ?");
-                    builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            startActivity(new Intent(Activity_ItemDetail.this, Activity_Login.class));
-                        }
-                    });
-                    builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
+                addToCart(s);
             }
         });
 

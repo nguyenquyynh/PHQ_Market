@@ -7,13 +7,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.phq_market.R;
@@ -31,7 +34,8 @@ public class Activity_Signup extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private Handler handler = new Handler();
     private TextInputEditText edtemail;
-    TextInputEditText edtPassword;
+    private String code;
+    private TextInputEditText edtPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,8 @@ public class Activity_Signup extends AppCompatActivity {
                 String password = edtPassword.getText().toString();
                 String confirmPassword= edtConfirmPassword.getText().toString();
 
+                getcode(email);
+
                 if(username.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
                     Toast.makeText(Activity_Signup.this,"The input box cannot be left blank", Toast.LENGTH_SHORT).show();
                 } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -104,7 +110,8 @@ public class Activity_Signup extends AppCompatActivity {
                 } else if (!chkAgreeCondition.isChecked()) {
                     Toast.makeText(Activity_Signup.this, "Please confirm saving information", Toast.LENGTH_SHORT).show();
                 } else {
-                    register_account(username,phone,email,password);
+                    setUpAlertgetcode(username,phone,email,password);
+
                 }
             }
         });
@@ -115,6 +122,64 @@ public class Activity_Signup extends AppCompatActivity {
                 startActivity(new Intent(Activity_Signup.this, Activity_Login.class));
             }
         });
+    }
+
+    private void setUpAlertgetcode(String username, String phone, String email, String password){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Signup.this);
+        View view = LayoutInflater.from(Activity_Signup.this).inflate(R.layout.layout_submit_email,null);
+        builder.setView(view);
+
+        EditText Edt_Email = view.findViewById(R.id.Edt_Email);
+        EditText Edt_Code = view.findViewById(R.id.Edt_Code);
+        Button Btn_Send = view.findViewById(R.id.Btn_Send);
+        Button Btn_Code = view.findViewById(R.id.Btn_Code);
+
+        Edt_Email.setVisibility(View.GONE);
+        Btn_Send.setVisibility(View.GONE);
+        Edt_Code.setVisibility(View.VISIBLE);
+        Btn_Code.setVisibility(View.VISIBLE);
+
+        AlertDialog dialog = builder.create();
+        Btn_Code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String check = Edt_Code.getText().toString();
+                if(code.equals(check)){
+                    register_account(username,phone,email,password);
+                }else {
+                    Toast.makeText(Activity_Signup.this, "Check the code again", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private void getcode(String email){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://phqmarket.online/controller/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                api Api = retrofit.create(api.class);
+                Call<String> call = Api.getCode(email);
+                call.enqueue(new Callback<String>() {
+                    @Override
+
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        code = response.body()+"";
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(Activity_Signup.this, "Lost conection", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }).start();
     }
 
 

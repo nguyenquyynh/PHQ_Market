@@ -264,24 +264,4 @@ public class Activity_Search extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private void sortEVALUATEASC(){
-        Collections.sort(list_all, new Comparator<NEWPRODUCT>() {
-            @Override
-            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
-                return o1.getEVALUATE().compareTo(o2.getEVALUATE());
-            }
-        });
-        adapter.notifyDataSetChanged();
-    }
-
-    private void sortEVALUATEDESC(){
-        Collections.sort(list_all, new Comparator<NEWPRODUCT>() {
-            @Override
-            public int compare(NEWPRODUCT o1, NEWPRODUCT o2) {
-                return o2.getEVALUATE().compareTo(o1.getEVALUATE());
-            }
-        });
-        adapter.notifyDataSetChanged();
-    }
-
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/Edt_Email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="10dp"
+        android:background="@drawable/radius"
+        android:hint="Enter email"/>
+
+    <Button
+        android:id="@+id/Btn_Send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send code"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/button_login"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"/>
+    <EditText
+        android:id="@+id/Edt_Code"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/radius"
+        android:visibility="visible"
+        android:hint="Enter code"/>
+
+    <Button
+        android:id="@+id/Btn_Code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        android:text="Submit"
+        android:backgroundTint="@color/button_login"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"/>
+</LinearLayout>

@@ -92,17 +92,21 @@ public class Activity_Main extends AppCompatActivity {
         bottomNavigationView.setItemActiveIndicatorWidth(70);
         bottomNavigationView.setItemActiveIndicatorHeight(70);
         bottomNavigationView.setItemActiveIndicatorShapeAppearance(new ShapeAppearanceModel().withCornerSize(15).toBuilder().build());
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+
         Img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Activity_Main.this, Activity_Search.class));
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
