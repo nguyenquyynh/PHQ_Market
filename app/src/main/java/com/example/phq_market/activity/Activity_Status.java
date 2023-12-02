@@ -45,6 +45,7 @@ public class Activity_Status extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<ORDERANDFEEDBACK> listOrder;
     private SharedPreferences sharedPreferences;
+    private String url = api.url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,6 @@ public class Activity_Status extends AppCompatActivity {
         int densityDpi = displayMetrics.densityDpi;
 
         int px =(int) (120.0*((float)densityDpi/160.0));
-        Log.e("----->", densityDpi+""+px);
         // bắt đầu vào thì hiển thị list của confirm
         Confirming();
         setSelected(Tv_Confirming);
@@ -127,7 +127,6 @@ public class Activity_Status extends AppCompatActivity {
         finish();
     }
 
-
     private void setSelected(TextView tv){
         setAllNon();
         tv.setTextColor(Color.YELLOW);
@@ -152,7 +151,7 @@ public class Activity_Status extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -192,7 +191,7 @@ public class Activity_Status extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -232,7 +231,7 @@ public class Activity_Status extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -272,7 +271,7 @@ public class Activity_Status extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

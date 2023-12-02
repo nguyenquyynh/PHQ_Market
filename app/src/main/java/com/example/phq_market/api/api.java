@@ -8,6 +8,7 @@ import com.example.phq_market.model.CUSTOMER;
 import com.example.phq_market.model.FEEDBACKSHOW;
 import com.example.phq_market.model.MONTHANDDAY;
 import com.example.phq_market.model.NEWPRODUCT;
+import com.example.phq_market.model.NOTIFICATION;
 import com.example.phq_market.model.ONLYIMAGE;
 import com.example.phq_market.model.ORDERANDFEEDBACK;
 import com.example.phq_market.model.PRODUCTDETAIL;
@@ -20,66 +21,83 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface api {
-    @GET("account/login.php")
-    Call<CUSTOMER> login(@Query("NAME") String name , @Query("PASS") String pass);
-    @GET("account/register.php")
+    String url = "https://phqmarket.online/";
+    //account
+    @GET("Customer/Login")
+    Call<CUSTOMER> login(@Query("EMAIL") String name , @Query("PASS") String pass);
+    @GET("Customer/Register")
     Call<String> register(@Query("NAME") String name , @Query("PASS") String pass, @Query("PHONE") String phone,@Query("EMAIL") String email);
-    @GET("account/updatecustomer.php")
+    @GET("Customer/UpdateCustomer")
     Call<String> updatecustomer(@Query("NAME") String name, @Query("EMAIL") String email , @Query("PASS") String pass, @Query("PHONE") String phone, @Query("ADRESS") String adress, @Query("IMG") String img, @Query("OLDEMAIL") String oldemail, @Query("OLDPASS") String oldpass);
-    @GET("account/accountdetail.php")
+    @GET("Customer/Accountdetail")
     Call<ACCOUNT> getDetailAccount(@Query("EMAIL") String email, @Query("PASS") String pass);
-    @GET("account/generatecodeemail.php")
-    Call<String> getCode(@Query("Email") String email);
-    @GET("catalog/getlistcatalog.php")
+    @GET("Customer/ResetPassword")
+    Call<String> resetPassword(@Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("Index/GetCode")
+    Call<String> getCode(@Query("EMAIL") String email);
+    //catalog
+    @GET("Catalog/Getlistcatalog")
     Call<ArrayList<CATALOGSHOW>> get_Listcatalog();
-    @GET("product/getlistnewproduct.php")
+    //product
+    @GET("Product/Getlistnewproduct")
     Call<ArrayList<NEWPRODUCT>> get_Listnewproduct();
-    @GET("image/getimageonlyproduct.php")
-    Call<ArrayList<ONLYIMAGE>> get_imageonlyproduct(@Query("IDPRODUCT")Integer id);
-    @GET("product/getonlyproduct.php")
+    @GET("Product/Getonlyproduct")
     Call<PRODUCTDETAIL> getonlyproduct(@Query("IDPRODUCT")Integer id);
-    @GET("feedback/getfeedbackproduct.php")
-    Call<ArrayList<FEEDBACKSHOW>> get_feedbackproduct(@Query("IDPRODUCT")Integer id);
-    @GET("cart/getlistcart.php")
-    Call<ArrayList<CART>> get_Listcart(@Query("EMAIL") String name , @Query("PASS") String pass);
-    @GET("product/getlistpopularproduct.php")
+    @GET("Product/Getlistpopularproduct")
     Call<ArrayList<NEWPRODUCT>> get_listpopularproduct();
-    @GET("product/getlistbestsaleproduct.php")
+    @GET("Product/Getlistbestsaleproduct")
     Call<ArrayList<NEWPRODUCT>> get_listbestsaleproduct();
-    @GET("cart/addtocart.php")
-    Call<String> add_ItemInCart(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
-    @GET("cart/deleteItemInCart.php")
-    Call<String> delete_ItemInCart(@Query("IDCART") Integer idcart);
-    @GET("banner/getlistbanner.php")
-    Call<ArrayList<ONLYIMAGE>> get_listbanner();
-    @GET("liked/addlike.php")
-    Call<String> add_ItemLike(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
-    @GET("liked/getlistlike.php")
-    Call<ArrayList<NEWPRODUCT>> get_listlike(@Query("EMAIL") String email, @Query("PASS") String pass);
-    @GET("liked/status.php")
-    Call<String> check_status(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
-    @GET("purchase/addpurchase.php")
-    Call<String> add_Purchase(@Query("listpurchase") String cart, @Query("ADRESS")  String Adress);
-    @GET("purchase/getitemtoaddpurchase.php")
-    Call<ArrayList<CHECKOUT>> getCheckOut(@Query("listcart") String cart);
-    @GET("purchase/getListOrderConfirm.php")
-    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderConfirm(@Query("EMAIL") String email,@Query("PASS") String pass);
-    @GET("purchase/getListOrderShipping.php")
-    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderShipping(@Query("EMAIL") String email,@Query("PASS") String pass);
-    @GET("purchase/getListOrderDone.php")
-    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderDone(@Query("EMAIL") String email,@Query("PASS") String pass);
-    @GET("purchase/getListOrderCancel.php")
-    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderCancel(@Query("EMAIL") String email,@Query("PASS") String pass);
-    @GET("purchase/updateStatus.php")
-    Call<String> update_Status(@Query("ID") int ID);
-    @GET("purchase/getDateAndPay.php")
-    Call<ArrayList<MONTHANDDAY>> get_DateAndPay(@Query("EMAIL") String email, @Query("PASS") String pass);
-    @GET("product/getlistallproduct.php")
+    @GET("Product/Getlistallproduct")
     Call<ArrayList<NEWPRODUCT>> get_listall();
-    @GET("product/getlistasCaTaLogproduct.php")
+    @GET("Product/GetlistasCaTaLogproduct")
     Call<ArrayList<NEWPRODUCT>> get_listasCaTaLog(@Query("IDCATALOG") Integer IDCATALOG);
-    @GET("feedback/sendfeedback.php")
+    //image
+    @GET("Image/Getimageonlyproduct")
+    Call<ArrayList<ONLYIMAGE>> get_imageonlyproduct(@Query("IDPRODUCT")Integer id);
+   //feedback
+    @GET("Feedback/GetListFeedBackInProduct")
+    Call<ArrayList<FEEDBACKSHOW>> get_feedbackproduct(@Query("IDPRODUCT")Integer id);
+    @GET("Feedback/SendFeedBack")
     Call<String> add_feedback(@Query("EVALUATE") Integer evaluate, @Query("CONTENT") String content, @Query("IDPURCHASE") Integer idpurchase, @Query("EMAIL") String email, @Query("PASS") String pass);
+    //cart
+    @GET("Cart/GetListCart")
+    Call<ArrayList<CART>> get_Listcart(@Query("EMAIL") String name , @Query("PASS") String pass);
+    @GET("Cart/AddToCart")
+    Call<String> add_ItemInCart(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("Cart/DeleteItemInCart")
+    Call<String> delete_ItemInCart(@Query("IDCART") Integer idcart);
+    //banner
+    @GET("Banner/Getlistbanner")
+    Call<ArrayList<ONLYIMAGE>> get_listbanner();
+    // liked
+    @GET("Liked/Addlike")
+    Call<String> add_ItemLike(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("Liked/GetListLiked")
+    Call<ArrayList<NEWPRODUCT>> get_listlike(@Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("Liked/Status")
+    Call<String> check_status(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
+    //purchase
+    @GET("Order/Addpurchase")
+    Call<String> add_Purchase(@Query("listpurchase") String cart, @Query("ADRESS")  String Adress);
+    @GET("Order/Getitemtoaddpurchase")
+    Call<ArrayList<CHECKOUT>> getCheckOut(@Query("listcart") String cart);
+    @GET("Order/GetListOrderConfirm")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderConfirm(@Query("EMAIL") String email,@Query("PASS") String pass);
+    @GET("Order/GetListOrderShipping")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderShipping(@Query("EMAIL") String email,@Query("PASS") String pass);
+    @GET("Order/GetListOrderDone")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderDone(@Query("EMAIL") String email,@Query("PASS") String pass);
+    @GET("Order/GetListOrderCancel")
+    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderCancel(@Query("EMAIL") String email,@Query("PASS") String pass);
+    @GET("Order/UpdateStatus")
+    Call<String> update_Status(@Query("ID") int ID);
+    @GET("Order/GetDateAndPay")
+    Call<ArrayList<MONTHANDDAY>> get_DateAndPay(@Query("EMAIL") String email, @Query("PASS") String pass);
+    // notification
+    @GET("News/GetListNotification")
+    Call<ArrayList<NOTIFICATION>> get_ListNotifcation(@Query("EMAIL") String email, @Query("PASS") String pass);
+    @GET("News/Readall")
+    Call<String> readall(@Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("data.json")
     Call<ArrayList<City>> get_listAdress();
 }

@@ -39,6 +39,7 @@ public class Activity_Login extends AppCompatActivity {
     private  SharedPreferences.Editor editor;
     private CheckBox chk_Remember;
     private String code;
+    private String url = api.url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +147,9 @@ public class Activity_Login extends AppCompatActivity {
             public void onClick(View v) {
                 String check = Edt_Code.getText().toString();
                 if(code.equals(check)){
-                    startActivity(new Intent(Activity_Login.this, Activity_ForgotPassword.class));
+                    Intent intent = new Intent(Activity_Login.this, Activity_ForgotPassword.class);
+                    intent.putExtra("email",Edt_Email.getText().toString());
+                    startActivity(intent);
                 }else {
                     Toast.makeText(Activity_Login.this, "Check the code again", Toast.LENGTH_SHORT).show();
                 }
@@ -162,7 +165,7 @@ public class Activity_Login extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api Api = retrofit.create(api.class);
@@ -198,7 +201,7 @@ public class Activity_Login extends AppCompatActivity {
                 });
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api apiAccount = retrofit.create(api.class);

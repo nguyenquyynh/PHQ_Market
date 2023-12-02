@@ -44,7 +44,7 @@ public class Activity_Search extends AppCompatActivity {
     ArrayList<NEWPRODUCT> listsearch;
     GridLayoutManager layoutManager;
     Adapter_PopularProduct adapter;
-
+    private String url = api.url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,7 +167,7 @@ public class Activity_Search extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit_all = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_all = retrofit_all.create(api.class);
@@ -197,7 +197,7 @@ public class Activity_Search extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit_all = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_all = retrofit_all.create(api.class);

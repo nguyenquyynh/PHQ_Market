@@ -56,6 +56,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/layout_item_adress"/>
+    <EditText
+        android:id="@+id/Edt_DetailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/outline_edit_account"
+        android:hint="Submit street and apartment number"/>
 
     <Button
         android:id="@+id/Btn_Confirm"

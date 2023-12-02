@@ -54,6 +54,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
     ImageView Img_like;
     private ArrayList<ONLYIMAGE> imageList;
     private  ArrayList<FEEDBACKSHOW> list_feedback;
+    private String url = api.url;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,6 @@ public class Activity_ItemDetail extends AppCompatActivity {
         imageList = new ArrayList<>();
         list_feedback = new ArrayList<>();
         ID = getIntent().getIntExtra("IDPRODUCT", -1);
-
         ImageView icBack = findViewById(R.id.icBack);
         icBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,34 +86,35 @@ public class Activity_ItemDetail extends AppCompatActivity {
     }
 
     private void getLike(SharedPreferences s){
-        Retrofit retrofit_status = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        api api_status = retrofit_status.create(api.class);
-        Call<String> call_status = api_status.check_status(ID,s.getString("Email",null), s.getString("Pass", null));
-        call_status.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Img_like.setImageResource(R.drawable.greenheart);
-                    check = true;
-                } else{
-                    Img_like.setImageResource(R.drawable.heart);
-                    check = false;
+        if (!s.getString("Email", "").isEmpty() && !s.getString("Pass", "").isEmpty()) {
+            Retrofit retrofit_status = new Retrofit.Builder()
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            api api_status = retrofit_status.create(api.class);
+            Call<String> call_status = api_status.check_status(ID,s.getString("Email",null), s.getString("Pass", null));
+            call_status.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful() && response.body() != null && response.body().equals("have like")) {
+                        Img_like.setImageResource(R.drawable.greenheart);
+                        check = true;
+                    } else{
+                        Img_like.setImageResource(R.drawable.heart);
+                        check = false;
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-            }
-        });
-
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                }
+            });
+        }
     }
 
     private void getProductDetal(){
         Retrofit retrofit_product = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_product = retrofit_product.create(api.class);
@@ -125,10 +126,11 @@ public class Activity_ItemDetail extends AppCompatActivity {
                     PRODUCTDETAIL product = response.body();
                     Txt_catalog.setText(product.getCATALOG());
                     Txt_nameproduct.setText(product.getNAME());
-                    if (!product.getEVALUATE().toString().isEmpty()) {
+                    try {
+                        product.getEVALUATE().toString();
                         Txt_evaluateproduct.setText(String.format("%.3s",product.getEVALUATE()));
-                    } else {
-                        Txt_evaluateproduct.setText(0);
+                    }catch (Exception e){
+                        Txt_evaluateproduct.setText(0+"");
                     }
                     DecimalFormat formatter = new DecimalFormat("#,###");
                     Txt_priceproduct.setText(formatter.format(product.getPRICE()));
@@ -150,7 +152,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
     private void getListImgProduct(){
         //lấy list ảnh
         Retrofit retrofit_image = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_image = retrofit_image.create(api.class);
@@ -177,7 +179,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
 
     private void getListFeedback(){
         Retrofit retrofit_feedback = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_feedback = retrofit_feedback.create(api.class);
@@ -208,7 +210,7 @@ public class Activity_ItemDetail extends AppCompatActivity {
     private void addToCart(SharedPreferences s){
         if (!s.getString("Email", "").isEmpty() && !s.getString("Pass", "").isEmpty()) {
             Retrofit retrofit_addcart = new Retrofit.Builder()
-                    .baseUrl("https://phqmarket.online/controller/")
+                    .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             api api_cart = retrofit_addcart.create(api.class);
@@ -229,26 +231,30 @@ public class Activity_ItemDetail extends AppCompatActivity {
                 }
             });
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(Activity_ItemDetail.this);
-            builder.setTitle("Warning");
-            builder.setIcon(R.drawable.baseline_error_outline_24);
-            builder.setMessage("You are not logged in, Login now ?");
-            builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    startActivity(new Intent(Activity_ItemDetail.this, Activity_Login.class));
-                }
-            });
-            builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            showForIfNotLogin();
         }
+    }
+
+    private void showForIfNotLogin(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Activity_ItemDetail.this);
+        builder.setTitle("Warning");
+        builder.setIcon(R.drawable.baseline_error_outline_24);
+        builder.setMessage("You are not logged in, Login now ?");
+        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                startActivity(new Intent(Activity_ItemDetail.this, Activity_Login.class));
+            }
+        });
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
     @Override
     protected void onResume() {
@@ -262,7 +268,20 @@ public class Activity_ItemDetail extends AppCompatActivity {
         getListImgProduct();
 
         getListFeedback();
+        getStarAverage();
+        Txt_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Txt_more.getText()=="More") {
+                    Txt_descriptionproduct.setMaxLines(100);
+                    Txt_more.setText("Collapse");
+                } else {
+                    Txt_more.setText("More");
+                    Txt_descriptionproduct.setMaxLines(2);
+                }
 
+            }
+        });
 
         Txt_addcart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +290,47 @@ public class Activity_ItemDetail extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getStarAverage(){
+        Img_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
+                if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
+                    Retrofit retrofit_addlike = new Retrofit.Builder()
+                            .baseUrl(url)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    api api_like = retrofit_addlike.create(api.class);
+                    Call<String> call_cart = api_like.add_ItemLike(ID,sharedPreferences.getString("Email", null),sharedPreferences.getString("Pass", null));
+                    call_cart.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.body() != null && response.isSuccessful()) {
+                                Toast.makeText(Activity_ItemDetail.this, "" + response.body(), Toast.LENGTH_SHORT).show();
+                                if (check) {
+                                    Img_like.setImageResource(R.drawable.heart);
+                                    check = false;
+                                } else {
+                                    Img_like.setImageResource(R.drawable.greenheart);
+                                    check = true;
+                                }
+                            } else {
+                                Toast.makeText(Activity_ItemDetail.this, "We have a problem !!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(Activity_ItemDetail.this, "We have a problem !!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else{
+                    showForIfNotLogin();
+                }
+            }
+        });
     }
 
     private void setupSlideshow(LinearLayout indicatorLayout){
@@ -329,56 +389,6 @@ public class Activity_ItemDetail extends AppCompatActivity {
             }
         });
         // Xử lý sự kiện
-        Txt_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Txt_more.getText()=="More") {
-                    Txt_descriptionproduct.setMaxLines(100);
-                    Txt_more.setText("Collapse");
-                } else {
-                    Txt_more.setText("More");
-                    Txt_descriptionproduct.setMaxLines(2);
-                }
-
-            }
-        });
-        Img_like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
-                if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
-                    Retrofit retrofit_addlike = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.online/controller/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    api api_like = retrofit_addlike.create(api.class);
-                    Call<String> call_cart = api_like.add_ItemLike(ID,sharedPreferences.getString("Email", null),sharedPreferences.getString("Pass", null));
-                    call_cart.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            if (response.body() != null && response.isSuccessful()) {
-                                Toast.makeText(Activity_ItemDetail.this, "" + response.body(), Toast.LENGTH_SHORT).show();
-                                if (check) {
-                                    Img_like.setImageResource(R.drawable.heart);
-                                    check = false;
-                                } else {
-                                    Img_like.setImageResource(R.drawable.greenheart);
-                                    check = true;
-                                }
-                            } else {
-                                Toast.makeText(Activity_ItemDetail.this, "We have a problem !!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-                            Toast.makeText(Activity_ItemDetail.this, "We have a problem !!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
-        });
-
     }
 
 }

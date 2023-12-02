@@ -2,14 +2,12 @@ package com.example.phq_market.fragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,16 +66,14 @@ public class Fragment_Account extends Fragment {
 
     private LinearLayout lnLike;
     EDITACCOUNT acc;
-    SharedPreferences s;
     private Dialog dialog;
     private String email = "";
     private String pass = "";
+    private String url = api.url;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,19 +95,19 @@ public class Fragment_Account extends Fragment {
         lnLike = view.findViewById(R.id.lnLike);
         acc = new EDITACCOUNT();
         listmonthandday = new ArrayList<>();
+
         sharedPreferences = getContext().getSharedPreferences("account",MODE_PRIVATE);
-        checkLogin(btn_setUp);
+
         btn_setUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(btn_setUp.getText() == "Log out"){
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("Email","");
+                    editor.putString("Pass","");
+                    editor.putBoolean("remember",false);
+                    editor.apply();
                     startActivity(new Intent(getContext(), Activity_Login.class));
-                    if(!sharedPreferences.getBoolean("remember",false)){
-                        editor.putString("Email","");
-                        editor.putString("Pass","");
-                        editor.apply();
-                    }
                 }else {
                     startActivity(new Intent(getContext(), Activity_Signup.class));
                 }
@@ -230,45 +226,33 @@ public class Fragment_Account extends Fragment {
         lineData.addDataSet(set);
     }
 
-    void checkLogin(Button btn_setUp){
-        try {
-            String email = sharedPreferences.getString("Email",null);
-            String pass = sharedPreferences.getString("Pass",null);
-            if(email.isEmpty() || pass.isEmpty()){
-                btn_setUp.setText("Log in");
-            }else {
-                btn_setUp.setText("Log out");
-            }
-
-        }catch (Exception e){
-            Log.e("->>>>>>>>>>>",e+"");
-            btn_setUp.setText("Log in");
-        }
+     private void checkLogin(Button btn_setUp){
+         if(email.isEmpty() || pass.isEmpty()){
+             btn_setUp.setText("Log in");
+         }else {
+             btn_setUp.setText("Log out");
+         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        showLoading();
-        s = getContext().getSharedPreferences("account", MODE_PRIVATE);
+    private void getPersonalInformation(){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 if (!sharedPreferences.getString("Email", "").isEmpty() && !sharedPreferences.getString("Pass", "").isEmpty()) {
                     Retrofit retrofit_account = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.online/controller/")
+                            .baseUrl(url)
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api api_account = retrofit_account.create(api.class);
-                    Call<ACCOUNT> call_account = api_account.getDetailAccount(s.getString("Email", null), s.getString("Pass", null));
+                    Call<ACCOUNT> call_account = api_account.getDetailAccount(sharedPreferences.getString("Email", null), sharedPreferences.getString("Pass", null));
                     call_account.enqueue(new Callback<ACCOUNT>() {
                         @Override
                         public void onResponse(Call<ACCOUNT> call, Response<ACCOUNT> response) {
                             if (response.isSuccessful() && response.body() != null){
                                 ACCOUNT account = response.body();
                                 Glide.with(getContext())
-                                                .load(account.getIMG())
-                                                        .into(Img_account);
+                                        .load(account.getIMG())
+                                        .into(Img_account);
                                 Txt_name.setText(account.getNAME());
                                 Txt_email.setText(account.getEMAIL());
                                 Txt_phone.setText(account.getPHONE());
@@ -281,7 +265,7 @@ public class Fragment_Account extends Fragment {
                                 acc.setADDRESS(account.getADDRESS());
                                 acc.setEMAIL(account.getEMAIL());
                                 acc.setNAME(account.getNAME());
-                                acc.setPASS(s.getString("Pass",null));
+                                acc.setPASS(sharedPreferences.getString("Pass",null));
                                 acc.setPHONE(account.getPHONE());
                                 dialog.cancel();
                                 Log.d(">>>>>>>>>>>>>>>>>>>>>>>", acc+"");
@@ -299,21 +283,15 @@ public class Fragment_Account extends Fragment {
                 }else {
                     dialog.cancel();
                 }
-            ;}
+            }
         }).start();
+    }
 
-        try {
-            email = sharedPreferences.getString("Email", "");
-            pass = sharedPreferences.getString("Pass", "");
-        } catch (Exception e) {
-
-        }
-
+    private void getDataChart(){
         new Thread(new Runnable() {
             @Override
             public void run() {
-
-                if (TextUtils.isEmpty(email) ||TextUtils.isEmpty(pass)){
+                if (email.isEmpty() || pass.isEmpty()){
                     Txt_name.setText("");
                     Txt_email.setText("");
                     Txt_phone.setText("");
@@ -326,7 +304,7 @@ public class Fragment_Account extends Fragment {
                     dialog.cancel();
                 }else {
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.online/controller/")
+                            .baseUrl(url)
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
 
@@ -355,6 +333,18 @@ public class Fragment_Account extends Fragment {
                 }
             }
         }).start();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        email = sharedPreferences.getString("Email", "");
+        pass = sharedPreferences.getString("Pass", "");
+        checkLogin(btn_setUp);
+        showLoading();
+        getPersonalInformation();
+        getDataChart();
+
+
     }
 
     private String load;

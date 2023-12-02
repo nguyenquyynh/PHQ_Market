@@ -31,7 +31,7 @@ public class Activity_FeedBack extends AppCompatActivity {
     private ORDERANDFEEDBACK item;
 
     int evaluate = 5;
-
+    private String url = api.url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,7 +164,7 @@ public class Activity_FeedBack extends AppCompatActivity {
                     if (content.isEmpty()) {content = Txt_status.getText().toString();
                     }
                     Retrofit retrofit_feedback = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.online/controller/")
+                            .baseUrl(url)
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api api_feedback = retrofit_feedback.create(api.class);
@@ -193,6 +193,7 @@ public class Activity_FeedBack extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        clickStar();
         Img_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

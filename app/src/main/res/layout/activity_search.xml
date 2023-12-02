@@ -89,6 +89,7 @@
             android:id="@+id/Btn_Price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textOn="Sort price ascending"
             android:textOff="Sort price descending"
             android:background="@drawable/nen_search"/>
@@ -96,6 +97,7 @@
             android:id="@+id/Btn_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_marginTop="10dp"
             android:textOn="Sort name ascending"
             android:textOff="Sort name descending"

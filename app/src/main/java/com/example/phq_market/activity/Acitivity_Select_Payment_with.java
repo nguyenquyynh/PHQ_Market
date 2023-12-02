@@ -40,6 +40,7 @@ public class Acitivity_Select_Payment_with extends AppCompatActivity {
     private String pay;
     private ProgressDialog progressDialog;
     private Handler handler = new Handler();
+    private String url = api.url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -235,7 +236,7 @@ public class Acitivity_Select_Payment_with extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

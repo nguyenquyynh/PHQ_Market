@@ -36,6 +36,7 @@ public class Activity_Signup extends AppCompatActivity {
     private TextInputEditText edtemail;
     private String code;
     private TextInputEditText edtPassword;
+    private String url = api.url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,14 +162,13 @@ public class Activity_Signup extends AppCompatActivity {
             @Override
             public void run() {
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api Api = retrofit.create(api.class);
                 Call<String> call = Api.getCode(email);
                 call.enqueue(new Callback<String>() {
                     @Override
-
                     public void onResponse(Call<String> call, Response<String> response) {
                         code = response.body()+"";
                     }
@@ -198,7 +198,7 @@ public class Activity_Signup extends AppCompatActivity {
                 });
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api apiAccount = retrofit.create(api.class);

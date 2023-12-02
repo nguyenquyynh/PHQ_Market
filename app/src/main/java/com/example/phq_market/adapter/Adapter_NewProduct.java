@@ -2,36 +2,22 @@ package com.example.phq_market.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
-import com.example.phq_market.activity.Activity_ItemDetail;
-import com.example.phq_market.fragment.Fragment_Cart;
 import com.example.phq_market.model.NEWPRODUCT;
-
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Adapter_NewProduct extends RecyclerView.Adapter<Adapter_NewProduct.ViewHolder> {
     public final ArrayList<NEWPRODUCT> list_product;
@@ -68,7 +54,7 @@ public class Adapter_NewProduct extends RecyclerView.Adapter<Adapter_NewProduct.
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onClickProduct.clickproduct(product.getID());
+                    onClickProduct.clickproduct(list_product.get(holder.getAdapterPosition()).getID());
                 }
             });
         } catch (Exception e) {
