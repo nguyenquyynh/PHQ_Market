@@ -54,7 +54,7 @@
             android:layout_toRightOf="@id/card"
             android:layout_below="@id/Txt_name"
             android:text="945.000 "
-            android:textSize="18dp"
+            android:textSize="13dp"
             android:textStyle="bold"
             android:textColor="@color/navigation_selected"/>
 
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Txt_name"
-            android:textSize="18dp"
+            android:textSize="13dp"
             android:layout_toRightOf="@+id/Txt_cost"
             android:text="VND"
             android:layout_marginLeft="10dp"

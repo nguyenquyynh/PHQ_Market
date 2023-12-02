@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="43dp"
                     android:text="Nguyễn Văn Bê"/>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

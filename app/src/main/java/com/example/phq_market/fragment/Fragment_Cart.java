@@ -47,6 +47,7 @@ public class Fragment_Cart extends Fragment {
     private String pass;
     private TextView tvCost;
     private Dialog dialog;
+    private String url = api.url;
     public Fragment_Cart() {
         // Required empty public constructor
     }
@@ -126,7 +127,7 @@ public class Fragment_Cart extends Fragment {
             @Override
             public void run() {
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_cart = retrofit_catalog.create(api.class);
@@ -194,7 +195,7 @@ public class Fragment_Cart extends Fragment {
             @Override
             public void run() {
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_cart = retrofit_catalog.create(api.class);
@@ -202,7 +203,8 @@ public class Fragment_Cart extends Fragment {
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        Toast.makeText(getContext(), "Delete sucessfull", Toast.LENGTH_SHORT).show();
+                        String a = response.body();
+                        Toast.makeText(getContext(), a+"", Toast.LENGTH_SHORT).show();
                         getLiset();
                     }
 

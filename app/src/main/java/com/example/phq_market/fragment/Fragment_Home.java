@@ -48,6 +48,7 @@ public class Fragment_Home extends Fragment {
     private Dialog dialog;
     private ArrayList<NEWPRODUCT> listProduct;
     private  RecyclerView rcv_Home;
+    private String url = api.url;
     public Fragment_Home() {
         // Required empty public constructor
     }
@@ -71,30 +72,23 @@ public class Fragment_Home extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+
         showLoading();
-        Retrofit retrofit_banner = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        api api_banner = retrofit_banner.create(api.class);
-        Call<ArrayList<ONLYIMAGE>> call_banner = api_banner.get_listbanner();
-        call_banner.enqueue(new Callback<ArrayList<ONLYIMAGE>>() {
-            @Override
-            public void onResponse(Call<ArrayList<ONLYIMAGE>> call, Response<ArrayList<ONLYIMAGE>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    ArrayList<ONLYIMAGE> list = response.body();
-                    list_banner.clear();
-                    list_banner.addAll(list);
-                    banner.notifyDataSetChanged();
-                }
-            }
+        //set Up banner
+        setUpBanner();
+        getListBanner();
 
-            @Override
-            public void onFailure(Call<ArrayList<ONLYIMAGE>> call, Throwable t) {
+        // product
+        getListProductPopular();
 
-            }
-        });
+        LayoutManager = new GridLayoutManager(getContext(),2);
+        rcv_Home.setLayoutManager(LayoutManager);
+        adapterPopularProduct = new Adapter_PopularProduct(listProduct,getContext());
+        rcv_Home.setAdapter(adapterPopularProduct);
+    }
 
+    private void setUpBanner(){
         banner = new Adapter_Banner(list_banner, getContext());
         view_banner.setAdapter(banner);
 
@@ -116,14 +110,31 @@ public class Fragment_Home extends Fragment {
                 return false;
             }
         });
-        // product
-        getListProductPopular();
+    }
 
-        LayoutManager = new GridLayoutManager(getContext(),2);
-        rcv_Home.setLayoutManager(LayoutManager);
-        adapterPopularProduct = new Adapter_PopularProduct(listProduct,getContext());
-        rcv_Home.setAdapter(adapterPopularProduct);
+    private void getListBanner(){
+        Retrofit retrofit_banner = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api api_banner = retrofit_banner.create(api.class);
+        Call<ArrayList<ONLYIMAGE>> call_banner = api_banner.get_listbanner();
+        call_banner.enqueue(new Callback<ArrayList<ONLYIMAGE>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ONLYIMAGE>> call, Response<ArrayList<ONLYIMAGE>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ArrayList<ONLYIMAGE> list = response.body();
+                    list_banner.clear();
+                    list_banner.addAll(list);
+                    banner.notifyDataSetChanged();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ArrayList<ONLYIMAGE>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getListProductPopular(){
@@ -132,7 +143,7 @@ public class Fragment_Home extends Fragment {
             public void run() {
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api api_product = retrofit.create(api.class);

@@ -33,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Adapter_Order_Confirm extends RecyclerView.Adapter<Adapter_Order_Confirm.ViewHolder> {
     private Context context;
     private ArrayList<ORDERANDFEEDBACK> listOrder;
+    private String url = api.url;
 
     public Adapter_Order_Confirm(Context context, ArrayList<ORDERANDFEEDBACK> listOrder) {
         this.context = context;
@@ -89,7 +90,7 @@ public class Adapter_Order_Confirm extends RecyclerView.Adapter<Adapter_Order_Co
 
     private void updateStatus(int ID){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api Api = retrofit.create(api.class);

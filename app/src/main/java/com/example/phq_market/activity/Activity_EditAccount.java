@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,9 +59,11 @@ public class Activity_EditAccount extends AppCompatActivity {
     private ArrayList<Wards> wards;
     private int posotioncity;
     private int positiondisstric;
+    EditText Edt_DetailAddress;
     private TextView Txt_city;
     private TextView Txt_districs ;
     private TextView Txt_ward ;
+    private String url = api.url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,84 +151,88 @@ public class Activity_EditAccount extends AppCompatActivity {
         Edt_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog dialog = new Dialog(Activity_EditAccount.this, R.style.Theme_PHQ_Market);
-                View view = LayoutInflater.from(Activity_EditAccount.this).inflate(R.layout.layout_select_adress,null);
-                dialog.setContentView(view);
-                Txt_city = view.findViewById(R.id.Txt_city);
-                Txt_districs = view.findViewById(R.id.Txt_districs);
-                Txt_ward = view.findViewById(R.id.Txt_ward);
-                Button Btn_Confirm = view.findViewById(R.id.Btn_Confirm);
-                ImageView Img_Cancel = view.findViewById(R.id.Img_Cancel);
-                rcv = view.findViewById(R.id.rcv);
-
-                city = new ArrayList<>();
-                districts = new ArrayList<>();
-                wards = new ArrayList<>();
-
-                getListAddress();
-
-                Img_Cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.cancel();
-                    }
-                });
-                Txt_city.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Txt_districs.setVisibility(View.GONE);
-                        Txt_districs.setText("");
-                        Txt_ward.setVisibility(View.GONE);
-                        Txt_ward.setText("");
-
-                        rcv.setVisibility(View.VISIBLE);
-                        listString.clear();
-                        listString.addAll(listStringCity());
-                        adapter_recycleview.notifyDataSetChanged();
-                    }
-                });
-
-                Txt_districs.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Txt_ward.setVisibility(View.GONE);
-                        Txt_ward.setText("");
-                        rcv.setVisibility(View.VISIBLE);
-                        listString.clear();
-                        listString.addAll(listStringDistrics(posotioncity));
-                        adapter_recycleview.notifyDataSetChanged();
-                    }
-                });
-
-                Txt_ward.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        rcv.setVisibility(View.VISIBLE);
-                        listString.clear();
-                        listString.addAll(listStringWards(positiondisstric));
-                    }
-                });
-
-                Btn_Confirm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(Txt_ward.getText().toString().isEmpty() || Txt_districs.getText().toString().isEmpty() || Txt_city.getText().toString().isEmpty()){
-                            Toast.makeText(Activity_EditAccount.this, "Hãy chọn địa chỉ ", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Edt_address.setText(Txt_ward.getText().toString()+", "+Txt_districs.getText().toString()+", "+Txt_city.getText().toString());
-                            dialog.cancel();
-                        }
-
-                    }
-                });
-
-
-                dialog.show();
-
+                setUpWriteAdress();
             }
         });
     }
 
+    private void setUpWriteAdress(){
+        Dialog dialog = new Dialog(Activity_EditAccount.this, R.style.Theme_PHQ_Market);
+        View view = LayoutInflater.from(Activity_EditAccount.this).inflate(R.layout.layout_select_adress,null);
+        dialog.setContentView(view);
+        Txt_city = view.findViewById(R.id.Txt_city);
+        Txt_districs = view.findViewById(R.id.Txt_districs);
+        Txt_ward = view.findViewById(R.id.Txt_ward);
+        Edt_DetailAddress = view.findViewById(R.id.Edt_DetailAddress);
+        Button Btn_Confirm = view.findViewById(R.id.Btn_Confirm);
+        ImageView Img_Cancel = view.findViewById(R.id.Img_Cancel);
+        rcv = view.findViewById(R.id.rcv);
+
+        city = new ArrayList<>();
+        districts = new ArrayList<>();
+        wards = new ArrayList<>();
+
+        getListAddress();
+
+        Img_Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        Txt_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Txt_districs.setVisibility(View.GONE);
+                Txt_districs.setText("");
+                Txt_ward.setVisibility(View.GONE);
+                Txt_ward.setText("");
+
+                rcv.setVisibility(View.VISIBLE);
+                listString.clear();
+                listString.addAll(listStringCity());
+                adapter_recycleview.notifyDataSetChanged();
+            }
+        });
+
+        Txt_districs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Txt_ward.setVisibility(View.GONE);
+                Txt_ward.setText("");
+                rcv.setVisibility(View.VISIBLE);
+
+                listString.clear();
+                listString.addAll(listStringDistrics(posotioncity));
+                adapter_recycleview.notifyDataSetChanged();
+            }
+        });
+
+        Txt_ward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rcv.setVisibility(View.VISIBLE);
+
+                listString.clear();
+                listString.addAll(listStringWards(positiondisstric));
+            }
+        });
+
+        Btn_Confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Edt_DetailAddress.getText().toString().isEmpty() || Txt_ward.getText().toString().isEmpty() || Txt_districs.getText().toString().isEmpty() || Txt_city.getText().toString().isEmpty()){
+                    Toast.makeText(Activity_EditAccount.this, "Hãy chọn địa chỉ ", Toast.LENGTH_SHORT).show();
+                }else {
+                    Edt_address.setText(Edt_DetailAddress.getText().toString()+ ", " + Txt_ward.getText().toString()+", "+Txt_districs.getText().toString()+", "+Txt_city.getText().toString());
+                    dialog.cancel();
+                }
+
+            }
+        });
+
+        dialog.show();
+    }
     private void getListAddress(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Activity_EditAccount.this);
         rcv.setLayoutManager(linearLayoutManager);
@@ -237,7 +244,7 @@ public class Activity_EditAccount extends AppCompatActivity {
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        api api = retrofit.create(api.class);
+        api api = retrofit.create(com.example.phq_market.api.api.class);
         Call<ArrayList<City>> call = api.get_listAdress();
         call.enqueue(new Callback<ArrayList<City>>() {
             @Override
@@ -318,79 +325,87 @@ public class Activity_EditAccount extends AppCompatActivity {
         return string;
     }
 
+    private void showIcon(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Activity_EditAccount.this);
+        View view = LayoutInflater.from(Activity_EditAccount.this).inflate(R.layout.layout_item_list_avata,null);
+        builder.setTitle("Chọn ảnh đại diện ");
+        RecyclerView Recycler_viewavata = view.findViewById(R.id.Recycler_viewavata);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(Activity_EditAccount.this,3);
+        Adapter_Avata adapter_avata = new Adapter_Avata(avatarURLs, Activity_EditAccount.this);
+        Recycler_viewavata.setLayoutManager(gridLayoutManager);
+        Recycler_viewavata.setAdapter(adapter_avata);
+        builder.setView(view);
+        Dialog dialog = builder.create();
+        adapter_avata.setOnClickProduct(new Adapter_Like.OnClickProduct() {
+            @Override
+            public void clickproduct(int ID) {
+                Glide.with(Activity_EditAccount.this)
+                        .load(avatarURLs.get(ID))
+                        .into(Img_avata);
+                stt = ID;
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void updateAccount(){
+        EDITACCOUNT editacc = new EDITACCOUNT();
+        editacc.setIMG(avatarURLs.get(stt));
+        editacc.setNAME(Edt_fullName.getText().toString());
+        editacc.setEMAIL(Edt_email.getText().toString());
+        editacc.setADDRESS(Edt_address.getText().toString());
+        editacc.setPHONE(Edt_number.getText().toString());
+        editacc.setPASS(Edt_password.getText().toString());
+        if (!TextUtils.isEmpty(editacc.getNAME()) && !TextUtils.isEmpty(editacc.getEMAIL()) && !TextUtils.isEmpty(editacc.getPASS()) && !TextUtils.isEmpty(editacc.getADDRESS()) && !TextUtils.isEmpty(editacc.getPHONE()) && !TextUtils.isEmpty(editacc.getIMG())) {
+            Retrofit retrofit_acc = new Retrofit.Builder()
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            api api_acc = retrofit_acc.create(api.class);
+            Call<String> call_acc = api_acc.updatecustomer(editacc.getNAME(),editacc.getEMAIL(),editacc.getPASS(),editacc.getPHONE(),editacc.getADDRESS(),editacc.getIMG(),oldemail, oldpass);
+            call_acc.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        Toast.makeText(Activity_EditAccount.this, "" + response.body(), Toast.LENGTH_SHORT).show();
+                        SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
+                        SharedPreferences.Editor e = s.edit();
+                        e.putString("Email",editacc.getEMAIL());
+                        e.putString("Pass",editacc.getPASS());
+                        e.apply();
+                        finish();
+                    } else {
+                        Toast.makeText(Activity_EditAccount.this, "" + response.body(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d(">>>>>>>>>>>>>>>>>>>>>>>>", t.getMessage());
+                }
+            });
+        } else {
+            Toast.makeText(Activity_EditAccount.this, "Looxi gif ddos maf t ddeos bieets", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         Btn_changeavata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Activity_EditAccount.this);
-                View view = LayoutInflater.from(Activity_EditAccount.this).inflate(R.layout.layout_list_avata,null);
-                builder.setTitle("Chọn ảnh đại diện ");
-                RecyclerView Recycler_viewavata = view.findViewById(R.id.Recycler_viewavata);
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(Activity_EditAccount.this,3);
-                Adapter_Avata adapter_avata = new Adapter_Avata(avatarURLs, Activity_EditAccount.this);
-                Recycler_viewavata.setLayoutManager(gridLayoutManager);
-                Recycler_viewavata.setAdapter(adapter_avata);
-                builder.setView(view);
-                Dialog dialog = builder.create();
-                adapter_avata.setOnClickProduct(new Adapter_Like.OnClickProduct() {
-                    @Override
-                    public void clickproduct(int ID) {
-                        Glide.with(Activity_EditAccount.this)
-                                .load(avatarURLs.get(ID))
-                                .into(Img_avata);
-                        stt = ID;
-                        dialog.cancel();
-                    }
-                });
-
-                dialog.show();
+               showIcon();
             }
         });
 
         Img_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EDITACCOUNT editacc = new EDITACCOUNT();
-                editacc.setIMG(avatarURLs.get(stt));
-                editacc.setNAME(Edt_fullName.getText().toString());
-                editacc.setEMAIL(Edt_email.getText().toString());
-                editacc.setADDRESS(Edt_address.getText().toString());
-                editacc.setPHONE(Edt_number.getText().toString());
-                editacc.setPASS(Edt_password.getText().toString());
-                if (!TextUtils.isEmpty(editacc.getNAME()) && !TextUtils.isEmpty(editacc.getEMAIL()) && !TextUtils.isEmpty(editacc.getPASS()) && !TextUtils.isEmpty(editacc.getADDRESS()) && !TextUtils.isEmpty(editacc.getPHONE()) && !TextUtils.isEmpty(editacc.getIMG())) {
-                    Retrofit retrofit_acc = new Retrofit.Builder()
-                            .baseUrl("https://phqmarket.online/controller/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    api api_acc = retrofit_acc.create(api.class);
-                    Call<String> call_acc = api_acc.updatecustomer(editacc.getNAME(),editacc.getEMAIL(),editacc.getPASS(),editacc.getPHONE(),editacc.getADDRESS(),editacc.getIMG(),oldemail, oldpass);
-                    call_acc.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            if (response.isSuccessful() && response.body() != null) {
-                                Toast.makeText(Activity_EditAccount.this, "" + response.body(), Toast.LENGTH_SHORT).show();
-                                SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
-                                SharedPreferences.Editor e = s.edit();
-                                e.putString("Email",editacc.getEMAIL());
-                                e.putString("Pass",editacc.getPASS());
-                                e.apply();
-                                finish();
-                            } else {
-                                Toast.makeText(Activity_EditAccount.this, "" + response.body(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-                            Log.d(">>>>>>>>>>>>>>>>>>>>>>>>", t.getMessage());
-                        }
-                    });
-                } else {
-                    Toast.makeText(Activity_EditAccount.this, "Looxi gif ddos maf t ddeos bieets", Toast.LENGTH_SHORT).show();
-                }
-
+               updateAccount();
             }
         });
 

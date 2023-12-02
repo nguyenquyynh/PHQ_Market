@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
+    <ImageView
+        android:id="@+id/Img_Notifi"
+        android:layout_width="50dp"
+        android:layout_below="@id/Txt_Date"
+        android:layout_height="50dp"
+        android:src="@drawable/account"
+        android:layout_marginRight="5dp"
+        android:layout_centerVertical="true"
+        android:background="@color/white"/>
+    <TextView
+        android:id="@+id/Txt_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiêu đề"
+        android:layout_toRightOf="@+id/Img_Notifi"
+        android:layout_below="@id/Txt_Date"
+        android:textColor="@color/navigation_selected"
+        android:textSize="25dp"/>
+    <TextView
+        android:id="@+id/Txt_Content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_below="@id/Txt_Title"
+        android:layout_toRightOf="@+id/Img_Notifi"
+        android:text="Nội dung"/>
+    <TextView
+        android:id="@+id/Txt_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="01/12/2023"/>
+</RelativeLayout>

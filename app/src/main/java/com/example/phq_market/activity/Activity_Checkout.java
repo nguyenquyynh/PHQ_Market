@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -73,6 +74,8 @@ public class Activity_Checkout extends AppCompatActivity {
     private TextView Txt_city;
     private TextView Txt_districs ;
     private TextView Txt_ward ;
+    private EditText Edt_DetailAddress;
+    private String url = api.url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +146,7 @@ public class Activity_Checkout extends AppCompatActivity {
         Txt_city = view.findViewById(R.id.Txt_city);
         Txt_districs = view.findViewById(R.id.Txt_districs);
         Txt_ward = view.findViewById(R.id.Txt_ward);
+        Edt_DetailAddress = view.findViewById(R.id.Edt_DetailAddress);
         Button Btn_Confirm = view.findViewById(R.id.Btn_Confirm);
         ImageView Img_Cancel = view.findViewById(R.id.Img_Cancel);
         rcv = view.findViewById(R.id.rcv);
@@ -198,10 +202,10 @@ public class Activity_Checkout extends AppCompatActivity {
         Btn_Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Txt_ward.getText().toString().isEmpty() || Txt_districs.getText().toString().isEmpty() || Txt_city.getText().toString().isEmpty()){
+                if(Edt_DetailAddress.getText().toString().isEmpty() || Txt_ward.getText().toString().isEmpty() || Txt_districs.getText().toString().isEmpty() || Txt_city.getText().toString().isEmpty()){
                     Toast.makeText(Activity_Checkout.this, "Hãy chọn địa chỉ ", Toast.LENGTH_SHORT).show();
                 }else {
-                    Txt_adress.setText(Txt_ward.getText().toString()+", "+Txt_districs.getText().toString()+", "+Txt_city.getText().toString());
+                    Txt_adress.setText(Edt_DetailAddress.getText().toString() + ", "+Txt_ward.getText().toString()+", "+Txt_districs.getText().toString()+", "+Txt_city.getText().toString());
                     dialog.cancel();
                 }
 
@@ -250,7 +254,7 @@ public class Activity_Checkout extends AppCompatActivity {
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        api api = retrofit.create(api.class);
+        api api = retrofit.create(com.example.phq_market.api.api.class);
         Call<ArrayList<City>> call = api.get_listAdress();
         call.enqueue(new Callback<ArrayList<City>>() {
             @Override
@@ -269,7 +273,6 @@ public class Activity_Checkout extends AppCompatActivity {
                                 Txt_city.setVisibility(View.VISIBLE);
                                 Txt_districs.setVisibility(View.VISIBLE);
                                 Txt_city.setText(name);
-
 
                                 posotioncity = posotion;
                                 listString.clear();
@@ -342,7 +345,7 @@ public class Activity_Checkout extends AppCompatActivity {
                 });
 
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -387,7 +390,7 @@ public class Activity_Checkout extends AppCompatActivity {
                 });
 
                 Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -425,9 +428,7 @@ public class Activity_Checkout extends AppCompatActivity {
         }).start();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void getPersonalInformation(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -436,7 +437,7 @@ public class Activity_Checkout extends AppCompatActivity {
                 String pass = sharedPreferences.getString("Pass",null);
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://phqmarket.online/controller/")
+                        .baseUrl(url)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 api Api  = retrofit.create(api.class);
@@ -459,5 +460,12 @@ public class Activity_Checkout extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getPersonalInformation();
     }
 }

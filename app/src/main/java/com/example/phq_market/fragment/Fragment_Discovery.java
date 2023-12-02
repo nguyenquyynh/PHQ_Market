@@ -52,7 +52,7 @@ public class Fragment_Discovery extends Fragment {
     Adapter_NewProduct adapter_newProduct;
     Adapter_SaleProduct adapter_saleProduct;
     private Dialog dialog;
-
+    private String url = api.url;
     public Fragment_Discovery() {
         // Required empty public constructor
     }
@@ -79,7 +79,7 @@ public class Fragment_Discovery extends Fragment {
     }
     private void getListBanner(){
         Retrofit retrofit_banner = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_banner = retrofit_banner.create(api.class);
@@ -104,7 +104,7 @@ public class Fragment_Discovery extends Fragment {
 
     private void getListCatalog(){
         Retrofit retrofit_catalog = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_catalog = retrofit_catalog.create(api.class);
@@ -127,7 +127,7 @@ public class Fragment_Discovery extends Fragment {
     }
     private void getListNewProduct(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_product = retrofit.create(api.class);
@@ -151,7 +151,7 @@ public class Fragment_Discovery extends Fragment {
 
     private void getListBestSale(){
         Retrofit retrofit_sale = new Retrofit.Builder()
-                .baseUrl("https://phqmarket.online/controller/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api api_sale = retrofit_sale.create(api.class);

@@ -12,19 +12,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="center">
         <ImageView
             android:id="@+id/IMG_Back"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/back"
-            android:layout_gravity="center"/>
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Account"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="25dp"
             android:layout_centerHorizontal="true"/>
 
@@ -33,31 +34,9 @@
             android:layout_width="24dp"
             android:layout_height="30dp"
             android:src="@drawable/check"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="360dp"
-        android:background="@color/background"
-        android:layout_marginTop="27dp"
-        android:layout_gravity="center">
-        <ImageView
-            android:id="@+id/Img_avata"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/Btn_changeavata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/black"
-        android:text="Click To Change Image"
-        app:cornerRadius="10dp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -67,6 +46,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="360dp"
+                android:background="@color/background"
+                android:layout_marginTop="27dp"
+                android:layout_gravity="center">
+                <ImageView
+                    android:id="@+id/Img_avata"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"/>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/Btn_changeavata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/black"
+                android:text="Click To Change Image"
+                app:cornerRadius="10dp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
@@ -77,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Full Name"
+                    android:textColor="@color/black"
                     android:inputType="text"
                     android:drawableLeft="@drawable/acthention"
                     android:drawablePadding="20dp"
@@ -94,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/radius"
+                    android:textColor="@color/black"
                     android:drawableLeft="@drawable/email"
                     android:drawablePadding="20dp"
                     android:hint="Email"
@@ -110,6 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Adress"
+                    android:textColor="@color/black"
                     android:inputType="none"
                     android:focusable="false"
                     android:drawableLeft="@drawable/home_edit_acconut"
@@ -124,6 +130,7 @@
                 android:layout_height="60dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/Edt_number"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Number"
@@ -147,6 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Password"
+                        android:textColor="@color/black"
                         android:inputType="textPassword"
                         android:drawableLeft="@drawable/pass"
                         android:drawablePadding="20dp"

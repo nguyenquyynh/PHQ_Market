@@ -124,6 +124,7 @@
             android:layout_width="match_parent"
             android:id="@+id/Edt_content"
             android:layout_height="170dp"
+            android:gravity="start"
             android:inputType="text"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>

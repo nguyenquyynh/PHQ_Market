@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -49,6 +50,7 @@ public class Activity_Main extends AppCompatActivity {
         Img_search = findViewById(R.id.Img_search);
         Title_fragment = findViewById(R.id.Title_fragment);
         layout1 = findViewById(R.id.layout1);
+        ImageView Img_notification = findViewById(R.id.Img_notification);
         changeFragment(new Fragment_Home());
         Title_fragment.setText("Home");
 
@@ -87,11 +89,16 @@ public class Activity_Main extends AppCompatActivity {
         }catch (Exception e){
             showWelcome();
         }
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int densityDpi = displayMetrics.densityDpi;
+
+        int px =(int) (40*((float)densityDpi/160.0));
+
         bottomNavigationView.setItemActiveIndicatorColor(ColorStateList.valueOf(Color.argb(255,56,151,46)));
         bottomNavigationView.setItemActiveIndicatorEnabled(true);
-        bottomNavigationView.setItemActiveIndicatorWidth(70);
-        bottomNavigationView.setItemActiveIndicatorHeight(70);
-        bottomNavigationView.setItemActiveIndicatorShapeAppearance(new ShapeAppearanceModel().withCornerSize(15).toBuilder().build());
+        bottomNavigationView.setItemActiveIndicatorWidth(px);
+        bottomNavigationView.setItemActiveIndicatorHeight(px);
+        bottomNavigationView.setItemActiveIndicatorShapeAppearance(new ShapeAppearanceModel().withCornerSize(30).toBuilder().build());
 
 
         Img_search.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +107,12 @@ public class Activity_Main extends AppCompatActivity {
                 startActivity(new Intent(Activity_Main.this, Activity_Search.class));
             }
         });
-
+        Img_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Activity_Main.this,Activity_Notification.class));
+            }
+        });
     }
 
     @Override
@@ -113,6 +125,12 @@ public class Activity_Main extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 layout1.setVisibility(View.VISIBLE);
                 Img_search.setVisibility(View.VISIBLE);
+
+                int currentItem = bottomNavigationView.getSelectedItemId();
+                if (currentItem == item.getItemId()) {
+                    // Ngăn chặn việc chuyển đổi
+                    return false;
+                }
 
                 if (item.getItemId() == R.id.Home) {
                     changeFragment(new Fragment_Home());

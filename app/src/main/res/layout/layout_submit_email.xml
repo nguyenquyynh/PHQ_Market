@@ -31,7 +31,7 @@
         android:paddingLeft="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/radius"
-        android:visibility="visible"
+        android:visibility="gone"
         android:hint="Enter code"/>
 
     <Button
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="Submit"
         android:backgroundTint="@color/button_login"
         android:textColor="@color/white"
