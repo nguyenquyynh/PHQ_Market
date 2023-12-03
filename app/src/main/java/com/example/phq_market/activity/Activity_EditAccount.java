@@ -352,7 +352,7 @@ public class Activity_EditAccount extends AppCompatActivity {
 
     private void updateAccount(){
         EDITACCOUNT editacc = new EDITACCOUNT();
-        editacc.setIMG(avatarURLs.get(stt));
+        editacc.setIMG(avatarURLs.get(stt).replace("/","!"));
         editacc.setNAME(Edt_fullName.getText().toString());
         editacc.setEMAIL(Edt_email.getText().toString());
         editacc.setADDRESS(Edt_address.getText().toString());
@@ -369,7 +369,7 @@ public class Activity_EditAccount extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        Toast.makeText(Activity_EditAccount.this, "" + response.body(), Toast.LENGTH_SHORT).show();
+                        Log.e(">>>>>>>>>>>>>>>>>>>>>>>>", response.body()+""+oldemail+" /"+oldpass);
                         SharedPreferences s = getSharedPreferences("account", MODE_PRIVATE);
                         SharedPreferences.Editor e = s.edit();
                         e.putString("Email",editacc.getEMAIL());
