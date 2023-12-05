@@ -113,6 +113,7 @@ public class Activity_FeedBack extends AppCompatActivity {
             public void onClick(View v) {
                 unfeedback();
                 evaluate = 1;
+                Txt_status.setText("This is a pretty bad product, not as expected");
                 feedback(evaluate);
             }
 
@@ -122,6 +123,7 @@ public class Activity_FeedBack extends AppCompatActivity {
             public void onClick(View v) {
                 unfeedback();
                 evaluate = 2;
+                Txt_status.setText("This is a bad product, hopefully it will be fixed");
                 feedback(evaluate);
             }
 
@@ -131,6 +133,7 @@ public class Activity_FeedBack extends AppCompatActivity {
             public void onClick(View v) {
                 unfeedback();
                 evaluate = 3;
+                Txt_status.setText("This is a temporary product that needs to be refin");
                 feedback(evaluate);
             }
 
@@ -140,6 +143,7 @@ public class Activity_FeedBack extends AppCompatActivity {
             public void onClick(View v) {
                 unfeedback();
                 evaluate = 4;
+                Txt_status.setText("This is a pretty good product, everyone should try");
                 feedback(evaluate);
             }
 
@@ -149,6 +153,7 @@ public class Activity_FeedBack extends AppCompatActivity {
             public void onClick(View v) {
                 unfeedback();
                 evaluate = 5;
+                Txt_status.setText("This is a great product, nothing to complain about");
                 feedback(evaluate);
             }
 
