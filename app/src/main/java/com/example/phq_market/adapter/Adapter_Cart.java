@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.model.CARTCHECKBOX;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> {
@@ -65,20 +66,20 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull Adapter_Cart.ViewHolder holder, int position) {
         CARTCHECKBOX cart = list_CART.get(holder.getAdapterPosition());
-
+        DecimalFormat formatter = new DecimalFormat("#,###");
         try {
             Glide.with(context)
                     .load(cart.getIMG())
                     .into(holder.imgAnh);
             holder.tvName.setText(cart.getNAME());
             holder.tvquantity.setText(String.valueOf(cart.getQUANTITY()));
-            holder.tvCost.setText(String.valueOf(cart.getPRICE()));
+            holder.tvCost.setText(formatter.format(cart.getPRICE()));
             holder.Chk_check.setChecked(cart.isCheck());
         } catch (Exception e) {
             Log.d(">>>>>>>>>>>>>>", e.getMessage());
         }
 
-        if(cart.getPRODUCTQUANTITY() == 0){
+        if(cart.getPRODUCTQUANTITY() == 0 || (cart.getPRODUCTQUANTITY()- cart.getQUANTITY())<0){
             holder.imgAnh.setColorFilter(Color.parseColor("#808080"));
             holder.Chk_check.setEnabled(false);
             holder.btnPlus.setEnabled(false);

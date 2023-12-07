@@ -104,7 +104,7 @@ public class Activity_Signup extends AppCompatActivity {
                 } else if (password.length()<8) {
                     Toast.makeText(Activity_Signup.this, "The password need more than 8 letter", Toast.LENGTH_SHORT).show();
                 } else if (!isPasswordValid(password)) {
-                    Toast.makeText(Activity_Signup.this, "The password need at least 1 lowercase letter,1 uppercase letter , 1 number and special characters ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_Signup.this, "The password need at least 1 lowercase letter,1 uppercase letter , 1 number and special characters @$!%*?&", Toast.LENGTH_SHORT).show();
                 } else if (!password.equals(confirmPassword)) {
                     edtConfirmPassword.requestFocus();
                     Toast.makeText(Activity_Signup.this, "Enter the same password", Toast.LENGTH_SHORT).show();
