@@ -27,6 +27,7 @@ import com.example.phq_market.model.CART;
 import com.example.phq_market.model.CARTCHECKBOX;
 import com.example.phq_market.model.PURCHASE;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -48,6 +49,7 @@ public class Fragment_Cart extends Fragment {
     private TextView tvCost;
     private Dialog dialog;
     private String url = api.url;
+    private DecimalFormat formatter = new DecimalFormat("#,###");
     public Fragment_Cart() {
         // Required empty public constructor
     }
@@ -76,14 +78,13 @@ public class Fragment_Cart extends Fragment {
         btnCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(Float.valueOf(tvCost.getText().toString()) > 0){
-                    ArrayList<PURCHASE> list_purchase = new ArrayList<>();
-                    for (CARTCHECKBOX ca : list_CARTCHECKBOX){
-                        if(ca.isCheck()){
-                            list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY(),0));
-                        }
+                ArrayList<PURCHASE> list_purchase = new ArrayList<>();
+                for (CARTCHECKBOX ca : list_CARTCHECKBOX){
+                    if(ca.isCheck()){
+                        list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY(),0));
                     }
+                }
+                if(list_purchase.size()>0){
                     Intent intent = new Intent(getContext(), Activity_Checkout.class);
                     intent.putExtra("list_purchase",list_purchase);
                     startActivity(intent);
@@ -110,7 +111,7 @@ public class Fragment_Cart extends Fragment {
                 sum += ca.getPRICE()*ca.getQUANTITY();
             }
         }
-        tvCost.setText(sum+"");
+        tvCost.setText(formatter.format(sum)+"");
     }
 
     @Override

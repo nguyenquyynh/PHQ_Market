@@ -48,7 +48,7 @@ public class Activity_EditAccount extends AppCompatActivity {
     Button Btn_changeavata;
     String oldemail, oldpass;
     ArrayList<String> avatarURLs = new ArrayList<>();
-    int stt =0;
+    String stt;
 
     private static final String API_URL = "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/";
     private Adapter_Recycleview adapter_recycleview;
@@ -342,7 +342,7 @@ public class Activity_EditAccount extends AppCompatActivity {
                 Glide.with(Activity_EditAccount.this)
                         .load(avatarURLs.get(ID))
                         .into(Img_avata);
-                stt = ID;
+                stt = avatarURLs.get(ID);
                 dialog.cancel();
             }
         });
@@ -352,7 +352,7 @@ public class Activity_EditAccount extends AppCompatActivity {
 
     private void updateAccount(){
         EDITACCOUNT editacc = new EDITACCOUNT();
-        editacc.setIMG(avatarURLs.get(stt).replace("/","!"));
+        editacc.setIMG(stt.replace("/","!"));
         editacc.setNAME(Edt_fullName.getText().toString());
         editacc.setEMAIL(Edt_email.getText().toString());
         editacc.setADDRESS(Edt_address.getText().toString());

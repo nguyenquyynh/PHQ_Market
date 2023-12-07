@@ -84,6 +84,13 @@ public class Activity_Status extends AppCompatActivity {
             }
         });
 
+        Img_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Activity_Status.this, Activity_Notification.class));
+            }
+        });
+
 
         Tv_Confirming.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,8 +177,13 @@ public class Activity_Status extends AppCompatActivity {
                                 listOrder.addAll(list);
                                 adapterOrderShipping = new Adapter_Order_Shipping(Activity_Status.this,listOrder);
                                 Rcv_status.setAdapter(adapterOrderShipping);
+                            }else{
+                                listOrder.clear();
+                                Rcv_status.setAdapter(adapterOrderConfirm);
                             }
                         }else {
+                            listOrder.clear();
+                            Rcv_status.setAdapter(adapterOrderConfirm);
                             Log.e("------>",response.body()+"");
                         }
                     }
@@ -179,6 +191,8 @@ public class Activity_Status extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
                         Log.e("------>",t+"");
+                        listOrder.clear();
+                        Rcv_status.setAdapter(adapterOrderConfirm);
                     }
                 });
             }
@@ -210,14 +224,21 @@ public class Activity_Status extends AppCompatActivity {
                                 listOrder.addAll(list);
                                 adapterOrderFeedBack = new Adapter_Order_Done(Activity_Status.this,listOrder);
                                 Rcv_status.setAdapter(adapterOrderFeedBack);
+                            }else {
+                                listOrder.clear();
+                                Rcv_status.setAdapter(adapterOrderConfirm);
                             }
                         }else {
+                            listOrder.clear();
+                            Rcv_status.setAdapter(adapterOrderConfirm);
                             Log.e("------>",response.body()+"");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
+                        listOrder.clear();
+                        Rcv_status.setAdapter(adapterOrderConfirm);
                         Log.e("------>",t+"");
                     }
                 });
@@ -250,14 +271,21 @@ public class Activity_Status extends AppCompatActivity {
                                 listOrder.addAll(list);
                                 adapterOrderShipping = new Adapter_Order_Shipping(Activity_Status.this,listOrder);
                                 Rcv_status.setAdapter(adapterOrderShipping);
+                            }else{
+                                listOrder.clear();
+                                Rcv_status.setAdapter(adapterOrderConfirm);
                             }
                         }else {
+                            listOrder.clear();
+                            Rcv_status.setAdapter(adapterOrderConfirm);
                             Log.e("------>",response.body()+"");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
+                        listOrder.clear();
+                        Rcv_status.setAdapter(adapterOrderConfirm);
                         Log.e("------>",t+"");
                     }
                 });
@@ -290,8 +318,13 @@ public class Activity_Status extends AppCompatActivity {
                                 listOrder.addAll(list);
                                 adapterOrderConfirm = new Adapter_Order_Confirm(Activity_Status.this,listOrder);
                                 Rcv_status.setAdapter(adapterOrderConfirm);
+                            }else {
+                                listOrder.clear();
+                                Rcv_status.setAdapter(adapterOrderConfirm);
                             }
                         }else {
+                            listOrder.clear();
+                            Rcv_status.setAdapter(adapterOrderConfirm);
                             Log.e("------>",response.body()+"");
                         }
                     }
@@ -299,6 +332,8 @@ public class Activity_Status extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
                         Log.e("------>",t+"");
+                        listOrder.clear();
+                        Rcv_status.setAdapter(adapterOrderConfirm);
                     }
                 });
             }
