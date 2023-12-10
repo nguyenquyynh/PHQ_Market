@@ -358,7 +358,13 @@ public class Activity_EditAccount extends AppCompatActivity {
         editacc.setADDRESS(Edt_address.getText().toString());
         editacc.setPHONE(Edt_number.getText().toString());
         editacc.setPASS(Edt_password.getText().toString());
-        if (!TextUtils.isEmpty(editacc.getNAME()) && !TextUtils.isEmpty(editacc.getEMAIL()) && !TextUtils.isEmpty(editacc.getPASS()) && !TextUtils.isEmpty(editacc.getADDRESS()) && !TextUtils.isEmpty(editacc.getPHONE()) && !TextUtils.isEmpty(editacc.getIMG())) {
+        if(Edt_number.getText().toString().length()<10){
+            Toast.makeText(Activity_EditAccount.this,"Phone number need 10 number", Toast.LENGTH_SHORT).show();
+        }else if(Edt_password.getText().toString().length()<8){
+            Toast.makeText(Activity_EditAccount.this, "The password need more than 8 letter", Toast.LENGTH_SHORT).show();
+        }else if(!isPasswordValid(Edt_password.getText().toString())){
+            Toast.makeText(Activity_EditAccount.this, "The password need at least 1 lowercase letter,1 uppercase letter , 1 number and special characters @$!%*?&", Toast.LENGTH_SHORT).show();
+        }else if (!TextUtils.isEmpty(editacc.getNAME()) && !TextUtils.isEmpty(editacc.getEMAIL()) && !TextUtils.isEmpty(editacc.getPASS()) && !TextUtils.isEmpty(editacc.getADDRESS()) && !TextUtils.isEmpty(editacc.getPHONE()) && !TextUtils.isEmpty(editacc.getIMG())) {
             Retrofit retrofit_acc = new Retrofit.Builder()
                     .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -409,5 +415,11 @@ public class Activity_EditAccount extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean isPasswordValid(String password) {
+        // Yêu cầu ít nhất 1 chữ cái thường, 1 chữ cái hoa, 1 kí tự đặt biệt và 1 số
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        return password.matches(passwordPattern);
     }
 }
