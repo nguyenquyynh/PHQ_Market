@@ -52,6 +52,7 @@
             android:layout_height="60dp"
             android:background="@drawable/nen_search"
             android:hint="Search"
+            android:textColor="@color/black"
             android:drawableLeft="@drawable/search"
             android:layout_marginRight="10dp"
             android:paddingLeft="20dp"

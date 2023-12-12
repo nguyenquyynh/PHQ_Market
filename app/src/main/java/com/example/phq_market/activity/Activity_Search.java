@@ -137,7 +137,7 @@ public class Activity_Search extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String s1 = s.toString();
+                String s1 = s.toString().toLowerCase();
                 if (!s1.isEmpty()) {
                     list_all.clear();
                     for (NEWPRODUCT pro: listsearch) {

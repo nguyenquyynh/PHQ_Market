@@ -125,7 +125,7 @@ public class Fragment_Like extends Fragment {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String s1 = s.toString();
+                String s1 = s.toString().toLowerCase();
                 if (!s1.isEmpty()) {
                     list_like.clear();
                     for (NEWPRODUCT pro: listsearch) {

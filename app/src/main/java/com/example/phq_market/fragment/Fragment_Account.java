@@ -216,7 +216,6 @@ public class Fragment_Account extends Fragment {
         set.setCircleColor(Color.GREEN);
         set.setCircleRadius(5f);
         set.setFillColor(Color.GREEN);
-        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set.setDrawValues(true);
         set.setValueTextSize(10f);
         set.setValueTextColor(Color.GREEN);
