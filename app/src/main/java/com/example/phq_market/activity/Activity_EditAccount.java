@@ -123,6 +123,7 @@ public class Activity_EditAccount extends AppCompatActivity {
                 Glide.with(Activity_EditAccount.this)
                         .load(acc.getIMG())
                         .into(Img_avata);
+                stt = acc.getIMG();
                 Edt_fullName.setText(acc.getNAME());
                 Edt_email.setText(acc.getEMAIL());
                 Edt_address.setText(acc.getADDRESS());

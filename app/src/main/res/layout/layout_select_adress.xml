@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:padding="20dp"
     android:background="@color/background">
     <RelativeLayout
         android:padding="10dp"
@@ -13,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="Select Adress"
             android:textSize="30dp"
             android:textColor="@color/navigation_selected"/>
@@ -21,6 +23,7 @@
             android:id="@+id/Img_Cancel"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_centerVertical="true"
             android:src="@drawable/cancel"
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
@@ -30,8 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="select city"
+        android:gravity="center"
+        android:textColor="@color/black"
         android:visibility="gone"
-        android:textSize="20dp"/>
+        android:textSize="25dp"/>
 
     <!-- District Selector Spinner -->
     <TextView
@@ -40,16 +45,20 @@
         android:layout_height="wrap_content"
         android:hint="select district"
         android:visibility="gone"
-        android:textSize="20dp"/>
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="25dp"/>
 
     <!-- Ward Selector Spinner -->
     <TextView
         android:id="@+id/Txt_ward"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:hint="select ward"
+        android:gravity="center"
         android:visibility="gone"
-        android:textSize="20dp"/>
+        android:textSize="25dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
@@ -61,6 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:padding="10dp"
+        android:textColor="@color/black"
         android:layout_margin="10dp"
         android:background="@drawable/outline_edit_account"
         android:hint="Submit street and apartment number"/>

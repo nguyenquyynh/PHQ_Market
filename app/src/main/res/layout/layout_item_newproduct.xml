@@ -16,8 +16,7 @@
             android:id="@+id/anh"
             android:layout_width="0dp"
             android:layout_weight="28"
-            android:background="@drawable/nen_product"
-
+            android:background="@drawable/nen_search"
             android:layout_height="130dp">
             <ImageView
                 android:id="@+id/Img_imageproduct"
