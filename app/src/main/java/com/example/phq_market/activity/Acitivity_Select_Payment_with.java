@@ -2,6 +2,7 @@ package com.example.phq_market.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -38,6 +39,7 @@ public class Acitivity_Select_Payment_with extends AppCompatActivity {
     private String giaTien;
     private String diachi;
     private String pay;
+    private int payment;
     private ProgressDialog progressDialog;
     private Handler handler = new Handler();
     private String url = api.url;
@@ -55,6 +57,7 @@ public class Acitivity_Select_Payment_with extends AppCompatActivity {
         giaTien = getCosst.getStringExtra("cosst");
         diachi = getCosst.getStringExtra("diachi");
         pay = getCosst.getStringExtra("lisst");
+        payment = getCosst.getIntExtra("payment",0);
         Log.e("--------------------->",giaTien+diachi+pay);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -232,6 +235,9 @@ public class Acitivity_Select_Payment_with extends AppCompatActivity {
     }
 
     private void addpurchase(String cart) {
+        SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
+        String email = sharedPreferences.getString("Email",null);
+        String pass = sharedPreferences.getString("Pass",null);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -241,7 +247,7 @@ public class Acitivity_Select_Payment_with extends AppCompatActivity {
                         .build();
 
                 api api_cart = retrofit_catalog.create(api.class);
-                Call<String> call = api_cart.add_Purchase(cart,diachi);
+                Call<String> call = api_cart.add_Purchase(cart,diachi,email,pass.replace("/","!"),payment);
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
