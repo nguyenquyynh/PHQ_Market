@@ -25,7 +25,6 @@ import com.example.phq_market.adapter.Adapter_Cart;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.CART;
 import com.example.phq_market.model.CARTCHECKBOX;
-import com.example.phq_market.model.PURCHASE;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -78,10 +77,10 @@ public class Fragment_Cart extends Fragment {
         btnCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<PURCHASE> list_purchase = new ArrayList<>();
+                ArrayList<CARTCHECKBOX> list_purchase = new ArrayList<>();
                 for (CARTCHECKBOX ca : list_CARTCHECKBOX){
                     if(ca.isCheck()){
-                        list_purchase.add(new PURCHASE(ca.getID(), email,pass,ca.getQUANTITY(),0));
+                        list_purchase.add(ca);
                     }
                 }
                 if(list_purchase.size()>0){

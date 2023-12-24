@@ -356,7 +356,7 @@ public class Activity_EditAccount extends AppCompatActivity {
         editacc.setIMG(stt.replace("/","!"));
         editacc.setNAME(Edt_fullName.getText().toString());
         editacc.setEMAIL(Edt_email.getText().toString());
-        editacc.setADDRESS(Edt_address.getText().toString());
+        editacc.setADDRESS(Edt_address.getText().toString().replace("/","!"));
         editacc.setPHONE(Edt_number.getText().toString());
         editacc.setPASS(Edt_password.getText().toString());
         if(Edt_number.getText().toString().length()<10){
@@ -394,7 +394,7 @@ public class Activity_EditAccount extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(Activity_EditAccount.this, "Looxi gif ddos maf t ddeos bieets", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Activity_EditAccount.this, "Lỗi", Toast.LENGTH_SHORT).show();
         }
 
     }

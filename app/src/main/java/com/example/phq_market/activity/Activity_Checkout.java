@@ -26,8 +26,8 @@ import com.example.phq_market.adapter.Adapter_Checkout;
 import com.example.phq_market.adapter.Adapter_Recycleview;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.ACCOUNT;
+import com.example.phq_market.model.CARTCHECKBOX;
 import com.example.phq_market.model.CHECKOUT;
-import com.example.phq_market.model.PURCHASE;
 import com.example.phq_market.select_adress.City;
 import com.example.phq_market.select_adress.Districts;
 import com.example.phq_market.select_adress.Wards;
@@ -57,8 +57,8 @@ public class Activity_Checkout extends AppCompatActivity {
     private RecyclerView rcvListPurchase;
     private Adapter_Checkout adapter_checkout;
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<CHECKOUT> list;
-    private ArrayList<PURCHASE> listCart;
+
+    private ArrayList<CARTCHECKBOX> listCart;
     private ProgressDialog progressDialog;
     private Handler handler = new Handler();
     DecimalFormat formatter = new DecimalFormat("#,###");
@@ -76,6 +76,9 @@ public class Activity_Checkout extends AppCompatActivity {
     private TextView Txt_ward ;
     private EditText Edt_DetailAddress;
     private String url = api.url;
+    private String email;
+    private String pass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,26 +100,32 @@ public class Activity_Checkout extends AppCompatActivity {
         Button Btn_order = findViewById(R.id.Btn_order);
 
         Intent intent = getIntent();
-        listCart = (ArrayList<PURCHASE>) intent.getSerializableExtra("list_purchase");
+        listCart = (ArrayList<CARTCHECKBOX>) intent.getSerializableExtra("list_purchase");
 
-        list = new ArrayList<>();
-        getList(new Gson().toJson(listCart));
+
+        adapter_checkout = new Adapter_Checkout(Activity_Checkout.this,listCart);
+        linearLayoutManager = new LinearLayoutManager(Activity_Checkout.this);
+        rcvListPurchase.setLayoutManager(linearLayoutManager);
+        rcvListPurchase.setAdapter(adapter_checkout);
+        updatecost();
+
         Btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addpaymenttolist();
                 if(Txt_adress.getText().toString().equals("null") || Txt_adress.getText().toString().isEmpty() ){
                     Toast.makeText(Activity_Checkout.this, "Hãy thêm địa chỉ khi đặt hàng", Toast.LENGTH_SHORT).show();
                 } else if (Chk_Online.isChecked()) {
-                    String cart = new Gson().toJson(listCart);
+                    String cart = new Gson().toJson(changeList());
                     Intent giatien =new Intent(Activity_Checkout.this, Acitivity_Select_Payment_with.class);
                     giatien.putExtra("cosst",(int)totalPayment+"");
+                    giatien.putExtra("payment",checkpayment());
                     giatien.putExtra("lisst",cart);
                     giatien.putExtra("diachi", Txt_adress.getText().toString());
                     startActivity(giatien);
 
                 } else {
-                    String cart = new Gson().toJson(listCart);
+                    String cart = new Gson().toJson(changeList());
+                    Log.e("--------->",cart);
                     addpurchase(cart);
                 }
 
@@ -306,11 +315,6 @@ public class Activity_Checkout extends AppCompatActivity {
             }
         });
     }
-    private void addpaymenttolist(){
-        for(PURCHASE pu: listCart){
-            pu.setPAYMENT(checkpayment());
-        }
-    }
 
     private int checkpayment(){
         return Chk_direct.isChecked() ? 1 : 0;
@@ -319,7 +323,7 @@ public class Activity_Checkout extends AppCompatActivity {
     private void updatecost(){
         float totalCostItem = 0;
         float Fee = 30000;
-        for (CHECKOUT pu : list){
+        for (CARTCHECKBOX pu : listCart){
             totalCostItem+=pu.getPRICE()* pu.getQUANTITY();
         }
         totalPayment = totalCostItem + Fee;
@@ -350,7 +354,7 @@ public class Activity_Checkout extends AppCompatActivity {
                         .build();
 
                 api api_cart = retrofit_catalog.create(api.class);
-                Call<String> call = api_cart.add_Purchase(cart,Txt_adress.getText().toString());
+                Call<String> call = api_cart.add_Purchase(cart,Txt_adress.getText().toString().replace("/","!"),email,pass,checkpayment());
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -375,66 +379,13 @@ public class Activity_Checkout extends AppCompatActivity {
         }).start();
     }
 
-    private void getList(String cart){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog = new ProgressDialog(Activity_Checkout.this);
-                        progressDialog.setMessage("Loading......");
-                        progressDialog.setCancelable(false);
-                        progressDialog.show();
-                    }
-                });
-
-                Retrofit retrofit_catalog = new Retrofit.Builder()
-                        .baseUrl(url)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                api api_cart = retrofit_catalog.create(api.class);
-                Call<ArrayList<CHECKOUT>> call = api_cart.getCheckOut(cart);
-                call.enqueue(new Callback<ArrayList<CHECKOUT>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<CHECKOUT>> call, Response<ArrayList<CHECKOUT>> response) {
-                        if(response.isSuccessful() && response.body()!=null){
-                            ArrayList<CHECKOUT> listcheckot = response.body();
-                            Log.e("->>>>>>>>>>",response.body()+"");
-                            list.addAll(listcheckot);
-                            for(int i=0; i<list.size();i++){
-                                list.get(i).setQUANTITY(listCart.get(i).getQUANTITY());
-                            }
-                            adapter_checkout = new Adapter_Checkout(Activity_Checkout.this,list);
-                            linearLayoutManager = new LinearLayoutManager(Activity_Checkout.this);
-                            rcvListPurchase.setLayoutManager(linearLayoutManager);
-                            rcvListPurchase.setAdapter(adapter_checkout);
-                            updatecost();
-                            progressDialog.dismiss();
-                        }else {
-                            Log.e("->>>>>>>>>>>>>>>>",response.body()+"");
-                            progressDialog.dismiss();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ArrayList<CHECKOUT>> call, Throwable t) {
-                        Log.e("->>>>>>>>>>>>>>>>",t+"");
-                        progressDialog.dismiss();
-                    }
-                });
-            }
-        }).start();
-    }
-
     private void getPersonalInformation(){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
-                String email = sharedPreferences.getString("Email",null);
-                String pass = sharedPreferences.getString("Pass",null);
+                email = sharedPreferences.getString("Email",null);
+                pass = sharedPreferences.getString("Pass",null);
 
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(url)
@@ -460,6 +411,16 @@ public class Activity_Checkout extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+    private ArrayList<CHECKOUT> changeList(){
+        ArrayList<CHECKOUT> change = new ArrayList<>();
+
+        for (CARTCHECKBOX a: listCart) {
+            change.add(new CHECKOUT(a.getID(),a.getQUANTITY()));
+        }
+
+        return change;
     }
 
     @Override

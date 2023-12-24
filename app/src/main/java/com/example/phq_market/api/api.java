@@ -3,7 +3,6 @@ package com.example.phq_market.api;
 import com.example.phq_market.model.ACCOUNT;
 import com.example.phq_market.model.CART;
 import com.example.phq_market.model.CATALOGSHOW;
-import com.example.phq_market.model.CHECKOUT;
 import com.example.phq_market.model.CUSTOMER;
 import com.example.phq_market.model.FEEDBACKSHOW;
 import com.example.phq_market.model.MONTHANDDAY;
@@ -78,9 +77,7 @@ public interface api {
     Call<String> check_status(@Query("IDPRODUCT") Integer idproduct, @Query("EMAIL") String email, @Query("PASS") String pass);
     //purchase
     @GET("Order/Addpurchase")
-    Call<String> add_Purchase(@Query("listpurchase") String cart, @Query("ADRESS")  String Adress);
-    @GET("Order/Getitemtoaddpurchase")
-    Call<ArrayList<CHECKOUT>> getCheckOut(@Query("listcart") String cart);
+    Call<String> add_Purchase(@Query("listpurchase") String cart, @Query("ADRESS")  String Adress,@Query("EMAIL") String email,@Query("PASS") String pass,@Query("PAYMENT") int payment);
     @GET("Order/GetListOrderConfirm")
     Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderConfirm(@Query("EMAIL") String email,@Query("PASS") String pass);
     @GET("Order/GetListOrderShipping")

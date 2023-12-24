@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
-import com.example.phq_market.model.CHECKOUT;
+import com.example.phq_market.model.CARTCHECKBOX;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class Adapter_Checkout extends RecyclerView.Adapter<Adapter_Checkout.ViewHolder> {
 
     private Context context;
-    private ArrayList<CHECKOUT> listCheckout;
+    private ArrayList<CARTCHECKBOX> listCheckout;
 
-    public Adapter_Checkout(Context context, ArrayList<CHECKOUT> listCheckout) {
+    public Adapter_Checkout(Context context, ArrayList<CARTCHECKBOX> listCheckout) {
         this.context = context;
         this.listCheckout = listCheckout;
     }
@@ -35,7 +35,7 @@ public class Adapter_Checkout extends RecyclerView.Adapter<Adapter_Checkout.View
 
     @Override
     public void onBindViewHolder(@NonNull Adapter_Checkout.ViewHolder holder, int position) {
-        CHECKOUT chou = listCheckout.get(holder.getAdapterPosition());
+        CARTCHECKBOX chou = listCheckout.get(holder.getAdapterPosition());
         DecimalFormat formatter = new DecimalFormat("#,###");
         try{
             Glide.with(context)
