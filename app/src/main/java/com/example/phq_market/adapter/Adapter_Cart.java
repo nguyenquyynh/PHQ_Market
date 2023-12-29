@@ -66,6 +66,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull Adapter_Cart.ViewHolder holder, int position) {
         CARTCHECKBOX cart = list_CART.get(holder.getAdapterPosition());
+
         DecimalFormat formatter = new DecimalFormat("#,###");
         try {
             Glide.with(context)
@@ -79,13 +80,20 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
             Log.d(">>>>>>>>>>>>>>", e.getMessage());
         }
 
-        if(cart.getPRODUCTQUANTITY() == 0 || (cart.getPRODUCTQUANTITY()- cart.getQUANTITY())<0){
+        if(cart.getPRODUCTQUANTITY() == 0 || (cart.getPRODUCTQUANTITY() - cart.getQUANTITY())<0){
             holder.imgAnh.setColorFilter(Color.parseColor("#808080"));
             holder.Chk_check.setEnabled(false);
             holder.btnPlus.setEnabled(false);
             holder.btnMinus.setEnabled(false);
             holder.tvName.setPaintFlags(holder.tvName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.tvCost.setText("Out off stock");
+        }else{
+            holder.imgAnh.setColorFilter(null);
+            holder.Chk_check.setEnabled(true);
+            holder.btnPlus.setEnabled(true);
+            holder.btnMinus.setEnabled(true);
+            holder.tvName.setPaintFlags(holder.tvName.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            holder.tvCost.setText(formatter.format(cart.getPRICE()));
         }
 
         holder.Chk_check.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +132,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.ViewHolder> 
             @Override
             public void onClick(View v) {
                 int vitri = list_CART.get(holder.getAdapterPosition()).getID();
+                notifyItemRemoved(vitri);
                 deleteProduct.delete(vitri);
             }
         });
