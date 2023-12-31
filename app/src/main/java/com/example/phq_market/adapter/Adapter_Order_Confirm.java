@@ -8,18 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.phq_market.R;
 import com.example.phq_market.activity.Activity_Status;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.ORDERANDFEEDBACK;
+import com.example.phq_market.model.ORDERCONFIRM;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -32,43 +32,49 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Adapter_Order_Confirm extends RecyclerView.Adapter<Adapter_Order_Confirm.ViewHolder> {
     private Context context;
-    private ArrayList<ORDERANDFEEDBACK> listOrder;
+    private ArrayList<ORDERCONFIRM> listOrder;
     private String url = api.url;
 
-    public Adapter_Order_Confirm(Context context, ArrayList<ORDERANDFEEDBACK> listOrder) {
+    public Adapter_Order_Confirm(Context context, ArrayList<ORDERCONFIRM> listOrder) {
         this.context = context;
         this.listOrder = listOrder;
     }
+    private Adapter_Detail_Order_Confirm adapter;
+    private ArrayList<ORDERANDFEEDBACK> listdetail;
     @NonNull
     @Override
     public Adapter_Order_Confirm.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_item_order_feedback,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_item_confirm_order,null);
         return new Adapter_Order_Confirm.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Adapter_Order_Confirm.ViewHolder holder, int position) {
-        ORDERANDFEEDBACK orderProdcut = listOrder.get(holder.getAdapterPosition());
+        ORDERCONFIRM orderProdcut = listOrder.get(holder.getAdapterPosition());
         DecimalFormat formatter = new DecimalFormat("#,###");
-        holder.Btn_Feedback.setText("Cancel");
 
         try{
-            Glide.with(context)
-                    .load(orderProdcut.getIMG())
-                    .into(holder.Img_imageproduct);
-            holder.Txt_nameproduct.setText(orderProdcut.getNAME());
-            holder.Txt_evaluate.setText(orderProdcut.getQUANTITY()+"");
-            holder.Txt_priceproduct.setText(formatter.format(orderProdcut.getPAY()));
+            holder.Txt_code.setText("" + orderProdcut.getCODEORDER());
+            holder.Txt_payment.setText((orderProdcut.getPAYMENT() == 0? "Online": "Direct")+"");
+            holder.Txt_date.setText("Date: " + orderProdcut.getDATE());
+            holder.Txt_price.setText(formatter.format(orderProdcut.getPAY()));
+
+            listdetail = orderProdcut.getListdetail();
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+            holder.Rcv_img.setLayoutManager(linearLayoutManager);
+            adapter = new Adapter_Detail_Order_Confirm(context,listdetail);
+            holder.Rcv_img.setAdapter(adapter);
+
         }catch (Exception e){
 
         }
 
-        holder.Btn_Feedback.setOnClickListener(new View.OnClickListener() {
+        holder.Btn_Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Warning");
-                builder.setMessage("Are you sure you want to canel your "+ listOrder.get(holder.getAdapterPosition()).getNAME()+" order ?");
+                builder.setMessage("Are you sure you want to canel your order "+ listOrder.get(holder.getAdapterPosition()).getCODEORDER()+" order ?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -116,16 +122,17 @@ public class Adapter_Order_Confirm extends RecyclerView.Adapter<Adapter_Order_Co
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView Img_imageproduct;
-        public TextView Txt_nameproduct,Txt_evaluate,Txt_priceproduct;
-        public Button Btn_Feedback;
+        public TextView Txt_code,Txt_payment,Txt_price,Txt_date;
+        public Button Btn_Cancel;
+        public RecyclerView Rcv_img;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Img_imageproduct = itemView.findViewById(R.id.Img_imageproduct);
-            Txt_nameproduct = itemView.findViewById(R.id.Txt_nameproduct);
-            Txt_evaluate = itemView.findViewById(R.id.Txt_evaluate);
-            Txt_priceproduct = itemView.findViewById(R.id.Txt_priceproduct);
-            Btn_Feedback = itemView.findViewById(R.id.Btn_Feedback);
+            Txt_code = itemView.findViewById(R.id.Txt_code);
+            Txt_payment = itemView.findViewById(R.id.Txt_payment);
+            Txt_price = itemView.findViewById(R.id.Txt_price);
+            Txt_date = itemView.findViewById(R.id.Txt_date);
+            Btn_Cancel = itemView.findViewById(R.id.Btn_Cancel);
+            Rcv_img = itemView.findViewById(R.id.Rcv_img);
         }
     }
 }

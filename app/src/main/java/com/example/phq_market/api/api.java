@@ -10,6 +10,7 @@ import com.example.phq_market.model.NEWPRODUCT;
 import com.example.phq_market.model.NOTIFICATION;
 import com.example.phq_market.model.ONLYIMAGE;
 import com.example.phq_market.model.ORDERANDFEEDBACK;
+import com.example.phq_market.model.ORDERCONFIRM;
 import com.example.phq_market.model.PRODUCTDETAIL;
 import com.example.phq_market.select_adress.City;
 
@@ -79,7 +80,7 @@ public interface api {
     @GET("Order/Addpurchase")
     Call<String> add_Purchase(@Query("listpurchase") String cart, @Query("ADRESS")  String Adress,@Query("EMAIL") String email,@Query("PASS") String pass,@Query("PAYMENT") int payment);
     @GET("Order/GetListOrderConfirm")
-    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderConfirm(@Query("EMAIL") String email,@Query("PASS") String pass);
+    Call<ArrayList<ORDERCONFIRM>> get_listOrderConfirm(@Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("Order/GetListOrderShipping")
     Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderShipping(@Query("EMAIL") String email,@Query("PASS") String pass);
     @GET("Order/GetListOrderDone")
