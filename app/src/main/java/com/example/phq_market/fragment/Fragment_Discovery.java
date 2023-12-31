@@ -165,11 +165,18 @@ public class Fragment_Discovery extends Fragment {
                     list_saleproduct.addAll(list);
                     adapter_saleProduct.notifyDataSetChanged();
                     dialog.cancel();
+                }else{
+                    list_saleproduct.clear();
+                    adapter_saleProduct.notifyDataSetChanged();
+                    dialog.cancel();
                 }
             }
             @Override
             public void onFailure(Call<ArrayList<NEWPRODUCT>> call, Throwable t) {
                 Log.d(">>>>>>>>>>>>>>>>>>>>>>>", t.getMessage());
+                list_saleproduct.clear();
+                adapter_saleProduct.notifyDataSetChanged();
+                dialog.cancel();
             }
         });
     }

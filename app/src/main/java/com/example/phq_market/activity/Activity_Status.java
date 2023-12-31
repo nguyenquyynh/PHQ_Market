@@ -134,7 +134,9 @@ public class Activity_Status extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        Intent intent = new Intent(Activity_Status.this,Activity_Main.class);
+        intent.putExtra("where","Account");
+        startActivity(intent);
     }
 
     private void setSelected(TextView tv){
@@ -169,33 +171,33 @@ public class Activity_Status extends AppCompatActivity {
                 String pass = sharedPreferences.getString("Pass",null);
 
                 api Api = retrofit.create(api.class);
-                Call<ArrayList<ORDERANDFEEDBACK>> call = Api.get_listOrderCancel(email,pass);
-                call.enqueue(new Callback<ArrayList<ORDERANDFEEDBACK>>() {
+                Call<ArrayList<ORDERCONFIRM>> call = Api.get_listOrderCancel(email,pass);
+                call.enqueue(new Callback<ArrayList<ORDERCONFIRM>>() {
                     @Override
-                    public void onResponse(Call<ArrayList<ORDERANDFEEDBACK>> call, Response<ArrayList<ORDERANDFEEDBACK>> response) {
+                    public void onResponse(Call<ArrayList<ORDERCONFIRM>> call, Response<ArrayList<ORDERCONFIRM>> response) {
                         if(response.isSuccessful() && response.body()!=null){
-                            ArrayList<ORDERANDFEEDBACK> list = response.body();
+                            ArrayList<ORDERCONFIRM> list = response.body();
                             if(list.size()>0){
-                                listOrder.clear();
-                                listOrder.addAll(list);
-                                adapterOrderShipping = new Adapter_Order_Shipping(Activity_Status.this,listOrder);
+                                listConfirm.clear();
+                                listConfirm.addAll(list);
+                                adapterOrderShipping = new Adapter_Order_Shipping(Activity_Status.this,listConfirm);
                                 Rcv_status.setAdapter(adapterOrderShipping);
                             }else{
-                                listOrder.clear();
-                                Rcv_status.setAdapter(adapterOrderConfirm);
+                                listConfirm.clear();
+                                Rcv_status.setAdapter(adapterOrderShipping);
                             }
                         }else {
-                            listOrder.clear();
-                            Rcv_status.setAdapter(adapterOrderConfirm);
+                            listConfirm.clear();
+                            Rcv_status.setAdapter(adapterOrderShipping);
                             Log.e("------>",response.body()+"");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<ORDERCONFIRM>> call, Throwable t) {
                         Log.e("------>",t+"");
-                        listOrder.clear();
-                        Rcv_status.setAdapter(adapterOrderConfirm);
+                        listConfirm.clear();
+                        Rcv_status.setAdapter(adapterOrderShipping);
                     }
                 });
             }
@@ -229,11 +231,11 @@ public class Activity_Status extends AppCompatActivity {
                                 Rcv_status.setAdapter(adapterOrderFeedBack);
                             }else {
                                 listOrder.clear();
-                                Rcv_status.setAdapter(adapterOrderConfirm);
+                                Rcv_status.setAdapter(adapterOrderFeedBack);
                             }
                         }else {
                             listOrder.clear();
-                            Rcv_status.setAdapter(adapterOrderConfirm);
+                            Rcv_status.setAdapter(adapterOrderFeedBack);
                             Log.e("------>",response.body()+"");
                         }
                     }
@@ -241,7 +243,7 @@ public class Activity_Status extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
                         listOrder.clear();
-                        Rcv_status.setAdapter(adapterOrderConfirm);
+                        Rcv_status.setAdapter(adapterOrderFeedBack);
                         Log.e("------>",t+"");
                     }
                 });
@@ -263,32 +265,33 @@ public class Activity_Status extends AppCompatActivity {
                 String pass = sharedPreferences.getString("Pass",null);
 
                 api Api = retrofit.create(api.class);
-                Call<ArrayList<ORDERANDFEEDBACK>> call = Api.get_listOrderShipping(email,pass);
-                call.enqueue(new Callback<ArrayList<ORDERANDFEEDBACK>>() {
+                Call<ArrayList<ORDERCONFIRM>> call = Api.get_listOrderShipping(email,pass);
+                call.enqueue(new Callback<ArrayList<ORDERCONFIRM>>() {
                     @Override
-                    public void onResponse(Call<ArrayList<ORDERANDFEEDBACK>> call, Response<ArrayList<ORDERANDFEEDBACK>> response) {
+                    public void onResponse(Call<ArrayList<ORDERCONFIRM>> call, Response<ArrayList<ORDERCONFIRM>> response) {
                         if(response.isSuccessful() && response.body()!=null){
-                            ArrayList<ORDERANDFEEDBACK> list = response.body();
+                            ArrayList<ORDERCONFIRM> list = response.body();
+                            Log.e("hêree",list.size()+"");
                             if(list.size()>0){
-                                listOrder.clear();
-                                listOrder.addAll(list);
-                                adapterOrderShipping = new Adapter_Order_Shipping(Activity_Status.this,listOrder);
+                                listConfirm.clear();
+                                listConfirm.addAll(list);
+                                adapterOrderShipping = new Adapter_Order_Shipping(Activity_Status.this,listConfirm);
                                 Rcv_status.setAdapter(adapterOrderShipping);
                             }else{
-                                listOrder.clear();
-                                Rcv_status.setAdapter(adapterOrderConfirm);
+                                listConfirm.clear();
+                                Rcv_status.setAdapter(adapterOrderShipping);
                             }
                         }else {
-                            listOrder.clear();
-                            Rcv_status.setAdapter(adapterOrderConfirm);
+                            listConfirm.clear();
+                            Rcv_status.setAdapter(adapterOrderShipping);
                             Log.e("------>",response.body()+"");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
-                        listOrder.clear();
-                        Rcv_status.setAdapter(adapterOrderConfirm);
+                    public void onFailure(Call<ArrayList<ORDERCONFIRM>> call, Throwable t) {
+                        listConfirm.clear();
+                        Rcv_status.setAdapter(adapterOrderShipping);
                         Log.e("------>",t+"");
                     }
                 });

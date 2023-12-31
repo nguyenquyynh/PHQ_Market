@@ -8,15 +8,25 @@ public class ORDERCONFIRM {
     private Integer PAYMENT;
     private Float PAY;
     private String DATE;
+    private String ADRESS;
     private ArrayList<ORDERANDFEEDBACK> listdetail;
 
-    public ORDERCONFIRM(Integer ID, String CODEORDER, Integer PAYMENT, Float PAY, String DATE, ArrayList<ORDERANDFEEDBACK> listdetail) {
+    public ORDERCONFIRM(Integer ID, String CODEORDER, Integer PAYMENT, Float PAY, String DATE, String ADRESS, ArrayList<ORDERANDFEEDBACK> listdetail) {
         this.ID = ID;
         this.CODEORDER = CODEORDER;
         this.PAYMENT = PAYMENT;
         this.PAY = PAY;
         this.DATE = DATE;
+        this.ADRESS = ADRESS;
         this.listdetail = listdetail;
+    }
+
+    public String getADRESS() {
+        return ADRESS;
+    }
+
+    public void setADRESS(String ADRESS) {
+        this.ADRESS = ADRESS;
     }
 
     public ArrayList<ORDERANDFEEDBACK> getListdetail() {

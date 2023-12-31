@@ -52,7 +52,12 @@ public class Adapter_Detail_Order_Confirm extends RecyclerView.Adapter<Adapter_D
 
     @Override
     public int getItemCount() {
-        return list.size();
+        try{
+            return list.size();
+        }catch (Exception e){
+            return 0;
+        }
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
