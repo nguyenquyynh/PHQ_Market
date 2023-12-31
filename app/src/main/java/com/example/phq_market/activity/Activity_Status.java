@@ -21,6 +21,7 @@ import com.example.phq_market.adapter.Adapter_Order_Done;
 import com.example.phq_market.adapter.Adapter_Order_Shipping;
 import com.example.phq_market.api.api;
 import com.example.phq_market.model.ORDERANDFEEDBACK;
+import com.example.phq_market.model.ORDERCONFIRM;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,7 @@ public class Activity_Status extends AppCompatActivity {
     private Adapter_Order_Shipping adapterOrderShipping;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<ORDERANDFEEDBACK> listOrder;
+    private ArrayList<ORDERCONFIRM> listConfirm;
     private SharedPreferences sharedPreferences;
     private String url = api.url;
 
@@ -63,6 +65,7 @@ public class Activity_Status extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
 
         listOrder = new ArrayList<>();
+        listConfirm = new ArrayList<>();
         linearLayoutManager = new LinearLayoutManager(Activity_Status.this);
         Rcv_status.setLayoutManager(linearLayoutManager);
 
@@ -307,32 +310,32 @@ public class Activity_Status extends AppCompatActivity {
                 String pass = sharedPreferences.getString("Pass",null);
 
                 api Api = retrofit.create(api.class);
-                Call<ArrayList<ORDERANDFEEDBACK>> call = Api.get_listOrderConfirm(email,pass);
-                call.enqueue(new Callback<ArrayList<ORDERANDFEEDBACK>>() {
+                Call<ArrayList<ORDERCONFIRM>> call = Api.get_listOrderConfirm(email,pass);
+                call.enqueue(new Callback<ArrayList<ORDERCONFIRM>>() {
                     @Override
-                    public void onResponse(Call<ArrayList<ORDERANDFEEDBACK>> call, Response<ArrayList<ORDERANDFEEDBACK>> response) {
+                    public void onResponse(Call<ArrayList<ORDERCONFIRM>> call, Response<ArrayList<ORDERCONFIRM>> response) {
                         if(response.isSuccessful() && response.body()!=null){
-                            ArrayList<ORDERANDFEEDBACK> list = response.body();
+                            ArrayList<ORDERCONFIRM> list = response.body();
                             if(list.size()>0){
-                                listOrder.clear();
-                                listOrder.addAll(list);
-                                adapterOrderConfirm = new Adapter_Order_Confirm(Activity_Status.this,listOrder);
+                                listConfirm.clear();
+                                listConfirm.addAll(list);
+                                adapterOrderConfirm = new Adapter_Order_Confirm(Activity_Status.this,listConfirm);
                                 Rcv_status.setAdapter(adapterOrderConfirm);
                             }else {
-                                listOrder.clear();
+                                listConfirm.clear();
                                 Rcv_status.setAdapter(adapterOrderConfirm);
                             }
                         }else {
-                            listOrder.clear();
+                            listConfirm.clear();
                             Rcv_status.setAdapter(adapterOrderConfirm);
                             Log.e("------>",response.body()+"");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ArrayList<ORDERANDFEEDBACK>> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<ORDERCONFIRM>> call, Throwable t) {
                         Log.e("------>",t+"");
-                        listOrder.clear();
+                        listConfirm.clear();
                         Rcv_status.setAdapter(adapterOrderConfirm);
                     }
                 });

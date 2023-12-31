@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="10dp">
+
+    <TextView
+        android:id="@+id/ao"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <LinearLayout
+        android:layout_below="@+id/ao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nen_search"
+        android:weightSum="100">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingTop="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/Tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Shipping code: "
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/Txt_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Mã đơn hàng"
+                android:layout_below="@+id/Tv2"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/Txt_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phương thức giao hàng"
+                android:textColor="@color/black"
+                android:layout_below="@+id/Txt_code"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/Txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày giao hàng"
+                android:textColor="@color/black"
+                android:layout_below="@+id/Txt_payment"
+                android:textSize="18dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Rcv_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Txt_date" />
+
+            <LinearLayout
+                android:id="@+id/layout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Rcv_img"
+                android:gravity="left"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/Tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total pay: "
+                    android:textSize="18dp"
+                    android:textColor="@color/navigation_selected"
+                    />
+
+                <TextView
+                    android:id="@+id/Txt_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="000.000"
+                    android:textSize="18dp"
+                    android:textColor="@color/navigation_selected"
+                    />
+                <TextView
+                    android:id="@+id/vnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" VNĐ"
+                    android:layout_toRightOf="@+id/Txt_priceproduct"
+                    android:textSize="18dp"
+                    android:textColor="@color/navigation_selected"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/Btn_Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout2"
+                android:text="Cancle"
+                android:textSize="13dp"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:backgroundTint="@color/navigation_selected"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
