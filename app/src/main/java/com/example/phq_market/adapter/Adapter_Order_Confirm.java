@@ -55,9 +55,10 @@ public class Adapter_Order_Confirm extends RecyclerView.Adapter<Adapter_Order_Co
 
         try{
             holder.Txt_code.setText("" + orderProdcut.getCODEORDER());
-            holder.Txt_payment.setText((orderProdcut.getPAYMENT() == 0? "Online": "Direct")+"");
+            holder.Txt_payment.setText("Payment: "+(orderProdcut.getPAYMENT() == 0? "Online": "Direct"));
             holder.Txt_date.setText("Date: " + orderProdcut.getDATE());
             holder.Txt_price.setText(formatter.format(orderProdcut.getPAY()));
+            holder.Txt_address.setText("Address: "+orderProdcut.getADRESS());
 
             listdetail = orderProdcut.getListdetail();
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
@@ -122,7 +123,7 @@ public class Adapter_Order_Confirm extends RecyclerView.Adapter<Adapter_Order_Co
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView Txt_code,Txt_payment,Txt_price,Txt_date;
+        public TextView Txt_code,Txt_payment,Txt_price,Txt_date,Txt_address;
         public Button Btn_Cancel;
         public RecyclerView Rcv_img;
         public ViewHolder(@NonNull View itemView) {
@@ -131,6 +132,7 @@ public class Adapter_Order_Confirm extends RecyclerView.Adapter<Adapter_Order_Co
             Txt_payment = itemView.findViewById(R.id.Txt_payment);
             Txt_price = itemView.findViewById(R.id.Txt_price);
             Txt_date = itemView.findViewById(R.id.Txt_date);
+            Txt_address = itemView.findViewById(R.id.Txt_address);
             Btn_Cancel = itemView.findViewById(R.id.Btn_Cancel);
             Rcv_img = itemView.findViewById(R.id.Rcv_img);
         }

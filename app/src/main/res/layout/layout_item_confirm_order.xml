@@ -55,12 +55,21 @@
                 android:textSize="18dp"/>
 
             <TextView
+                android:id="@+id/Txt_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ giao hàng"
+                android:textColor="@color/black"
+                android:layout_below="@+id/Txt_payment"
+                android:textSize="18dp"/>
+
+            <TextView
                 android:id="@+id/Txt_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ngày giao hàng"
                 android:textColor="@color/black"
-                android:layout_below="@+id/Txt_payment"
+                android:layout_below="@+id/Txt_address"
                 android:textSize="18dp"/>
 
             <androidx.recyclerview.widget.RecyclerView

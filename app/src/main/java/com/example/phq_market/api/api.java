@@ -82,11 +82,11 @@ public interface api {
     @GET("Order/GetListOrderConfirm")
     Call<ArrayList<ORDERCONFIRM>> get_listOrderConfirm(@Query("EMAIL") String email, @Query("PASS") String pass);
     @GET("Order/GetListOrderShipping")
-    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderShipping(@Query("EMAIL") String email,@Query("PASS") String pass);
+    Call<ArrayList<ORDERCONFIRM>> get_listOrderShipping(@Query("EMAIL") String email,@Query("PASS") String pass);
     @GET("Order/GetListOrderDone")
     Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderDone(@Query("EMAIL") String email,@Query("PASS") String pass);
     @GET("Order/GetListOrderCancel")
-    Call<ArrayList<ORDERANDFEEDBACK>> get_listOrderCancel(@Query("EMAIL") String email,@Query("PASS") String pass);
+    Call<ArrayList<ORDERCONFIRM>> get_listOrderCancel(@Query("EMAIL") String email,@Query("PASS") String pass);
     @GET("Order/UpdateStatus")
     Call<String> update_Status(@Query("ID") int ID);
     @GET("Order/GetDateAndPay")
