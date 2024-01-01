@@ -1,9 +1,9 @@
 package com.example.phq_market.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +56,7 @@ public class Adapter_Order_Done extends RecyclerView.Adapter<Adapter_Order_Done.
                 holder.Txt_nameproduct.setText(orderProdcut.getNAME());
                 holder.Txt_evaluate.setText(orderProdcut.getQUANTITY()+"");
                 holder.Txt_priceproduct.setText(formatter.format(orderProdcut.getPAY()));
+                Log.e("--------->",orderProdcut.getCheckFeedBack()+"");
             }catch (Exception e){
 
             }
@@ -67,7 +68,7 @@ public class Adapter_Order_Done extends RecyclerView.Adapter<Adapter_Order_Done.
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("ITEM",listOrder.get(holder.getAdapterPosition()));
                 intent.putExtras(bundle);
-                ((Activity)context).startActivity(intent);
+                context.startActivity(intent);
             }
         });
     }

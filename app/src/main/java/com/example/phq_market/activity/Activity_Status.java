@@ -40,6 +40,7 @@ public class Activity_Status extends AppCompatActivity {
     private TextView Tv_Canceled;
     private RecyclerView Rcv_status;
     private LinearLayout Tab_selected;
+    private int px;
     private Adapter_Order_Done adapterOrderFeedBack;
     private Adapter_Order_Confirm adapterOrderConfirm;
     private Adapter_Order_Shipping adapterOrderShipping;
@@ -72,7 +73,7 @@ public class Activity_Status extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int densityDpi = displayMetrics.densityDpi;
 
-        int px =(int) (120.0*((float)densityDpi/160.0));
+        px =(int) (120.0*((float)densityDpi/160.0));
         // bắt đầu vào thì hiển thị list của confirm
         Confirming();
         setSelected(Tv_Confirming);
@@ -129,6 +130,20 @@ public class Activity_Status extends AppCompatActivity {
                 Tab_selected.animate().translationX((3*px)).setDuration(2000).start();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(Tab_selected.getX() == 0){
+            Confirming();
+        } else if (Tab_selected.getX() == px) {
+            shipping();
+        } else if (Tab_selected.getX() == 2*px) {
+            done();
+        }else {
+            cancel();
+        }
     }
 
     @Override
